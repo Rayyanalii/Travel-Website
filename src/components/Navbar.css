@@ -1,0 +1,55 @@
+
+.container{
+    background-color:hsla(0, 0%, 9%, 0.962);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+ul{
+    display: flex;
+}
+li{
+    padding: 20px;
+    list-style: none;
+}
+li a{
+    text-decoration: none;
+    color: white;
+}
+.links{
+    padding-right: 20px;
+}
+.rightSide{
+    display: inline-flex;
+    align-items: center;
+}
+.mainButtons{
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+#signupButton{
+    color: black;
+    background-color: white;
+    margin-right: 30px;
+}
+#loginButton{
+    background-color: transparent;
+    color: white;
+}
+.verticalLine{
+    font-size: 40px;
+    padding-bottom: 7px;
+    padding-right: 20px;
+    color: white;
+}
+.logo{
+    margin-left: 10px;
+}
+#signupButton:hover{
+    background-color: rgba(255, 255, 255, 0.742);
+}
