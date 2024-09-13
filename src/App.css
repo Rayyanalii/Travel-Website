@@ -1,6 +1,9 @@
+.body{
+  background-color: hsla(0, 0%, 7%, 0.863);
+}
 .headingText{
   text-align: center;
-  margin: 200px 0px;
+  margin: 200px 0px 0px 0px;
   font-size: 30px;
   color: white;
   text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
@@ -13,6 +16,32 @@
   z-index: -1;
   top: 0;
   left: 0;
-  background-position: center;
   width: 100%;
+}
+.destinationText{
+  color: white;
+  text-align: center;
+  margin: 700px 0px 50px 0px;
+  font-size: 25px;
+  text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+}
+.destinationText p{
+  font-size: 18px;
+}
+.destinationCards{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 350px;
+  font-size: 20px;
+}
+.valueTripText{
+  color: white;
+  text-align: center;
+  margin: 300px 0px 50px 0px;
+  font-size: 25px;
+  text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+}
+.valueTripText p{
+  font-size: 18px;
 }
