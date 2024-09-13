@@ -1,0 +1,35 @@
+.TripCardContainer{
+    width: 350px;
+    height: 410px;
+
+    border: 1px solid white;
+}
+.TripImageContainer{
+    height: 335px;
+}
+.TripImageContainer img{
+    width: 100%;
+    height: auto;
+}
+.priceContainer{
+    transform: translate(1px,-50px);
+    width: 60px;
+    height: 24px;
+    text-align: center;
+    padding:5px;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+}
+.tripCardText{
+    margin-left: 8px;
+    color: white;
+}
+.TripCardATag{
+    text-decoration: none;
+}
+.TripCardContainer:hover{
+    transition-timing-function: linear;
+    transition-duration: 100ms;
+    transform: translate(0px,-10px);
+}

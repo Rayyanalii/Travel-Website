@@ -1,9 +1,10 @@
 
 .container{
-    background-color:hsla(0, 0%, 9%, 0.962);
+    background-color:rgba(0, 0, 0, 0.798);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 1000;
 }
 ul{
     display: flex;
@@ -56,4 +57,5 @@ li a{
 nav{
     position: sticky;
   top: 0;
+  z-index: 1000;
 }

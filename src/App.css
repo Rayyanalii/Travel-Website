@@ -21,7 +21,7 @@
 .destinationText{
   color: white;
   text-align: center;
-  margin: 700px 0px 50px 0px;
+  margin: 710px 0px 35px 0px;
   font-size: 25px;
   text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
 }
@@ -38,10 +38,38 @@
 .valueTripText{
   color: white;
   text-align: center;
-  margin: 300px 0px 50px 0px;
+  margin: 240px 0px 35px 0px;
   font-size: 25px;
   text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
 }
 .valueTripText p{
   font-size: 18px;
 }
+.searchForm{
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+.searchButton{
+  margin-left: 10px;
+  width: 70px;
+}
+.AllTripCards{
+  margin-left: 350px;
+  margin-right: 350px;
+  display: flex;
+  justify-content: space-between;
+}
+.servicesText{
+  color: white;
+  text-align: center;
+  margin: 240px 0px 35px 0px;
+  font-size: 25px;
+  text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+}
+.allServices{
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 300px;
+}
+

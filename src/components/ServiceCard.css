@@ -1,0 +1,44 @@
+.serviceContainer{
+    width: 400px;
+    text-align: center;
+}
+.serviceTitleAndDesc{
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+}
+.serviceTitleAndDesc p{
+    font-size: 18px;
+    margin-top: 7px;
+}
+.serviceButton{
+    display: flex;
+    justify-content: center;
+    width: 250px;
+    transform: translate(80px,0);
+    margin-top: 20px;
+}
+.serviceImageContainer{
+    color: white;
+    width: 100px;
+    height: 100px;
+}
+.carServiceSVG{
+    margin-top: 20px;
+    color: white;
+    width: 120px;
+    height: 120px;
+}
+.planeServiceSVG{
+    margin-top: 20px;
+    color: white;
+    width: 120px;
+    height: 120px;
+}
+.hotelServiceSVG{
+    margin-top: 20px;
+    color: white;
+    width: 120px;
+    height: 120px;
+}
