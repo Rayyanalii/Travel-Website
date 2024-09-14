@@ -6,6 +6,8 @@ import SearchBar from './components/SearchBar'
 import RedButton from './components/RedButton'
 import TripCard from './components/TripCard'
 import ServiceCard from './components/ServiceCard'
+import Destinations from './pages/Destinations'
+
 
 function App() {
 

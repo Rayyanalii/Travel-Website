@@ -1,5 +1,6 @@
 import React from 'react'
 import './Navbar.css'
+import Destinations from '../pages/Destinations'
 
 const Navbar = () => {
   return (
@@ -13,7 +14,7 @@ const Navbar = () => {
         <div className="links">
           <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/">Destinations</a></li>
+            <li><a href="/destinations">Destinations</a></li>
             <li><a href="/">Services</a></li>
             <li><a href="/">Pages</a></li>
           </ul>
@@ -28,6 +29,7 @@ const Navbar = () => {
         </div>
         
       </div>
+
     </nav>
     </>
   )
