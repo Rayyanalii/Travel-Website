@@ -10,9 +10,9 @@ const SearchBar = () => {
     }
 
     return (
-            <div className="searchBar">
-                <input type="search" id="searchBar" placeholder='Destinations' value={search} onChange={handleChange} />
-            </div>
+        <div className="searchBar">
+            <input type="search" id="searchBar" placeholder='Destinations' value={search} onChange={handleChange} />
+        </div>
     )
 }
 

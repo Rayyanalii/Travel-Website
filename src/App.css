@@ -1,50 +1,53 @@
 .body{
   background-color: hsla(0, 0%, 7%, 0.863);
 }
-.headingText{
-  text-align: center;
-  margin: 200px 0px 0px 0px;
-  font-size: 30px;
-  color: white;
-  text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
-}
-.headingText p{
-  font-size: 22px;
-}
 .backImage{
   position: absolute;
   z-index: -1;
   top: 0;
   left: 0;
   width: 100%;
+  height: auto;
 }
-.destinationText{
-  color: white;
+.headingText{
   text-align: center;
-  margin: 710px 0px 35px 0px;
-  font-size: 25px;
-  text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
-}
-.destinationText p{
-  font-size: 18px;
-}
-.destinationCards{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin: 0 350px;
-  font-size: 20px;
-}
-.valueTripText{
+  margin-top: 10vw;
   color: white;
-  text-align: center;
-  margin: 240px 0px 35px 0px;
-  font-size: 25px;
   text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+  padding: 0 10px;
 }
-.valueTripText p{
-  font-size: 18px;
+.headingText h1 {
+  font-size: 6vw; /* Larger font for small screens */
 }
+.headingText p {
+  font-size: 3vw; /* Larger font for small screens */
+}
+
+@media (min-width: 768px) {
+  .headingText {
+    margin-top: 10vw;
+  }
+  .headingText h1 {
+    font-size: 4vw; /* Adjust font for medium screens */
+  }
+  .headingText p {
+    font-size: 2vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .headingText {
+    margin-top: 9vw;
+  }
+  .headingText h1 {
+    font-size: 3.5vw; /* Adjust font for larger screens */
+  }
+  .headingText p {
+    font-size: 1.5vw;
+  }
+}
+
+
 .searchForm{
   display: flex;
   justify-content: center;
@@ -54,11 +57,44 @@
   margin-left: 10px;
   width: 70px;
 }
+.destinationText{
+  color: white;
+  text-align: center;
+  margin: 37vw 0px 1vw 0px;
+  text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+}
+.destinationText h2{
+  font-size: 2vw;
+}
+.destinationText p{
+  font-size: 1vw;
+}
+.destinationCards{
+  margin: 0 20vw;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: 20px;
+}
+.valueTripText{
+  color: white;
+  text-align: center;
+  margin: 13vw 0px 1vw 0px;
+  text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+}
+.valueTripText h2{
+  font-size: 2vw;
+}
+.valueTripText p{
+  font-size: 1vw;
+}
+
 .AllTripCards{
   margin-left: 350px;
   margin-right: 350px;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .servicesText{
   color: white;

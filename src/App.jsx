@@ -45,16 +45,16 @@ function App() {
           <p>Best trips offered by us!</p>
         </div>
         <div className="AllTripCards">
-          <TripCard url="src\assets\TokyoTripCard.png" title="Konnichiwa" desc="City tours, iconic" price="$3000"/>
-          <TripCard url="src\assets\ParisTripCard.png" title="French Fever" desc="City tours, urban" price="$5000"/>
-          <TripCard url="src\assets\SkarduTripCard.png" title="Northern Blast" desc="Nature, scenic" price="$2000"/>
+          <TripCard url="src\assets\TokyoTripCard.png" title="Konnichiwa" desc="City tours, iconic" price="$3000" star='4' time='5'/>
+          <TripCard url="src\assets\ParisTripCard.png" title="French Fever" desc="City tours, urban" price="$5000" star='4' time='6'/>
+          <TripCard url="src\assets\SkarduTripCard.png" title="Northern Blast" desc="Nature, scenic" price="$2000" star='5' time='8'/>
         </div>
         <div className="servicesText">
           <h2>Our Services</h2>
         </div>
         <div className="allServices">
           <ServiceCard title="Rent A Car" desc="Choose from our finest car rentals choices" iden="car"/>
-          <ServiceCard title="Book A Flight" desc="Enter departure and destination, we'll book the flight for you" iden="plane"/>
+          <ServiceCard title="Book A Flight" desc="Flight booking made easy" iden="plane"/>
           <ServiceCard title="Book A Hotel" desc="Luxurious and affordable hotels available for you" iden="hotel"/>
         </div>
       </main>
