@@ -1,14 +1,28 @@
 .redbutton{
     background-color: red;
-    width: 100%;
-    height: 50px;
-    font-size: 20px;
+    width: 12vw;
+    height: 6vw;
+    font-size: 3.4vw;
     font-weight: bold;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
     cursor: pointer;
 }
 .redbutton:hover{
     background-color: rgb(101, 0, 0);
+}
+@media (min-width:768px){
+    .redbutton{
+        width: 8vw;
+        height: 4vw;
+        font-size: 2vw;
+    }
+}
+@media (min-width:1024px){
+    .redbutton{
+        width: 6vw;
+        height: 3vw;
+        font-size: 1.6vw;
+    }
 }

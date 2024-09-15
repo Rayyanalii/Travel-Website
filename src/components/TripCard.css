@@ -1,36 +1,45 @@
 .TripCardContainer{
-    width: 18vw;
-    height: 21.5vw;
+    width: 30vw;
     border: 1px solid white;
+    transition: transform 100ms linear;
+}
+.TripImageContainer{
+    max-height: 29vw;
 }
 .TripImageContainer img{
     width: 100%;
     height: auto;
 }
 .priceContainer{
-    transform: translate(1px,-50px);
-    width: 60px;
-    height: 24px;
+    width: 9vw;
     text-align: center;
-    padding:5px;
+    padding: 5px;
     background-color: black;
     color: white;
-    font-size: 20px;
+    font-size: 3vw;
+    position: relative;
+    top: -40px;
 }
-.tripCardText{
-    font-size: 0.9vw;
-    margin-left: 8px;
+.tripCardText h3{
+    font-size: 3vw;
+    margin-left: 6px;
+    color: white;
+    text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+}
+.tripCardText p{
+    font-size: 2.2vw;
+    margin-left: 6px;
     color: white;
     text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
 }
 .TripCardATag{
     text-decoration: none;
 }
-.TripCardContainer:hover{
-    transition-timing-function: linear;
-    transition-duration: 100ms;
-    transform: translate(0px,-10px);
+
+.TripCardContainer:hover {
+    transform: translateY(-10px);
 }
+
 .starAndTime{
     display: flex;
     align-items: center;
@@ -39,29 +48,57 @@
     margin-left: 6px;
 }
 .redtripCardStar{
-    width: 1vw;
-    height: 2vh;
+    width: 2.5vw;
     color: red;
-    padding-left: 2px;
+    padding-right: 1px;
 }
 .whitetripCardStar{
-    width: 1vw;
-    height: 2vh;
+    width: 2.5vw;
     color: white;
-    padding-left: 2px;
+    padding-right: 1px;
 }
 .clockAndTime{
     display: flex;
     align-items: center;
-    margin-right: 8px;
+    margin-right: 2px;
     color: white;
-    font-size: 0.95vw;
+}
+.clockAndTime p{
+    font-size: 2.6vw;
 }
 .tripCardClock{
+    width: 1.9vw;
     color: white;
-    margin-right: 5px;
+    margin-right: 3px;
 }
-.tripCardBottom{
-    transform: translate(0,-1.5vw);
+@media (min-width:768px) {
+    .TripCardContainer{
+        width: 20vw;
+    }
+    .TripImageContainer{
+        max-height: 19vw;
+    }
+    .tripCardText h3{
+        font-size: 2vw;
+    }
+    .tripCardText p{
+        font-size: 1.6vw;
+    }
+    .redtripCardStar{
+        width: 1.9vw;
+    }
+    .whitetripCardStar{
+        width: 1.9vw;
+    }
+    .priceContainer{
+        width: 5.4vw;
+        font-size: 1.9vw;
+    }
+    .clockAndTime p{
+        font-size: 1.7vw;
+    }
+    .tripCardClock{
+        width: 1.3vw;
+    }
 }
 

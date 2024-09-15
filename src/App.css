@@ -23,29 +23,6 @@
   font-size: 3vw; /* Larger font for small screens */
 }
 
-@media (min-width: 768px) {
-  .headingText {
-    margin-top: 10vw;
-  }
-  .headingText h1 {
-    font-size: 4vw; /* Adjust font for medium screens */
-  }
-  .headingText p {
-    font-size: 2vw;
-  }
-}
-
-@media (min-width: 1024px) {
-  .headingText {
-    margin-top: 9vw;
-  }
-  .headingText h1 {
-    font-size: 3.5vw; /* Adjust font for larger screens */
-  }
-  .headingText p {
-    font-size: 1.5vw;
-  }
-}
 
 
 .searchForm{
@@ -60,52 +37,93 @@
 .destinationText{
   color: white;
   text-align: center;
-  margin: 37vw 0px 1vw 0px;
+  margin: 30vw 0px 3vw 0px;
   text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
 }
 .destinationText h2{
-  font-size: 2vw;
+  font-size: 4.5vw;
 }
 .destinationText p{
-  font-size: 1vw;
+  font-size: 2.6vw;
 }
 .destinationCards{
   display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 50px;
+    gap: 25px;
     margin: 0 12vw;
 }
 .valueTripText{
   color: white;
   text-align: center;
-  margin: 13vw 0px 1vw 0px;
+  margin: 19vw 0px 3vw 0px;
   text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
 }
 .valueTripText h2{
-  font-size: 2vw;
+  font-size: 4.5vw;
 }
 .valueTripText p{
-  font-size: 1vw;
+  font-size: 2.6vw;
 }
 
 .AllTripCards{
-  margin-left: 350px;
-  margin-right: 350px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
+  gap: 25px;
+  margin: 0 10vw;
 }
 .servicesText{
   color: white;
   text-align: center;
-  margin: 240px 0px 35px 0px;
-  font-size: 25px;
+  margin: 19vw 0px 3vw 0px;
   text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+}
+.servicesText h2{
+  font-size: 4.5vw;
 }
 .allServices{
   display: flex;
-  justify-content: space-between;
-  margin: 0px 300px;
+  justify-content: center;
+}
+
+
+@media (min-width: 768px) {
+  .headingText {
+    margin-top: 10vw;
+  }
+  .headingText h1 {
+    font-size: 4vw; /* Adjust font for medium screens */
+  }
+  .headingText p {
+    font-size: 2vw;
+  }
+  .destinationText h2{
+    font-size: 3.3vw;
+  }
+  .destinationText p{
+    font-size: 1.8vw;
+  }
+  .valueTripText h2{
+    font-size: 3.3vw;
+  }
+  .valueTripText p{
+    font-size: 1.8vw;
+  }
+  .servicesText h2{
+    font-size: 3.3vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .headingText {
+    margin-top: 9vw;
+  }
+  .headingText h1 {
+    font-size: 3.5vw; /* Adjust font for larger screens */
+  }
+  .headingText p {
+    font-size: 1.5vw;
+  }
 }
 

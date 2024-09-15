@@ -1,9 +1,23 @@
 #searchBar{
-    width: 625px;
-    height: 50px;
-    font-size: 15px;
-    padding-left: 20px;
+    width: 50vw;
+    height: 6vw;
+    font-size: 3vw;
+    padding-left: 8px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: ghostwhite
   }
+  @media (min-width:768px){
+    #searchBar{
+      height: 4vw;
+      font-size: 1.7vw;
+      width: 35vw;
+    }
+}
+@media (min-width:1024px){
+  #searchBar{
+    height: 3vw;
+    font-size: 1.3vw;
+    width: 35vw;
+  }
+}
