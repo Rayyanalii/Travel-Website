@@ -1,0 +1,35 @@
+.destinationHeadingText h1{
+    color: white;
+    font-size: 6.5vw;
+    text-align: center;
+    margin: 10vw auto;
+    text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+    ;
+}
+@media (min-width:768px){
+    .destinationHeadingText h1{
+        font-size: 5vw;
+    }
+}
+@media (min-width:1024px){
+    .destinationHeadingText h1{
+        font-size: 3.8vw;
+    }
+}
+
+.destinationImage{
+    position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+
+.allDestinationCards{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin: 35vw 12vw;
+}

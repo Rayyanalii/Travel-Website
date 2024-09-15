@@ -1,45 +1,44 @@
 .card{
     width: 100%;
-    max-width: 200px; /* Limit max width for large screens */
+    max-width: 130px;
     border-radius: 10px;
-    margin-bottom: 1rem; /* Change vw to rem for better responsiveness */
-    position: relative; /* To ensure h3 is positioned relative to the card */
-    overflow: hidden; /* In case of rounded corners, hide overflow */
-    transition: transform 100ms linear; /* Combine transition properties */
+    position: relative;
+    overflow: hidden;
+    transition: transform 100ms linear;
 }
 .card h3{
     position: absolute;
-    bottom: 15px; /* Position the text relative to the image */
-    left: 8px;
+    bottom: 15px;
+    left: 12px;
     color: white;
     z-index: 1;
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
 }
 .card img{
     width: 100%;
     height: auto;
-    border-radius: 10px; /* Ensure the image also gets rounded corners */
+    border-radius: 10px;
 }
 .card:hover{
-    transform: translateY(-10px); /* Simplified hover transition */
+    transform: translateY(-10px);
 }
 @media (min-width: 768px) {
     .card {
-        max-width: 180px; /* Larger cards for medium devices */
+        max-width: 180px;
     }
 
     .card h3 {
-        font-size: 1.2rem; /* Adjust font size for medium devices */
+        font-size: 1.2rem;
     }
 }
 
 @media (min-width: 1024px) {
     .card {
-        max-width: 220px; /* Larger cards for desktops */
+        max-width: 250px;
     }
 
     .card h3 {
-        font-size: 1.5rem; /* Larger font size for desktop screens */
+        font-size: 1.5rem;
     }
 }

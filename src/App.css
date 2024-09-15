@@ -70,11 +70,11 @@
   font-size: 1vw;
 }
 .destinationCards{
-  margin: 0 20vw;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  font-size: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin: 0 12vw;
 }
 .valueTripText{
   color: white;
