@@ -1,5 +1,5 @@
 .card{
-    width: 29vw;
+    width: 25vw;
     border-radius: 10px;
     position: relative;
     overflow: hidden;
@@ -7,11 +7,11 @@
 }
 .card h3{
     position: absolute;
-    bottom: 12px;
-    left: 7px;
+    bottom: 10px;
+    left: 6px;
     color: white;
     z-index: 1;
-    font-size: 3.5vw;
+    font-size: 3.2vw;
     text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
 }
 .card img{
@@ -38,6 +38,6 @@
     }
 
     .card h3 {
-        font-size: 1.5rem;
+        font-size: 1.3vw;
     }
 }

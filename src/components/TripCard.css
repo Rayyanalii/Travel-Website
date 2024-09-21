@@ -101,4 +101,44 @@
         width: 1.3vw;
     }
 }
+@media (min-width:1024px){
+    .TripCardContainer{
+        width: 17vw;
+    }
+    .TripImageContainer{
+        max-height: 16.2vw;
+    }
+    .tripCardText{
+        padding-left: 2px;
+    }
+    .tripCardText h3{
+        font-size: 1.3vw;
+    }
+    .tripCardText p{
+        font-size: 1vw;
+    }
+    .redtripCardStar{
+        width: 1.7vw;
+        height: 1.2vw;
+    }
+    .whitetripCardStar{
+        width: 1.7vw;
+        height: 1.2vw;
+    }
+    .priceContainer{
+        width: 3.5vw;
+        font-size: 1.2vw;
+        top: -50px;
+    }
+    .clockAndTime p{
+        font-size: 1vw;
+        margin-right: 3px;
+    }
+    .tripCardClock{
+        width: 1.3vw;
+    }
+    .tripCardBottom{
+        margin-bottom: 5px;
+    }
+}
 

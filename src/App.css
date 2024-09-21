@@ -17,10 +17,10 @@
   padding: 0 10px;
 }
 .headingText h1 {
-  font-size: 6vw; /* Larger font for small screens */
+  font-size: 5vw;
 }
 .headingText p {
-  font-size: 3vw; /* Larger font for small screens */
+  font-size: 2.5vw;
 }
 
 
@@ -28,11 +28,10 @@
 .searchForm{
   display: flex;
   justify-content: center;
-  margin-top: 25px;
+  margin-top: 2vw;
 }
 .searchButton{
   margin-left: 10px;
-  width: 70px;
 }
 .destinationText{
   color: white;
@@ -41,10 +40,10 @@
   text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
 }
 .destinationText h2{
-  font-size: 4.5vw;
+  font-size: 3.8vw;
 }
 .destinationText p{
-  font-size: 2.6vw;
+  font-size: 2.3vw;
 }
 .destinationCards{
   display: flex;
@@ -60,10 +59,10 @@
   text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
 }
 .valueTripText h2{
-  font-size: 4.5vw;
+  font-size: 3.8vw;
 }
 .valueTripText p{
-  font-size: 2.6vw;
+  font-size: 2.3vw;
 }
 
 .AllTripCards{
@@ -83,8 +82,11 @@
   font-size: 4.5vw;
 }
 .allServices{
+  margin: 0 10vw;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 25px;
 }
 
 
@@ -93,7 +95,7 @@
     margin-top: 10vw;
   }
   .headingText h1 {
-    font-size: 4vw; /* Adjust font for medium screens */
+    font-size: 4vw;
   }
   .headingText p {
     font-size: 2vw;
@@ -120,10 +122,34 @@
     margin-top: 9vw;
   }
   .headingText h1 {
-    font-size: 3.5vw; /* Adjust font for larger screens */
+    font-size: 3.1vw; 
   }
   .headingText p {
-    font-size: 1.5vw;
+    font-size: 1.3vw;
+  }
+  .destinationText{
+    margin: 37vw 0px 3vw 0px;
+  }
+  .destinationText h2{
+    font-size: 2.2vw;
+  }
+  .destinationText p{
+    font-size: 1.2vw;
+  }
+  .destinationCards{
+      gap: 45px;
+  }
+  .valueTripText h2{
+    font-size: 2.2vw;
+  }
+  .valueTripText p{
+    font-size: 1.2vw;
+  }
+  .AllTripCards{
+    gap: 70px;
+  }
+  .servicesText h2{
+    font-size: 2.2vw;
   }
 }
 

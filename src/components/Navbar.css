@@ -20,6 +20,9 @@ li a{
 .links{
     padding-right: 20px;
 }
+.links ul li{
+    cursor: pointer;
+}
 .rightSide{
     display: inline-flex;
     align-items: center;
@@ -58,5 +61,69 @@ nav{
     position: sticky;
   top: 0;
   z-index: 1000;
+}
+.mobileContainer{
+    display: none;
+}
+.sliderMenuContainer{
+    display: none;
+}
+.closedSlider{
+    display: none;
+}
+.serviceDropdown{
+    position: absolute;
+    z-index: 1000;
+    color: white;
+    margin: 40px auto 0px auto;
+}
+.service{
+    text-align: center;
+}
+.closedServiceDropdown{
+    display: none;
+}
+@media (max-width:794px){
+    .container{
+        display: none;
+    }
+    .mobileContainer{
+        display: flex;
+        background-color:rgba(0, 0, 0, 0.798);
+        z-index: 1000;
+        align-items: center;
+    }
+    .mobileLogo{
+        margin: 4px auto 0px auto;
+    }
+    .mobileLogo img{
+        width: 15vw;
+    }
+    .hamburger{
+        color: white;
+        margin: auto;
+        width: 4.5vw;
+        height: 4.5vw;
+        cursor: pointer;
+    }
+    .hamburgerIconContainer{
+        padding-left: 10px;
+    }
+    .sliderMenuContainer{
+        display: block;
+        width: 100vw;
+        position: absolute;
+        z-index: 1000;
+        background-color:rgba(0, 0, 0, 0.798);
+    }
+    .sliderMenuContainer ul{
+        display: block;
+    }
+    .sliderMenuContainer ul li{
+        color: white;
+    }
+    .closedSlider{
+        display: none;
+    }
 }
 

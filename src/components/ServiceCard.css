@@ -1,15 +1,16 @@
 .serviceContainer{
-    max-width: 40vw;
+    max-width: 400px;
     display: block;
     text-align: center;
+    margin: 0px 1vw;
 }
 .serviceTitleAndDesc h3{
     color: white;
-    font-size: 4vw;
+    font-size: 3.5vw;
     text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
 }
 .serviceTitleAndDesc p{
-    font-size: 2.6vw;
+    font-size: 2.3vw;
     margin-top: 7px;
     color: white;
 }
@@ -22,18 +23,66 @@
 .carServiceSVG{
     margin-top: 20px;
     color: white;
-    height: 15vw;
-    width:15vw;
+    height: 12vw;
+    width:12vw;
 }
 .planeServiceSVG{
     margin-top: 20px;
     color: white;
-    height: 15vw;
-    width: 15vw;
+    height: 12vw;
+    width: 12vw;
 }
 .hotelServiceSVG{
     margin-top: 20px;
     color: white;
-    height: 15vw;
-    width: 15vw;
+    height: 12vw;
+    width: 12vw;
+}
+
+@media (min-width:768px){
+    .serviceContainer{
+        margin: 0px 2vw;
+    }
+    .serviceTitleAndDesc h3{
+        font-size: 2.3vw;
+    }
+    .serviceTitleAndDesc p{
+        font-size: 1.7vw;
+    }
+    .carServiceSVG{
+        height: 10vw;
+        width:10vw;
+    }
+    .planeServiceSVG{
+        height: 10vw;
+        width: 10vw;
+    }
+    .hotelServiceSVG{
+        height: 10vw;
+        width: 10vw;
+    }
+}
+
+@media (min-width:1024px){
+    .serviceContainer{
+        margin: 0px 1.5vw;
+    }
+    .serviceTitleAndDesc h3{
+        font-size: 1.6vw;
+    }
+    .serviceTitleAndDesc p{
+        font-size: 1.1vw;
+    }
+    .carServiceSVG{
+        height: 8vw;
+        width:8vw;
+    }
+    .planeServiceSVG{
+        height: 8vw;
+        width: 8vw;
+    }
+    .hotelServiceSVG{
+        height: 8vw;
+        width: 8vw;
+    }
 }
