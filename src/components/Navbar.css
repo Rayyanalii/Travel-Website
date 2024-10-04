@@ -6,11 +6,10 @@
     align-items: center;
     z-index: 1000;
 }
-ul{
+.links ul{
     display: flex;
 }
 li{
-    padding: 20px;
     list-style: none;
 }
 li a{
@@ -20,8 +19,12 @@ li a{
 .links{
     padding-right: 20px;
 }
-.links ul li{
+.links ul li a{
     cursor: pointer;
+    list-style: none;
+}
+.navbarLinks{
+    padding-left: 40px;
 }
 .rightSide{
     display: inline-flex;
@@ -48,7 +51,7 @@ li a{
 .verticalLine{
     font-size: 40px;
     padding-bottom: 7px;
-    padding-right: 20px;
+    padding-right: 10px;
     color: white;
 }
 .logo{
@@ -75,13 +78,43 @@ nav{
     position: absolute;
     z-index: 1000;
     color: white;
-    margin: 40px auto 0px auto;
-}
-.service{
-    text-align: center;
+    margin-top: 30px;
+    background-color:rgba(0, 0, 0, 0.798);
+    padding: 15px 10px 0px 10px;
+    border-radius: 0px 0px 10px 10px;
 }
 .closedServiceDropdown{
     display: none;
+}
+.serviceDropdownList ul{
+    display: block;
+}
+.serviceDropdownList ul li{
+    padding-bottom: 20px;
+}
+.pagesDropdown{
+    position: absolute;
+    z-index: 1000;
+    color: white;
+    margin-top: 30px;
+    background-color:rgba(0, 0, 0, 0.798);
+    padding: 15px 10px 0px 10px;
+    border-radius: 0px 0px 10px 10px;
+}
+.closedPagesDropdown{
+    display: none;
+}
+.pagesDropdownList ul{
+    display: block;
+}
+.pagesDropdownList ul li{
+    padding-bottom: 20px;
+}
+li a:hover{
+    text-decoration: underline;
+}
+#loginButton:hover{
+    text-decoration: underline;
 }
 @media (max-width:794px){
     .container{
@@ -121,6 +154,10 @@ nav{
     }
     .sliderMenuContainer ul li{
         color: white;
+        padding: 10px
+    }
+    .sliderMenuContainer ul li a{
+        cursor: pointer;
     }
     .closedSlider{
         display: none;

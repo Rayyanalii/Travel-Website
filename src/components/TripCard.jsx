@@ -2,12 +2,13 @@ import React from 'react'
 import './TripCard.css'
 import { IoIosStar } from "react-icons/io";
 import { FaClock } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const TripCard = (props) => {
     return (
         <>
             <div className="TripCardContainer">
-                <a href="/" className='TripCardATag'>
+                <Link to="/tripPackage" className='TripCardATag'>
                     <div className="TripImageContainer">
                         <img src={props.url} alt="" />
                         <div className="priceContainer">
@@ -30,9 +31,8 @@ const TripCard = (props) => {
                         </div>
                     </div>
                     </div>
-                </a>
+                </Link>
             </div>
-
         </>
     )
 }
