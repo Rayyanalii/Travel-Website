@@ -1,39 +1,336 @@
+/*Hero Section*/
+
 .tripPackageImageContainer img{
-    width: 100%;
-    height: auto;
     position: absolute;
     z-index: -1000;
+    object-position: center;
+    object-fit: cover;
+    width: 100%;
+    max-width: 100%;
+    height: 31%;
 }
 .tripPackageImageContainer h1{
-    color: white;
     position: relative;
-    top: 140px;
-    left: 10px;
-    font-size: 4.5vw;
+    color: white;
+    font-size: 1.7rem;
+    top: 170px;
+    left: 7vw;
     text-shadow: 0px 2px hsla(0, 0%, 6%, 0.489);
-
 }
-.tripPackageClockIcon{
-    width: 5vw;
-    height: 5vw;
+.tripPackageClockIcon, .tripPackageCalendarIcon, .tripPackageIDIcon{
+    position: relative;
+    width: 1.7em;
+    height: 1.7em;
     color: white;
-    margin-top: 155px;
-    margin-left: 50px;
-}
-.tripPackageCalendarIcon{
-    width: 5vw;
-    height: 5vw;
-    color: white;
-    margin-top: 155px;
-    margin-left: 70px;
 }
 .tripPackageDescriptionCardsContainer{
     display: flex;
-    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 188px;
 }
 .tripPackageDescriptionCardsContainer p{
     text-shadow: 0px 2px hsla(0, 0%, 7%, 0.489);
     color: white;
-    font-size: 2.5vw;
-    margin-left: 70px;
+    font-size: 1em;
+}
+
+
+/*Main Section*/
+/*Hotel Section*/
+.hotelSection{
+    margin: 45px 50px 0 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    color: white;
+}
+.hotelSection h3{
+    font-size: 1.5rem;
+}
+.hotelSection h4{
+    font-size: 1.1rem;
+}
+.hotelSection p{
+    font-size: 1rem;
+    word-break: break-all;
+}
+
+.hotelNameContainer{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.hotelNameContainer img{
+    width: 50px;
+    height: 50px;
+}
+/*Trip Images Flexbox*/
+.TripPackageImagesContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
+}
+.TripPackageImagesContainer img{
+    width: 125px;
+    height: 125px;
+}
+/*Red Divider*/
+.redBox{
+    margin: 30px 140px 0 140px;
+    background-color: red;
+    height: 3px;
+}
+
+
+
+#placesVisitingh3{
+    margin: 30px 50px 0 50px;
+    color: white;
+}
+.visitingPlaceContainer{
+    margin: 45px 50px 0 50px;
+    color: white;
+}
+
+    /*transportation*/
+
+    .transportation{
+        margin-top: 30px;
+        margin-left: 150px;
+        margin-right: 150px;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        gap: 20px;
+    }
+    .transportation h3{
+        font-size: 1.6rem;
+    }
+    .transportationNameContainer{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+    .transportationNameContainer img{
+        width: 50px;
+    height: 50px;
+    }
+    .transportationNameContainer h4{
+        font-size: 1.2rem;
+    }
+    .transportationNameContainer p{
+        font-size: 1rem;
+        word-break: break-all;
+    }
+
+@media (min-width:768px){
+    .tripPackageImageContainer h1{
+        top: 200px;
+        font-size: 2.1rem;
+    }
+    .tripPackageImageContainer img{
+        height: 36%;
+    }
+    .tripPackageDescriptionCardsContainer{
+        justify-content: space-around;
+        margin-top: 220px;
+    }
+    .tripPackageClockIcon, .tripPackageCalendarIcon, .tripPackageIDIcon{
+        width: 1.8em;
+        height: 1.8em;
+    }
+    .tripPackageDescriptionCardsContainer p{
+        font-size: 1.1em;
+    }
+    /*Hotel Section*/
+    .hotelSection{
+        margin-top: 55px;
+    }
+    /*Trip Images Flexbox*/
+    .TripPackageImagesContainer img{
+        width: 150px;
+        height: 150px;
+    }
+
+
+    /*Visiting Places*/
+
+    #placesVisitingh3{
+        font-size: 1.5rem;
+        color: white;
+    }
+    .visitingPlaceContainer{
+        color: white;
+    }
+    .visitingPlaceContainer h4{
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    .visitingPlaceContainer p{
+        font-size: 1rem;
+        word-break: break-all;
+    }
+
+}
+@media (min-width:1024px){
+    /*Hero Section*/
+    .tripPackageImageContainer h1{
+        top: 400px;
+        font-size: 2.5em;
+        left: 150px;
+    }
+    .tripPackageImageContainer img{
+    width: 100%;
+        height: 65%;
+    }
+    .tripPackageDescriptionCardsContainer{
+        justify-content: space-around;
+        margin-top: 440px;
+    }
+    .tripPackageClockIcon, .tripPackageCalendarIcon, .tripPackageIDIcon{
+        width: 3.1em;
+        height: 3.1em;
+    }
+    .tripPackageDescriptionCardsContainer p{
+        font-size: 1.3em;
+    }
+    /*Hotel Section*/
+    .hotelSection{
+        margin-top: 80px;
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+    .hotelSection h3{
+        font-size: 1.6rem;
+    }
+    .hotelSection h4{
+        font-size: 1.2rem;
+    }
+    .hotelSection p{
+        font-size: 1rem;
+        word-break: break-all;
+    }
+
+    /*Trip Images*/
+    .TripPackageImagesContainer{
+        justify-content: flex-start;
+        gap: 2vw;
+        margin-top: 20px;
+    }
+    .TripPackageImagesContainer img{
+        width: 200px;
+        height: 200px;
+    }
+
+    /*Visiting Places*/
+
+    #placesVisitingh3{
+        margin: 30px 150px 0 150px;
+        font-size: 1.6rem;
+        color: white;
+    }
+    .visitingPlaceContainer{
+        margin: 30px 150px 60px 150px;
+        color: white;
+    }
+    .lastPlace{
+        margin-bottom: 30px;
+    }
+    .visitingPlaceContainer h4{
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
+    .visitingPlaceContainer p{
+        font-size: 1rem;
+        word-break: break-all;
+    }
+
+    /*transportation*/
+
+    .transportation{
+        margin-top: 30px;
+        margin-left: 150px;
+        margin-right: 150px;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        gap: 20px;
+    }
+    .transportation h3{
+        font-size: 1.6rem;
+    }
+    .transportationNameContainer{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+    .transportationNameContainer img{
+        width: 50px;
+    height: 50px;
+    }
+    .transportationNameContainer h4{
+        font-size: 1.2rem;
+    }
+    .transportationNameContainer p{
+        font-size: 1rem;
+        word-break: break-all;
+    }
+
+    /*Other Info*/
+
+    .otherInfoContainer{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin: 30px 150px 0 150px;
+        color: white;
+    }
+    .otherInfoContainer p{
+        font-size: 1.1rem;
+    }
+    .otherInfoContainer h3{
+        font-size: 1.6rem;
+    }
+    .otherInfoContainer h4{
+        font-size: 1.2rem;
+    }
+    .allInformationContainer{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    .arrivalContainer{
+        display: flex;
+        justify-content: space-between;
+    }
+    .departureTimeContainer{
+        display: flex;
+        justify-content: space-between;
+    }
+    .returnTimeContainer{
+        display: flex;
+        justify-content: space-between;
+    }
+    .includedContainer{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .includedItemsContainer{
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .includedItemsInsideContainer{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 30px;
+    }
 }

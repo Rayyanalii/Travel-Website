@@ -1,0 +1,41 @@
+.BookingFormContainer{
+    width: 30vw;
+    height: 50vw;
+    background-color: black;
+    color: white;
+    margin-top: 30vw;
+    margin-left: 65vw;
+    border-radius: 10px 10px 0 0;
+}
+.PriceSection{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+#price{
+    font-size: 4vw;
+    font-weight: bold;
+    padding: 3px;
+}
+#perPerson{
+    font-size: 2vw;
+    font-weight: normal;
+}
+.tripForms{
+    margin-top: 2px;
+    border: 1px solid gray;
+    width: 30vw;
+    height: 40vw;
+}
+.tripForms label{
+    font-size: 2vw;
+    margin: 0 1.5vw;
+}
+.tripForms input{
+    width: 25vw;
+    height: 4vw;
+    border: none;
+    margin: 0 1.5vw;
+    border-radius: 2px;
+    font-size: 10px;
+}
