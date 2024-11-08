@@ -1,36 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.css";
-import Destinations from "../pages/Destinations";
-import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [hamburger, sethamburger] = useState(false);
-  const [serviceDrop, setserviceDrop] = useState(false);
-  const [pagesDrop, setpagesDrop] = useState(false);
+  const [hamburger, setHamburger] = useState(false);
+  const [serviceDrop, setServiceDrop] = useState(false);
+  const [pagesDrop, setPagesDrop] = useState(false);
 
   function toggleHamburger() {
-    sethamburger(!hamburger);
+    setHamburger(!hamburger);
+    console.log(!hamburger);
   }
+
   function closeHamburger() {
-    sethamburger(false);
+    setHamburger(false);
   }
 
   function toggleService() {
-    setserviceDrop(!serviceDrop);
-  }
-
-  function closeService() {
-    setserviceDrop(false);
+    setServiceDrop(!serviceDrop);
+    console.log(!serviceDrop);
   }
 
   function togglePages() {
-    setpagesDrop(!pagesDrop);
-  }
-
-  function closePages() {
-    setpagesDrop(false);
+    setPagesDrop(!pagesDrop);
   }
 
   useEffect(() => {
@@ -39,10 +32,10 @@ const Navbar = () => {
         !document.querySelector(".service a").contains(e.target) &&
         serviceDrop
       ) {
-        closeService();
+        setServiceDrop(false);
       }
       if (!document.querySelector(".pages a").contains(e.target) && pagesDrop) {
-        closePages();
+        setPagesDrop(false);
       }
       if (
         !document.querySelector(".hamburger").contains(e.target) &&
@@ -65,7 +58,7 @@ const Navbar = () => {
         <div className="container">
           <div className="logo">
             <Link to="/">
-              <img src="src\assets\MajesticTravels Logo.png" alt="Logo" />
+              <img src="/Uploads/MajesticTravels Logo.png" alt="Logo" />
             </Link>
           </div>
           <div className="rightSide">
@@ -75,13 +68,13 @@ const Navbar = () => {
                   <Link to="/">Home</Link>
                 </li>
                 <li className="navbarLinks">
-                  <Link to="/destinations">Destinations</Link>
+                  <Link to="/Destinations">Destinations</Link>
                 </li>
                 <li className="service navbarLinks">
                   <Link
                     to=""
                     onClick={() => {
-                      closePages();
+                      setPagesDrop(false);
                       toggleService();
                     }}
                   >
@@ -111,7 +104,7 @@ const Navbar = () => {
                   <Link
                     to=""
                     onClick={() => {
-                      closeService();
+                      setServiceDrop(false);
                       togglePages();
                     }}
                   >
@@ -125,7 +118,7 @@ const Navbar = () => {
                     <div className="pagesDropdownList">
                       <ul>
                         <li>
-                          <Link to="/">Reviews</Link>
+                          <Link to="/reviews">Reviews</Link>
                         </li>
                       </ul>
                     </div>
@@ -145,29 +138,80 @@ const Navbar = () => {
           </div>
         </div>
 
+        {/* Mobile Navbar */}
         <div className="mobileContainer">
           <div className="hamburgerIconContainer">
             <GiHamburgerMenu className="hamburger" onClick={toggleHamburger} />
           </div>
           <div className="mobileLogo">
-            <a href="/">
-              <img src="src\assets\MajesticTravels Logo.png" alt="Logo" />
-            </a>
+            <Link to="/">
+              <img src="src/assets/MajesticTravels Logo.png" alt="Logo" />
+            </Link>
           </div>
         </div>
+
+        {/* Mobile Slider Menu */}
         <div className={hamburger ? "sliderMenuContainer" : "closedSlider"}>
           <ul>
             <li className="menuListItems">
-              <Link to="/">Home</Link>
+              <Link to="/" onClick={closeHamburger}>
+                Home
+              </Link>
             </li>
             <li className="menuListItems">
-              <Link to="/destinations">Destination</Link>
+              <Link to="/destinations" onClick={closeHamburger}>
+                Destinations
+              </Link>
             </li>
-            <li className="menuListItems">
-              <Link to="">Services</Link>
+            <li className="mobileDropdown">
+              <span onClick={toggleService}>Services</span>
+              {serviceDrop && (
+                <ul>
+                  <li>
+                    <Link to="/" onClick={closeHamburger}>
+                      Rent A Car
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/ServiceFlight" onClick={closeHamburger}>
+                      Book A Flight
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/ServiceHotel" onClick={closeHamburger}>
+                      Book A Hotel
+                    </Link>
+                  </li>
+                </ul>
+              )}
             </li>
-            <li className="menuListItems">
-              <Link to="">Pages</Link>
+            <li className="mobileDropdown">
+              <span onClick={togglePages}>Pages</span>
+              {pagesDrop && (
+                <ul>
+                  <li>
+                    <Link to="/reviews" onClick={closeHamburger}>
+                      Reviews
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+            <li className="mobileMenuButtons">
+              <button
+                className="mainButtons"
+                id="loginButton"
+                onClick={closeHamburger}
+              >
+                Login
+              </button>
+              <button
+                className="mainButtons"
+                id="signupButton"
+                onClick={closeHamburger}
+              >
+                Signup
+              </button>
             </li>
           </ul>
         </div>

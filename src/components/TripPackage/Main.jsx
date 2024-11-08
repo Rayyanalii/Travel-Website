@@ -6,23 +6,29 @@ import RedDivider from './RedDivider'
 import VisitingLocations from './VisitingLocations'
 import Transportation from './Transportation'
 import OtherInfo from './OtherInfo'
+import Ratings from './Ratings'
+import WriteReview from './WriteReview'
 
-const Main = () => {
+const Main = ({ packageData }) => {
   return (
     <>
-    <main>
-        <HotelSection/>
-        <RedDivider/>
+      <main>
+        <HotelSection packageData={packageData} />
+        <RedDivider />
         <h3 id='placesVisitingh3'>Places you will be visiting:</h3>
-        <VisitingLocations num="1"/>
-        <VisitingLocations num="2"/>
-        <VisitingLocations num="3"/>
-        <VisitingLocations num="4" last={true}/>
-        <RedDivider/>
-        <Transportation/>
-        <RedDivider/>
-        <OtherInfo/>
-    </main>
+        <VisitingLocations num="1" packageData={packageData} />
+        <VisitingLocations num="2" />
+        <VisitingLocations num="3" />
+        <VisitingLocations num="4" last={true} />
+        <RedDivider />
+        <Transportation />
+        <RedDivider />
+        <OtherInfo />
+        <RedDivider />
+        <Ratings />
+        <RedDivider />
+        <WriteReview />
+      </main>
     </>
   )
 }

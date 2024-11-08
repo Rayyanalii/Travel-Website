@@ -8,7 +8,7 @@ const TripCard = (props) => {
     return (
         <>
             <div className="TripCardContainer">
-                <Link to="/tripPackage" className='TripCardATag'>
+                <Link to={props.route} className='TripCardATag'>
                     <div className="TripImageContainer">
                         <img src={props.url} alt="" />
                         <div className="priceContainer">
@@ -17,19 +17,19 @@ const TripCard = (props) => {
 
                     </div>
                     <div className="tripCardBottom">
-                    <div className="tripCardText">
-                        <h3>{props.title}</h3>
-                        <p>{props.desc}</p>
-                    </div>
-                    <div className="starAndTime">
-                        <div className="allStars">
-                            {props.star == 1 ? <><IoIosStar className='redtripCardStar' /><IoIosStar className='whitetripCardStar' /><IoIosStar className='whitetripCardStar' /><IoIosStar className='whitetripCardStar' /><IoIosStar className='whitetripCardStar' /></> : props.star == 2 ? <><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='whitetripCardStar' /><IoIosStar className='whitetripCardStar' /><IoIosStar className='whitetripCardStar' /></> : props.star == 3 ? <><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='whitetripCardStar' /><IoIosStar className='whitetripCardStar' /></> : props.star == 4 ? <><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='whitetripCardStar' /></> : <><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /></>}
+                        <div className="tripCardText">
+                            <h3>{props.title}</h3>
+                            <p>{props.desc}</p>
                         </div>
-                        <div className="clockAndTime">
-                            <FaClock className='tripCardClock' />
-                            <p>{props.time} days</p>
+                        <div className="starAndTime">
+                            <div className="allStars">
+                                {props.star == 1 ? <><IoIosStar className='redtripCardStar' /><IoIosStar className='whitetripCardStar' /><IoIosStar className='whitetripCardStar' /><IoIosStar className='whitetripCardStar' /><IoIosStar className='whitetripCardStar' /></> : props.star == 2 ? <><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='whitetripCardStar' /><IoIosStar className='whitetripCardStar' /><IoIosStar className='whitetripCardStar' /></> : props.star == 3 ? <><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='whitetripCardStar' /><IoIosStar className='whitetripCardStar' /></> : props.star == 4 ? <><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='whitetripCardStar' /></> : <><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /><IoIosStar className='redtripCardStar' /></>}
+                            </div>
+                            <div className="clockAndTime">
+                                <FaClock className='tripCardClock' />
+                                <p>{props.time} days</p>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </Link>
             </div>

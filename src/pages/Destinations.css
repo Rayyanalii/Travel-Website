@@ -33,3 +33,49 @@
     gap: 25px;
     margin: 35vw 12vw;
 }
+
+/*Destination Cards*/
+
+.card{
+    width: 25vw;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 100ms linear;
+}
+.card h3{
+    position: absolute;
+    bottom: 10px;
+    left: 6px;
+    color: white;
+    z-index: 1;
+    font-size: 3.2vw;
+    text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+}
+.card img{
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.card:hover{
+    transform: translateY(-10px);
+}
+@media (min-width: 768px) {
+    .card {
+        width: 16vw;
+    }
+
+    .card h3 {
+        font-size: 2.2vw;
+    }
+}
+
+@media (min-width: 1024px) {
+    .card {
+        max-width: 250px;
+    }
+
+    .card h3 {
+        font-size: 1.3vw;
+    }
+}

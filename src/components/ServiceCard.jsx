@@ -17,7 +17,7 @@ const ServiceCard = (props) => {
                 </div>
                 {props.iden=="car"?<FaCarSide className='carServiceSVG'/>:props.iden=="plane"?<FaPlane className='planeServiceSVG'/>:<FaHotel className='hotelServiceSVG'/>}
                 <div className='serviceButtonContainer'>
-                    <RedButton className="serviceButton"/>
+                    <RedButton className="serviceButton" review={false} desc="Go!"/>
                 </div>
             </div>
         </>

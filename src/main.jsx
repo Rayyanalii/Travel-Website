@@ -3,11 +3,25 @@ import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+// Import all page components
 import Destinations from "./pages/Destinations.jsx";
 import TripPackage from "./pages/TripPackage.jsx";
 import ServiceFlight from "./pages/ServiceFlight.jsx";
 import ServiceHotel from "./pages/Services/Hotel/ServiceHotel.jsx";
+import Reviews from "./pages/Reviews.jsx";
+import AdminLogin from "./pages/AdminLogin/AdminLogin.jsx";
+import AdminDashboard from "./pages/AdminDashboard/AdminDashboard.jsx";
+import DestinationDashboard from "./pages/AdminDashboard/DestinationDashboard/DestinationDashboard.jsx";
+import ReviewsDashboard from "./pages/AdminDashboard/ReviewsDashboard/ReviewsDashboard";
+import TripPackageDashboard from "./pages/AdminDashboard/TripPackageDashboard/TripPackageDashboard.jsx";
+import PlacesToVisitDashboard from "./pages/AdminDashboard/PlacesToVisitDashboard/PlacesToVisitDashboard";
+import RestaurantDashboard from "./pages/AdminDashboard/RestaurantDashboard/RestaurantDashboard.jsx";
+import HotelsDashboard from "./pages/AdminDashboard/HotelsDashboard/HotelsDashboard.jsx";
+import CarsDashboard from "./pages/AdminDashboard/CarsDashboard/CarsDashboard.jsx";
+import FlightsDashboard from "./pages/AdminDashboard/FlightsDashboard/FlightsDashboard.jsx";
 
+// Define router with all routes
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,8 +43,57 @@ const router = createBrowserRouter([
     path: "/ServiceHotel",
     element: <ServiceHotel />,
   },
+  {
+    path: "/reviews",
+    element: <Reviews />,
+  },
+  {
+    path: "/admin",
+    element: <AdminLogin />,
+  },
+  {
+    path: "/admin/dashboard",
+    element: <AdminDashboard />,
+  },
+  {
+    path: "/admin/dashboard/destinations",
+    element: <DestinationDashboard />,
+  },
+  {
+    path: "/admin/dashboard/reviews",
+    element: <ReviewsDashboard />,
+  },
+  {
+    path: "/admin/dashboard/tripPackage",
+    element: <TripPackageDashboard />,
+  },
+  {
+    path: "/admin/dashboard/places-to-visit",
+    element: <PlacesToVisitDashboard />,
+  },
+  {
+    path: "/admin/dashboard/restaurants",
+    element: <RestaurantDashboard />,
+  },
+  {
+    path: "/admin/dashboard/hotels",
+    element: <HotelsDashboard />,
+  },
+  {
+    path: "/admin/dashboard/cars",
+    element: <CarsDashboard />,
+  },
+  {
+    path: "/admin/dashboard/flights",
+    element: <FlightsDashboard />,
+  },
+  {
+    path: "/tripPackage/:id/:name",
+    element: <TripPackage />,
+  },
 ]);
 
+// Render application
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={router} />

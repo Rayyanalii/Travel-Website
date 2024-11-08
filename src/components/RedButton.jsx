@@ -1,10 +1,16 @@
 import React from 'react'
 import './RedButton.css'
 
-const RedButton = () => {
+const RedButton = ({ type, review, desc }) => {
   return (
     <>
-        <button className='redbutton'>Go!</button>
+      <button
+        className={review ? 'redbutton button--review' : 'redbutton'}
+        type={type}
+        aria-label={desc}
+      >
+        {desc}
+      </button>
     </>
   )
 }

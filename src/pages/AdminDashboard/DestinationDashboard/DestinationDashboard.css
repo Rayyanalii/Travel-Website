@@ -1,0 +1,177 @@
+.dashboardPage {
+  display: flex;
+  width: 100%;
+}
+.destinationDashboardMainContainerFlexbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 85%;
+  width: 100%;
+  margin: 0 auto;
+  gap: 2em;
+}
+.addDestinationContainer {
+  display: flex;
+  justify-content: space-between;
+  max-width: 80%;
+  max-height: 10em;
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 5em;
+  background-color: #181a1b;
+  align-items: center;
+  padding: 30px 40px;
+  color: #f7f7f7;
+}
+.addDestinationText {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.addDestinationButton input {
+  border: none;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  color: white;
+  background-color: #dc3545;
+  font-size: 3em;
+  cursor: pointer;
+}
+.addDestinationButton input:hover {
+  background-color: #6f0e18;
+}
+.allDestinationsContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  height: auto;
+  margin: 0 auto;
+  width: 100%;
+  background-color: #181a1b;
+  padding: 30px 40px;
+  color: #f7f7f7;
+  gap: 4em;
+}
+.allDestinationTableContainer {
+  display: flex;
+}
+
+/*Add Destination Menu*/
+.addDestinationMenuContainer {
+  position: absolute;
+  top: 10%;
+  max-width: 70%;
+  height: auto;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #555555;
+  border: 2px solid #8d8d8d;
+  color: #f7f7f7;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 10px;
+  max-height: 70%;
+  overflow-y: scroll;
+}
+
+.close input {
+  border: none;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  font-size: 20px;
+  background-color: #555555;
+  cursor: pointer;
+}
+.addDestinationInput label {
+  display: inline-block;
+  width: 180px;
+}
+.addDestinationInput button {
+  height: 3.5em;
+  padding: 15px;
+}
+.addDestinationMenuContainer form {
+  margin-top: 20px;
+  padding: 10px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.divider {
+  width: 100%;
+  height: 2px;
+  background-color: gray;
+}
+
+.success-message {
+  color: green; /* Change color as needed */
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.allDestinationTableContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.allDestinationTableContainer {
+  overflow-x: auto; /* Allow horizontal scrolling if needed */
+  position: relative; /* Set position relative for absolute positioning of options */
+}
+
+table {
+  width: 100%; /* Make the table take the full width */
+  border-collapse: collapse; /* Merge borders for a cleaner look */
+}
+
+th,
+td {
+  border: 1px solid #505050; /* Add border to table cells */
+  padding: 10px; /* Add padding for better spacing */
+  text-align: left; /* Align text to the left */
+  overflow-y: auto; /* Enable vertical scrollbar for overflow */
+  max-height: 50px; /* Set a maximum height for each cell */
+}
+
+th {
+  background-color: #1e1e1f; /* Light grey background for header */
+  font-weight: bold; /* Make header text bold */
+}
+.dataField {
+  font-size: 0.9rem;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end; /* Aligns buttons to the right */
+  gap: 8px; /* Space between buttons */
+}
+
+.modifyButton,
+.deleteButton {
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.modifyButton:hover {
+  background-color: #0056b3; /* Darker shade for hover */
+}
+
+.deleteButton {
+  background-color: #dc3545; /* Bootstrap danger color */
+}
+
+.deleteButton:hover {
+  background-color: #6f0e18; /* Darker shade for hover */
+}
