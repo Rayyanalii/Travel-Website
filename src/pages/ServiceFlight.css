@@ -1,0 +1,123 @@
+.FlightformContainer {
+  /*form*/
+  display: flex;
+  flex-direction: row;
+  max-width: 60%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.584);
+  height: 10em;
+  margin: 0 auto;
+  margin-top: 9em;
+  padding: 20px;
+  justify-content: space-between;
+  color: white;
+  border-radius: 20px;
+  padding-top: 30px;
+}
+.partition {
+  max-width: 48%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.fromParentContainer {
+  max-height: 50%;
+  height: 100%;
+}
+.passengerDepartureFlex {
+  max-height: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.flightInputBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 7px;
+}
+.flightInputBox input {
+  height: 1.8em;
+}
+.flightInputBox input[type="submit"] {
+  height: 2.2em;
+  font-size: 17px;
+  margin: 0 auto;
+  margin-top: 1.3em;
+  width: 100%;
+}
+.departurePassengerSmallContainer {
+  max-width: 48%;
+  width: 100%;
+}
+
+.flightInputBox label {
+  font-weight: bold;
+}
+
+.servicesBackgroundImage {
+  /*hero*/
+  display: flex;
+  justify-content: center;
+
+  position: absolute; /* Make it start from the top without being affected by other elements */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.servicesTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  margin-top: 7rem;
+}
+.servicesTitle h1 {
+  font-size: 2.5rem;
+}
+.servicesTitle p {
+  font-size: 1.2rem;
+}
+.advantagesText {
+  /*advantages*/
+  background-color: rgba(0, 0, 0, 0.584);
+  text-align: center;
+  color: white;
+  padding: 1.3em;
+  border-radius: 30px;
+  position: absolute;
+  z-index: -1;
+  top: 6.3em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.advantagesContainer {
+  max-width: 25%;
+  width: 100%;
+  margin-top: 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.advantagesLogoImage {
+  width: 7.5em;
+  height: 7.5em;
+  color: white;
+}
+.ServiceAdvantagesMainContainer {
+  /*advantges main container*/
+  display: flex;
+  justify-content: center;
+  gap: 3%;
+}
+.servicesDescriptionText {
+  /*description text*/
+  color: white;
+  max-width: 80%;
+  margin: 0 auto;
+  margin-top: 10em;
+}

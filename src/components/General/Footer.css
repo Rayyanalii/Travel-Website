@@ -1,0 +1,79 @@
+.footerMainContainer {
+  display: flex;
+  padding: 2rem 3rem;
+  margin-top: 5rem;
+  justify-content: space-between;
+  background-color: azure;
+  background-image: url("public/FooterBackgroundImage.png");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  padding-bottom: 4.5rem;
+}
+
+.footerPartition {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 18%;
+}
+.footerPartition h3 {
+  color: white;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 1.4em;
+}
+
+.FooterSitemapAndServicesText {
+  display: flex;
+  flex-direction: column;
+}
+.FooterSitemapAndServicesContainer {
+  display: flex;
+  max-width: 100%;
+  gap: 30%;
+  width: 16rem;
+}
+.FooterSocialLogos {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1.5em;
+}
+.FooterSocialLogos img {
+  height: 2.6em;
+  width: 2.6em;
+}
+.footerPartition input[type="submit"] {
+  height: 2.2em;
+  font-size: 12px;
+  margin: 0 auto;
+  margin-top: 1.3em;
+  width: 50%;
+}
+.footerPartition input {
+  height: 1.8em;
+}
+.FooterSitemapAndServicesText Link {
+  color: white;
+}
+.footer-link {
+  color: #fff; /* Example color */
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+.footerCopywriteContainer {
+  color: white;
+  position: absolute;
+  bottom: 6px;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.584);
+  padding: 0.3rem 0;
+  left: 0;
+  overflow-x: hidden;
+}
