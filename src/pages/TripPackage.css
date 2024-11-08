@@ -1,8 +1,13 @@
 /*Hero Section*/
+.tripPackageImageContainer{
+    position: relative;
+    overflow: hidden;
+}
 
 .tripPackageImageContainer img{
     position: absolute;
     z-index: -1000;
+    top: 0px;
     object-position: center;
     object-fit: cover;
     width: 100%;
@@ -13,9 +18,9 @@
     position: relative;
     color: white;
     font-size: 1.7rem;
-    top: 170px;
     left: 7vw;
     text-shadow: 0px 2px hsla(0, 0%, 6%, 0.489);
+    width: 300px;
 }
 .tripPackageClockIcon, .tripPackageCalendarIcon, .tripPackageIDIcon{
     position: relative;
@@ -130,7 +135,6 @@
 
 @media (min-width:768px){
     .tripPackageImageContainer h1{
-        top: 200px;
         font-size: 2.1rem;
     }
     .tripPackageImageContainer img{
@@ -179,14 +183,26 @@
 }
 @media (min-width:1024px){
     /*Hero Section*/
+    .tripPackageImageContainer{
+        height: 540px;
+    }
     .tripPackageImageContainer h1{
-        top: 400px;
-        font-size: 2.5em;
-        left: 150px;
+        position: absolute;
+        bottom: 25%;
+        left: 7vw;
+        color: white;
+        font-size: 2.5rem;
+        text-shadow: 0px 2px hsla(0, 0%, 6%, 0.489);
+        width: 300px;
     }
     .tripPackageImageContainer img{
-    width: 100%;
-        height: 65%;
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        object-position: center;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
     }
     .tripPackageDescriptionCardsContainer{
         justify-content: space-around;
@@ -201,7 +217,7 @@
     }
     /*Hotel Section*/
     .hotelSection{
-        margin-top: 80px;
+        margin-top: 50px;
         margin-left: 150px;
         margin-right: 150px;
     }
@@ -287,7 +303,7 @@
     .otherInfoContainer{
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 30px;
         margin: 30px 150px 0 150px;
         color: white;
     }
@@ -333,4 +349,89 @@
         justify-content: space-between;
         gap: 30px;
     }
+
+    /*Ratings*/
+
+    .tripRatingsContainer{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin: 30px 150px 0 150px;
+        color: white;
+    }
+    .tripRatingsContainer h3{
+        font-size: 1.6rem;
+    }
+    .tripRatingsItemsContainer h4{
+        font-size: 1.2rem;
+        width: 200px;
+    }
+    .tripRatingsItemsContainer{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .tripRatingRow{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .tripRatingItem{
+        display: flex;
+        gap: 8vw;
+        align-items: center;
+    }
+
+    /*Review*/
+
+    .writeReviewContainer{
+        margin: 30px 150px 0 150px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .writeReviewContainer h3{
+        font-size: 1.6rem;
+    }
+    .writeReviewTitleAndView{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .writeReviewInputContainer{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .writeReviewInputContainer textarea{
+        border-radius: 5px;
+        font-size: 18px;
+    }
+    .twoInputFlexbox{
+        display: flex;
+        justify-content: space-between;
+    }
+    .formContainer{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    .formContainer label{
+        font-size: 1.1rem;
+    }
+    .writeReviewInputTextContainer{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 47%;
+    }
+    .writeReviewInputTextContainer input{
+        height: 30px;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+   
 }

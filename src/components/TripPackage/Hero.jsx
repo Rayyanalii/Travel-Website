@@ -1,34 +1,34 @@
 import React from 'react'
 import '../../pages/TripPackage.css'
-import Navbar from '../Navbar'
+
 import { GoClock } from "react-icons/go";
 import { CiCalendar } from "react-icons/ci";
 import { FaRegAddressCard } from "react-icons/fa";
 
-const TripPackageHero = () => {
+const TripPackageHero = ({ packageData }) => {
   return (
     <>
-    <header>
-       <Navbar/>
-       <div className="tripPackageImageContainer">
-        <img src="src\assets\parisTripPackageImage.png" alt="Trip Image" />
-        <h1>French Fever</h1>
-       </div>
-       <div className="tripPackageDescriptionCardsContainer">
+      <header>
+
+        <div className="tripPackageImageContainer">
+          <img src={packageData.packageURL} alt="Trip Image" />
+          <h1>{packageData.packageTitle}</h1>
+          <div className="tripPackageDescriptionCardsContainer">
             <div>
-            <GoClock className='tripPackageClockIcon'/>
-            <p>6 days</p>
+              <GoClock className='tripPackageClockIcon' />
+              <p>{packageData.packageDuration}</p>
             </div>
             <div>
-            <CiCalendar className='tripPackageCalendarIcon'/>
-            <p>All year</p>
+              <CiCalendar className='tripPackageCalendarIcon' />
+              <p>{packageData.packageAvailability}</p>
             </div>
             <div>
-            <FaRegAddressCard className='tripPackageIDIcon'/>
-            <p>Age 12+</p>
+              <FaRegAddressCard className='tripPackageIDIcon' />
+              <p>{packageData.packageReq}</p>
             </div>
+          </div>
         </div>
-    </header>
+      </header>
 
     </>
   )

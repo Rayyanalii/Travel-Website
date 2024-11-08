@@ -1,4 +1,3 @@
-
 .container{
     background-color:rgba(0, 0, 0, 0.798);
     display: flex;
@@ -62,8 +61,8 @@ li a{
 }
 nav{
     position: sticky;
-  top: 0;
-  z-index: 1000;
+    top: 0;
+    z-index: 1000;
 }
 .mobileContainer{
     display: none;
@@ -116,6 +115,8 @@ li a:hover{
 #loginButton:hover{
     text-decoration: underline;
 }
+
+/* Mobile Styles */
 @media (max-width:794px){
     .container{
         display: none;
@@ -130,13 +131,13 @@ li a:hover{
         margin: 4px auto 0px auto;
     }
     .mobileLogo img{
-        width: 15vw;
+        width: 7em;
     }
     .hamburger{
         color: white;
         margin: auto;
-        width: 4.5vw;
-        height: 4.5vw;
+        width: 2em;
+        height: 2em;
         cursor: pointer;
     }
     .hamburgerIconContainer{
@@ -154,13 +155,60 @@ li a:hover{
     }
     .sliderMenuContainer ul li{
         color: white;
-        padding: 10px
+        padding: 10px;
     }
     .sliderMenuContainer ul li a{
         cursor: pointer;
+        color: white;
     }
     .closedSlider{
         display: none;
     }
+
+    /* Mobile Dropdown for Services and Pages */
+/* Mobile Dropdown for Services and Pages */
+.mobileDropdown ul {
+    display: block;
+    border-radius: 0px 0px 10px 10px;
+    margin: 5px 0;
 }
 
+.mobileDropdown ul li {
+    padding: 10px;
+    color: white;
+}
+
+.mobileDropdown ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.mobileDropdown ul li a:hover {
+    text-decoration: underline;
+}
+
+.mobileDropdown span {
+    cursor: pointer;
+    color: white;
+}
+
+.mobileDropdown span:hover {
+    text-decoration: underline;
+}
+
+
+    /* Mobile Menu Buttons for Login and Signup */
+    .mobileMenuButtons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        justify-content: center;
+    }
+
+    .mainButtons {
+        margin: 10px 0;
+        width: 80%;
+        text-align: center;
+    }
+}

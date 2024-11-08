@@ -1,0 +1,16 @@
+.redtripCardStar, .whitetripCardStar{
+    width: 1em;
+    height: 1em;
+}
+@media (min-width:768px){
+    .redtripCardStar, .whitetripCardStar{
+        width: 1.3em;
+        height: 1.3em;
+    }
+}
+@media (min-width:1024px){
+    .redtripCardStar, .whitetripCardStar{
+        width: 1.5em;
+        height: 1.5em;
+    }
+}
