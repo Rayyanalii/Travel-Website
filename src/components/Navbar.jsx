@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const [hamburger, sethamburger] = useState(false);
   const [serviceDrop, setserviceDrop] = useState(false);
-  const [pagesDrop, setpagesDrop] = useState(false)
+  const [pagesDrop, setpagesDrop] = useState(false);
 
   function toggleHamburger() {
     sethamburger(!hamburger);
@@ -35,24 +35,29 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClick = (e) => {
-      if (!document.querySelector('.service a').contains(e.target) && serviceDrop) {
+      if (
+        !document.querySelector(".service a").contains(e.target) &&
+        serviceDrop
+      ) {
         closeService();
       }
-      if (!document.querySelector('.pages a').contains(e.target) && pagesDrop) {
+      if (!document.querySelector(".pages a").contains(e.target) && pagesDrop) {
         closePages();
       }
-      if (!document.querySelector('.hamburger').contains(e.target) && hamburger) {
+      if (
+        !document.querySelector(".hamburger").contains(e.target) &&
+        hamburger
+      ) {
         closeHamburger();
       }
-    }
+    };
 
-    document.addEventListener('mouseup', handleClick);
+    document.addEventListener("mouseup", handleClick);
 
     return () => {
-      document.removeEventListener('mouseup', handleClick);
-    }
-  }, [serviceDrop, pagesDrop, hamburger])
-
+      document.removeEventListener("mouseup", handleClick);
+    };
+  }, [serviceDrop, pagesDrop, hamburger]);
 
   return (
     <>
@@ -73,10 +78,13 @@ const Navbar = () => {
                   <Link to="/destinations">Destinations</Link>
                 </li>
                 <li className="service navbarLinks">
-                  <Link to="" onClick={() => {
-                    closePages();
-                    toggleService();
-                  }}>
+                  <Link
+                    to=""
+                    onClick={() => {
+                      closePages();
+                      toggleService();
+                    }}
+                  >
                     Services
                   </Link>
                   <div
@@ -86,18 +94,29 @@ const Navbar = () => {
                   >
                     <div className="serviceDropdownList">
                       <ul>
-                        <li><Link to="/">Rent A Car</Link></li>
-                        <li><Link to="/">Book A Flight</Link></li>
-                        <li><Link to="/">Book A Hotel</Link></li>
+                        <li>
+                          <Link to="/">Rent A Car</Link>
+                        </li>
+                        <li>
+                          <Link to="/ServiceFlight">Book A Flight</Link>
+                        </li>
+                        <li>
+                          <Link to="/ServiceHotel">Book A Hotel</Link>
+                        </li>
                       </ul>
                     </div>
                   </div>
                 </li>
                 <li className="pages navbarLinks">
-                  <Link to="" onClick={() => {
-                    closeService();
-                    togglePages();
-                  }}>Pages</Link>
+                  <Link
+                    to=""
+                    onClick={() => {
+                      closeService();
+                      togglePages();
+                    }}
+                  >
+                    Pages
+                  </Link>
                   <div
                     className={
                       pagesDrop ? "pagesDropdown" : "closedPagesDropdown"
@@ -105,7 +124,9 @@ const Navbar = () => {
                   >
                     <div className="pagesDropdownList">
                       <ul>
-                        <li><Link to="/">Reviews</Link></li>
+                        <li>
+                          <Link to="/">Reviews</Link>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -136,10 +157,18 @@ const Navbar = () => {
         </div>
         <div className={hamburger ? "sliderMenuContainer" : "closedSlider"}>
           <ul>
-            <li className="menuListItems"><Link to="/">Home</Link></li>
-            <li className="menuListItems"><Link to="/destinations">Destination</Link></li>
-            <li className="menuListItems"><Link to="">Services</Link></li>
-            <li className="menuListItems"><Link to="">Pages</Link></li>
+            <li className="menuListItems">
+              <Link to="/">Home</Link>
+            </li>
+            <li className="menuListItems">
+              <Link to="/destinations">Destination</Link>
+            </li>
+            <li className="menuListItems">
+              <Link to="">Services</Link>
+            </li>
+            <li className="menuListItems">
+              <Link to="">Pages</Link>
+            </li>
           </ul>
         </div>
       </nav>
