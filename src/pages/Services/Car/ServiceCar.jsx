@@ -9,7 +9,7 @@ const ServiceCar = () => {
   useEffect(() => {
     // Apply background styles to the body
     document.body.style.backgroundImage =
-      'linear-gradient(to bottom, rgba(17, 19, 19, 0.3), rgba(17, 19, 19, 0.7), #000),url("/ServicesCarBackgroundImage.png")';
+      'linear-gradient(to bottom, rgba(17, 19, 19, 0.3), rgba(17, 19, 19, 0.7), #000),url("/Uploads/ServicesCarBackgroundImage.png")';
 
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundPosition = "top";
