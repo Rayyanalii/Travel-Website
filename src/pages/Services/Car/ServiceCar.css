@@ -1,0 +1,58 @@
+.CarformContainer {
+  /*form*/
+  display: flex;
+  flex-direction: row;
+  max-width: 60%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.584);
+  height: 10em;
+  margin: 0 auto;
+  margin-top: 9em;
+  padding: 20px;
+  justify-content: space-between;
+  color: white;
+  border-radius: 20px;
+  padding-top: 30px;
+}
+.CarFormPartition {
+  max-width: 48%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.HotelCityParentContainer {
+  max-height: 50%;
+  height: 100%;
+}
+.PickupAndDaysFlex {
+  max-height: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.HotelInputBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 7px;
+}
+.HotelInputBox input {
+  height: 1.8em;
+}
+.HotelInputBox select {
+  height: 2em;
+}
+.HotelInputBox input[type="submit"] {
+  height: 2.2em;
+  font-size: 17px;
+  margin: 0 auto;
+  margin-top: 1.3em;
+  width: 100%;
+}
+.PickupAndDaysSmallContainer {
+  max-width: 48%;
+  width: 100%;
+}
+.HotelInputBox label {
+  font-weight: bold;
+}

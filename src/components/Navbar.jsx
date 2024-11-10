@@ -88,7 +88,7 @@ const Navbar = () => {
                     <div className="serviceDropdownList">
                       <ul>
                         <li>
-                          <Link to="/">Rent A Car</Link>
+                          <Link to="/ServiceCar">Rent A Car</Link>
                         </li>
                         <li>
                           <Link to="/ServiceFlight">Book A Flight</Link>
@@ -168,7 +168,7 @@ const Navbar = () => {
               {serviceDrop && (
                 <ul>
                   <li>
-                    <Link to="/" onClick={closeHamburger}>
+                    <Link to="/ServiceCar" onClick={closeHamburger}>
                       Rent A Car
                     </Link>
                   </li>

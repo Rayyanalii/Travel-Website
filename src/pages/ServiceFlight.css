@@ -89,7 +89,7 @@
   border-radius: 30px;
   position: absolute;
   z-index: -1;
-  top: 6.3em;
+  top: 6em;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
@@ -97,17 +97,18 @@
 .advantagesContainer {
   max-width: 25%;
   width: 100%;
-  margin-top: 5em;
+  margin-top: 6em;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
 }
 .advantagesLogoImage {
-  width: 7.5em;
-  height: 7.5em;
+  width: 7em;
+  height: 7em;
   color: white;
 }
+
 .ServiceAdvantagesMainContainer {
   /*advantges main container*/
   display: flex;

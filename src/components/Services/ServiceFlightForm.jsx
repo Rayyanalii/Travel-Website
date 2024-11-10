@@ -30,8 +30,8 @@ const ServiceFlightForm = () => {
         <div className="partition">
           <div className="fromParentContainer">
             <div className="flightInputBox">
-              <label htmlFor="from">To:</label>
-              <input type="text" name="from" id="from" required />
+              <label htmlFor="to">To:</label>
+              <input type="text" name="to" id="to" required />
             </div>
           </div>
           <div className="fromParentContainer">

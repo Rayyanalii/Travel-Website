@@ -20,6 +20,7 @@ import RestaurantDashboard from "./pages/AdminDashboard/RestaurantDashboard/Rest
 import HotelsDashboard from "./pages/AdminDashboard/HotelsDashboard/HotelsDashboard.jsx";
 import CarsDashboard from "./pages/AdminDashboard/CarsDashboard/CarsDashboard.jsx";
 import FlightsDashboard from "./pages/AdminDashboard/FlightsDashboard/FlightsDashboard.jsx";
+import ServiceCar from "./pages/Services/Car/ServiceCar.jsx";
 
 // Define router with all routes
 const router = createBrowserRouter([
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
   {
     path: "/tripPackage/:id/:name",
     element: <TripPackage />,
+  },
+  {
+    path: "/ServiceCar",
+    element: <ServiceCar />,
   },
 ]);
 

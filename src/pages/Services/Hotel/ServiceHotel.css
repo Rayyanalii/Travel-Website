@@ -1,1 +1,54 @@
-
+.HotelFormMainContainer {
+  display: flex;
+  flex-direction: row;
+  max-width: 60%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.584);
+  height: 10em;
+  margin: 0 auto;
+  margin-top: 9em;
+  padding: 20px;
+  justify-content: space-between;
+  color: white;
+  border-radius: 20px;
+  padding-top: 30px;
+}
+.HotelFormPartition {
+  display: flex;
+  flex-direction: column;
+  max-width: 48%;
+  width: 100%;
+}
+.cityParentContainer {
+  max-height: 50%;
+  height: 100%;
+}
+.HotelTwoInputsFlex {
+  max-height: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.HotelInputBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 7px;
+}
+.HotelInputBox input {
+  height: 1.8em;
+}
+.HotelInputBox input[type="submit"] {
+  height: 2.2em;
+  font-size: 17px;
+  margin: 0 auto;
+  margin-top: 1.3em;
+  width: 100%;
+}
+.HotelTwoInputsSmallContainer {
+  max-width: 45%;
+  width: 100%;
+}
+.HotelInputBox label {
+  font-weight: bold;
+}
