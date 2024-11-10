@@ -1,42 +1,53 @@
-.redbutton, .redbutton:hover {
-    background: rgb(1,1,1);
-    background: linear-gradient(0deg, rgba(1,1,1,1) 0%);
+.redbutton,
+.redbutton:hover {
+  background: rgb(1, 1, 1);
+  background: linear-gradient(0deg, rgba(1, 1, 1, 1) 0%);
 }
 
 .redbutton {
-    background: linear-gradient(0deg, rgba(1,1,1,1) 0%, rgba(154,0,0,1) 38%, rgba(255,0,0,1) 100%);
-    width: 10rem;
-    height: 5rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
+  background: linear-gradient(
+    0deg,
+    rgba(1, 1, 1, 1) 0%,
+    rgba(154, 0, 0, 1) 38%,
+    rgba(255, 0, 0, 1) 100%
+  );
+  width: 5rem;
+  height: 1.6em;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
 }
 
 .redbutton:hover {
-    background: linear-gradient(0deg, rgba(1,1,1,1) 0%, rgba(42,0,0,1) 38%, rgba(73,0,0,1) 100%);
+  background: linear-gradient(
+    0deg,
+    rgba(1, 1, 1, 1) 0%,
+    rgba(42, 0, 0, 1) 38%,
+    rgba(73, 0, 0, 1) 100%
+  );
 }
 
 @media (min-width: 768px) {
-    .redbutton {
-        width: 8rem;
-        height: 4rem;
-        font-size: 1.2rem;
-    }
+  .redbutton {
+    width: 8rem;
+    height: 4rem;
+    font-size: 1.2rem;
+  }
 }
 
 @media (min-width: 1024px) {
-    .redbutton {
-        width: 5rem;
-        height: 3rem;
-        font-size: 1.4rem;
-    }
+  .redbutton {
+    width: 5rem;
+    height: 3rem;
+    font-size: 1.4rem;
+  }
 }
 
 .button--review {
-    width: 100%;
-    height: 3.5rem;
+  width: 100%;
+  height: 3.5rem;
 }

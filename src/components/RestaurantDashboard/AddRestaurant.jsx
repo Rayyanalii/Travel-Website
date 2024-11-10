@@ -111,16 +111,16 @@ const AddRestaurant = ({ closeMenu }) => {
                         </div>
                     ))}
                     <div className="divider" />
-
+                    {successMessage && (
+                        <div className="success-message">
+                            {successMessage}
+                        </div>
+                    )}
                     <div className="addDestinationInput">
                         <button type="submit">Add Place To Visit</button>
                     </div>
                 </form>
-                {successMessage && (
-                    <div className="success-message">
-                        {successMessage}
-                    </div>
-                )}
+
             </div>
         </>
     );

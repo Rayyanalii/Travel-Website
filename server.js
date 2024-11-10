@@ -26,18 +26,19 @@ const dbConfig = {
   connectionString: "localhost/xe",
 };
 
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "public", "Uploads")); // Use the existing 'Uploads' directory
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname); // Use the original file name
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, path.join(__dirname, "public", "Uploads")); // Use the existing 'Uploads' directory
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, file.originalname); // Use the original file name
+//   },
+// });
 
-// Initialize multer with the defined storage
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 // Function to get data from the database without any params
 async function getQuery(query) {
@@ -112,6 +113,7 @@ async function DeleteQueryWithParams(query, params) {
   }
 }
 
+// Places To Visit
 // Endpoint to GET places to visit
 app.get("/api/get-places-to-visit", async (req, res) => {
   try {
@@ -123,35 +125,102 @@ app.get("/api/get-places-to-visit", async (req, res) => {
   }
 });
 
-// Endpoint to GET best places to eat
-app.get("/api/get-restaurants", async (req, res) => {
+// Endpoint to Delete places to visit
+app.delete("/api/delete-place-to-visit/:id", async (req, res) => {
+  const { id } = req.params;
+  const { imageUrls } = req.body;
+
+  let connection;
   try {
-    const result = await getQuery("SELECT * FROM Restaurants"); // Adjust the query
-    res.json(result);
+    connection = await oracledb.getConnection(dbConfig);
+
+    imageUrls.forEach((imageUrl) => {
+      const imagePath = path.join(__dirname, "public", imageUrl); // Path to the image in the 'uploads' folder
+      if (fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath); // Delete the image file
+      } else {
+        console.log(`Image not found: ${imagePath}`);
+      }
+    });
+
+    await connection.execute(`DELETE FROM Places WHERE PLACEID = :id`, [id], {
+      autoCommit: true,
+    });
+
+    res.status(200).send("Place and images deleted successfully");
   } catch (err) {
-    res.status(500).send("Database error");
+    console.error(err);
+    res.status(500).send("Error deleting place or images");
+  } finally {
+    if (connection) {
+      await connection.close();
+    }
   }
 });
 
-// Endpoint to GET hotels
-app.get("/api/get-hotels", async (req, res) => {
-  try {
-    const result = await getQuery("SELECT * FROM hotels");
-    res.json(result);
-  } catch (err) {
-    res.status(500).send("Database error");
-  }
-});
+// Endpoint to Update places to visit
+app.put(
+  "/api/update-place-to-visit",
+  upload.array("images", 5),
+  async (req, res) => {
+    const { placeID, placeTitle, placeCity, placeDescription, oldImages } =
+      req.body;
 
-// Endpoint to GET trip packages
-app.get("/api/trip-packages", async (req, res) => {
-  try {
-    const result = await getQuery("SELECT first_name FROM employees"); // Adjust the query
-    res.json(result);
-  } catch (err) {
-    res.status(500).send("Database error");
+    const parsedoldImages = JSON.parse(oldImages).imageUrls;
+
+    parsedoldImages.forEach((old) => {
+      const imagePath = path.join(__dirname, "public", old); // Path to the image in the 'uploads' folder
+      if (fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath); // Delete the image file
+      } else {
+        console.log(`Image not found: ${imagePath}`);
+      }
+    });
+
+    const imageUrls = req.files.map((file) => {
+      const filePath = path.join(
+        __dirname,
+        "public",
+        "Uploads",
+        file.originalname
+      );
+      fs.writeFileSync(filePath, file.buffer);
+      return path.join("/Uploads/", file.originalname).replace(/\\/g, "/");
+    });
+
+    const imageUrlsString = imageUrls.join(",");
+
+    let query =
+      "Update Places set placeTitle=:placeTitle,placeCity=:placeCity,placeDescription=:placeDescription,placeImages=:imageUrlsString where placeID=:placeID";
+
+    let connection;
+    try {
+      connection = await oracledb.getConnection(dbConfig);
+
+      const result = await connection.execute(query, {
+        placeTitle,
+        placeCity,
+        placeDescription,
+        imageUrlsString,
+        placeID,
+      });
+
+      await connection.commit();
+      res.status(200).send("Place To Visit updated successfully");
+    } catch (error) {
+      console.error("Database error:", error);
+      res.status(500).send("Error updating Place to Visit");
+    } finally {
+      if (connection) {
+        try {
+          await connection.close();
+        } catch (err) {
+          console.error("Error closing the connection:", err);
+        }
+      }
+    }
   }
-});
+);
 
 // Endpoint to ADD places to visit
 app.post(
@@ -159,9 +228,18 @@ app.post(
   upload.array("images", 5),
   async (req, res) => {
     const { placeTitle, placeCity, placeDescription } = req.body;
-    const imageUrls = req.files.map((file) =>
-      path.join("/Uploads/", file.filename).replace(/\\/g, "/")
-    );
+
+    const imageUrls = req.files.map((file) => {
+      const filePath = path.join(
+        __dirname,
+        "public",
+        "Uploads",
+        file.originalname
+      );
+      fs.writeFileSync(filePath, file.buffer);
+      return path.join("/Uploads/", file.originalname).replace(/\\/g, "/");
+    });
+
     const imageUrlsString = imageUrls.join(",");
 
     let query =
@@ -194,6 +272,190 @@ app.post(
     }
   }
 );
+
+// Restaurants
+// Endpoint to ADD Restaurants
+app.post("/api/add-restaurant", upload.array("images", 2), async (req, res) => {
+  const { restaurantName, restaurantCity, restaurantDescription } = req.body;
+
+  const imageUrls = req.files.map((file) => {
+    const filePath = path.join(
+      __dirname,
+      "public",
+      "Uploads",
+      file.originalname
+    );
+    fs.writeFileSync(filePath, file.buffer);
+    return path.join("/Uploads/", file.originalname).replace(/\\/g, "/");
+  });
+
+  const imageUrlsString = imageUrls.join(",");
+
+  let query =
+    "Insert into Restaurants(restaurantName,restaurantCity,restaurantDescription,restaurantImages) values (:restaurantName,:restaurantCity,:restaurantDescription,:imageUrlsString)";
+
+  let connection;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    const result = await connection.execute(query, {
+      restaurantName,
+      restaurantCity,
+      restaurantDescription,
+      imageUrlsString,
+    });
+
+    await connection.commit();
+    res.status(200).send("Restaurant added successfully");
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).send("Error adding restaurant");
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing the connection:", err);
+      }
+    }
+  }
+});
+
+// Endpoint to Delete Restaurant
+app.delete("/api/delete-restaurant/:id", async (req, res) => {
+  const { id } = req.params;
+  const { imageUrls } = req.body;
+
+  let connection;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    imageUrls.forEach((imageUrl) => {
+      const imagePath = path.join(__dirname, "public", imageUrl); // Path to the image in the 'uploads' folder
+      if (fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath); // Delete the image file
+      } else {
+        console.log(`Image not found: ${imagePath}`);
+      }
+    });
+
+    await connection.execute(
+      `DELETE FROM Restaurants WHERE restaurantID = :id`,
+      [id],
+      {
+        autoCommit: true,
+      }
+    );
+
+    res.status(200).send("Restaurant deleted successfully");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error deleting Restaurant");
+  } finally {
+    if (connection) {
+      await connection.close();
+    }
+  }
+});
+
+// Endpoint to Update Restaurant
+app.put(
+  "/api/update-restaurant",
+  upload.array("images", 2),
+  async (req, res) => {
+    const {
+      restaurantID,
+      restaurantName,
+      restaurantCity,
+      restaurantDescription,
+      oldImages,
+    } = req.body;
+
+    const parsedoldImages = JSON.parse(oldImages).oldImages;
+
+    parsedoldImages.forEach((old) => {
+      const imagePath = path.join(__dirname, "public", old); // Path to the image in the 'uploads' folder
+      if (fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath); // Delete the image file
+      } else {
+        console.log(`Image not found: ${imagePath}`);
+      }
+    });
+
+    const imageUrls = req.files.map((file) => {
+      const filePath = path.join(
+        __dirname,
+        "public",
+        "Uploads",
+        file.originalname
+      );
+      fs.writeFileSync(filePath, file.buffer);
+      return path.join("/Uploads/", file.originalname).replace(/\\/g, "/");
+    });
+
+    const imageUrlsString = imageUrls.join(",");
+
+    let query =
+      "Update Restaurants set restaurantName=:restaurantName,restaurantCity=:restaurantCity,restaurantDescription=:restaurantDescription,restaurantImages=:imageUrlsString where restaurantID=:restaurantID";
+
+    let connection;
+    try {
+      connection = await oracledb.getConnection(dbConfig);
+
+      const result = await connection.execute(query, {
+        restaurantName,
+        restaurantCity,
+        restaurantDescription,
+        imageUrlsString,
+        restaurantID,
+      });
+
+      await connection.commit();
+      res.status(200).send("Place To Visit updated successfully");
+    } catch (error) {
+      console.error("Database error:", error);
+      res.status(500).send("Error updating Place to Visit");
+    } finally {
+      if (connection) {
+        try {
+          await connection.close();
+        } catch (err) {
+          console.error("Error closing the connection:", err);
+        }
+      }
+    }
+  }
+);
+
+// Endpoint to GET restaurants
+app.get("/api/get-restaurants", async (req, res) => {
+  try {
+    const result = await getQuery("SELECT * FROM Restaurants"); // Adjust the query
+    res.json(result);
+  } catch (err) {
+    res.status(500).send("Database error");
+  }
+});
+
+// Endpoint to GET hotels
+app.get("/api/get-hotels", async (req, res) => {
+  try {
+    const result = await getQuery("SELECT * FROM hotels");
+    res.json(result);
+  } catch (err) {
+    res.status(500).send("Database error");
+  }
+});
+
+// Endpoint to GET trip packages
+app.get("/api/trip-packages", async (req, res) => {
+  try {
+    const result = await getQuery("SELECT first_name FROM employees"); // Adjust the query
+    res.json(result);
+  } catch (err) {
+    res.status(500).send("Database error");
+  }
+});
 
 // Endpoint to ADD Car
 app.post("/api/add-car", upload.array("images", 1), async (req, res) => {
@@ -228,44 +490,6 @@ app.post("/api/add-car", upload.array("images", 1), async (req, res) => {
   } catch (error) {
     console.error("Database error:", error);
     res.status(500).send("Error adding Car");
-  } finally {
-    if (connection) {
-      try {
-        await connection.close();
-      } catch (err) {
-        console.error("Error closing the connection:", err);
-      }
-    }
-  }
-});
-
-// Endpoint to ADD Restaurants
-app.post("/api/add-restaurant", upload.array("images", 2), async (req, res) => {
-  const { restaurantName, restaurantCity, restaurantDescription } = req.body;
-  const imageUrls = req.files.map((file) =>
-    path.join("/Uploads/", file.filename).replace(/\\/g, "/")
-  );
-  const imageUrlsString = imageUrls.join(",");
-
-  let query =
-    "Insert into Restaurants(restaurantName,restaurantCity,restaurantDescription,restaurantImages) values (:restaurantName,:restaurantCity,:restaurantDescription,:imageUrlsString)";
-
-  let connection;
-  try {
-    connection = await oracledb.getConnection(dbConfig);
-
-    const result = await connection.execute(query, {
-      restaurantName,
-      restaurantCity,
-      restaurantDescription,
-      imageUrlsString,
-    });
-
-    await connection.commit();
-    res.status(200).send("Restaurant added successfully");
-  } catch (error) {
-    console.error("Database error:", error);
-    res.status(500).send("Error adding restaurant");
   } finally {
     if (connection) {
       try {
