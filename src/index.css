@@ -6,6 +6,7 @@
 body {
   max-height: 1000px;
   background-color: #111313;
+  overflow: auto;
 }
 
 .admin-body {

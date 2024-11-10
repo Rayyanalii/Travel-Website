@@ -60,6 +60,7 @@ const MainReview = ({ review }) => {
                         </div>
                     </div>
                 </div>
+                <div className="gray-divider"></div>
             </div>
         </>
     )

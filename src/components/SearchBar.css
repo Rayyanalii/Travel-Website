@@ -1,25 +1,26 @@
-#searchBar{
-    width: 35vw;
-    height: 5vw;
-    font-size: 2.5vw;
-    padding-left: 8px;
-    border: none;
-    border-radius: 5px;
-    background-color: ghostwhite
-  }
-  @media (min-width:768px){
-    #searchBar{
-      height: 4vw;
-      font-size: 1.7vw;
-      width: 35vw;
-    }
+#searchBar {
+  width: 10em;
+  height: 1.6em;
+  font-size: 0.8rem;
+  padding-left: 8px;
+  border: none;
+  border-radius: 5px;
+  background-color: ghostwhite;
 }
-@media (min-width:1024px){
-  #searchBar{
-    height: 2.5vw;
-    font-size: 1.3vw;
-    width: 32vw;
+
+@media (min-width: 768px) {
+  #searchBar {
+    height: 3.2rem; /* Replacing 4vw */
+    font-size: 1.36rem; /* Replacing 1.7vw */
+    width: 28rem; /* Replacing 35vw */
+  }
+}
+
+@media (min-width: 1024px) {
+  #searchBar {
+    height: 2.8rem; /* Replacing 2.5vw */
+    width: 35rem; /* Replacing 32vw */
     padding-left: 15px;
-    font-size: 1vw;
+    font-size: 1rem; /* Replacing 1vw */
   }
 }

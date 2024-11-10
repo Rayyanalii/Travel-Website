@@ -61,7 +61,7 @@
 /*Add Destination Menu*/
 .addDestinationMenuContainer {
   position: absolute;
-  top: 10%;
+  top: 12%;
   max-width: 70%;
   height: auto;
   width: 100%;
@@ -74,6 +74,7 @@
   border-radius: 10px;
   max-height: 70%;
   overflow-y: scroll;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Shadow effect */
 }
 
 .close input {
@@ -148,8 +149,8 @@ th {
 
 .buttonContainer {
   display: flex;
-  justify-content: flex-end; /* Aligns buttons to the right */
-  gap: 8px; /* Space between buttons */
+  justify-content: center; /* Aligns buttons to the right */
+  gap: 10px; /* Space between buttons */
 }
 
 .modifyButton,

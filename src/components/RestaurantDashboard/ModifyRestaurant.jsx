@@ -1,14 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../pages/AdminDashboard/DestinationDashboard/DestinationDashboard.css';
 
-const AddPlaceToVisit = ({ closeMenu }) => {
+const ModifyRestaurant = ({ closeMenu, editData, updateMessage }) => {
     // State variables for input fields
-    const [placeTitle, setplaceTitle] = useState('');
-    const [placeCity, setplaceCity] = useState('');
-    const [placeDescription, setplaceDescription] = useState('');
-    const [images, setImages] = useState(Array(5).fill(null)); // Array for 5 image uploads
+    const [restaurantName, setrestaurantName] = useState('');
+    const [restaurantCity, setrestaurantCity] = useState('');
+    const [restaurantDescription, setrestaurantDescription] = useState('');
+    const [images, setImages] = useState(Array(2).fill(null));
 
     const [successMessage, setSuccessMessage] = useState('');
+
+    useEffect(() => {
+        setrestaurantName(editData.RESTAURANTNAME);
+        setrestaurantCity(editData.RESTAURANTCITY);
+        setrestaurantDescription(editData.RESTAURANTDESCRIPTION);
+
+        return () => {
+            setrestaurantName('')
+            setrestaurantDescription('')
+            setrestaurantCity('')
+        }
+
+    }, [editData])
+
 
     function handleMenu() {
         closeMenu(false);
@@ -18,7 +32,7 @@ const AddPlaceToVisit = ({ closeMenu }) => {
     const handleImageChange = (index, event) => {
         const files = Array.from(event.target.files);
         const updatedImages = [...images];
-        updatedImages[index] = files[0];
+        updatedImages[index] = files[0]; // Store the first file selected
         setImages(updatedImages);
     };
 
@@ -27,9 +41,12 @@ const AddPlaceToVisit = ({ closeMenu }) => {
 
         const formData = new FormData();
 
-        formData.append('placeTitle', placeTitle);
-        formData.append('placeCity', placeCity);
-        formData.append('placeDescription', placeDescription);
+        formData.append('restaurantID', editData.RESTAURANTID);
+        formData.append('restaurantName', restaurantName);
+        formData.append('restaurantCity', restaurantCity);
+        formData.append('restaurantDescription', restaurantDescription);
+        const oldImages = editData.RESTAURANTIMAGES.split(',');
+        formData.append('oldImages', JSON.stringify({ oldImages }));
 
         images.forEach((image, index) => {
             formData.append('images', image);
@@ -37,21 +54,18 @@ const AddPlaceToVisit = ({ closeMenu }) => {
 
         try {
             // Send the POST request with the FormData
-            const response = await fetch('http://localhost:3000/api/add-place-to-visit', {
-                method: 'POST',
+            const response = await fetch('http://localhost:3000/api/update-restaurant', {
+                method: 'PUT',
                 body: formData,
             });
 
             if (response.ok) {
-                setSuccessMessage('Place added successfully!');
-                // Clear the form if needed
-                setplaceTitle('');
-                setplaceCity('');
-                setplaceDescription('');
-                setImages(Array(5).fill(null));
+                setSuccessMessage('Restaurant updated successfully!');
+                updateMessage("Restaurant Updated Successfully!");
+                closeMenu(false);
             } else {
                 // Handle server error
-                console.error('Failed to add place to visit');
+                console.error('Failed to add Restaurant');
             }
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -66,34 +80,34 @@ const AddPlaceToVisit = ({ closeMenu }) => {
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="addDestinationInput">
-                        <label htmlFor="placeTitle">Place Name:</label>
+                        <label htmlFor="restaurantName">Restaurant Name:</label>
                         <input
                             type="text"
-                            name="placeTitle"
-                            id="placeTitle"
-                            value={placeTitle}
-                            onChange={(e) => setplaceTitle(e.target.value)}
+                            name="restaurantName"
+                            id="restaurantName"
+                            value={restaurantName}
+                            onChange={(e) => setrestaurantName(e.target.value)}
                             required
                         />
                     </div>
                     <div className="addDestinationInput">
-                        <label htmlFor="placeCity">City Name:</label>
+                        <label htmlFor="restaurantCity">City Name:</label>
                         <input
                             type="text"
-                            name="placeCity"
-                            id="placeCity"
-                            value={placeCity}
-                            onChange={(e) => setplaceCity(e.target.value)}
+                            name="restaurantCity"
+                            id="restaurantCity"
+                            value={restaurantCity}
+                            onChange={(e) => setrestaurantCity(e.target.value)}
                             required
                         />
                     </div>
                     <div className="addDestinationInput">
-                        <label htmlFor="placeDescription">Description:</label>
+                        <label htmlFor="restaurantDescription">Description:</label>
                         <textarea
-                            name="placeDescription"
-                            id="placeDescription"
-                            value={placeDescription}
-                            onChange={(e) => setplaceDescription(e.target.value)}
+                            name="restaurantDescription"
+                            id="restaurantDescription"
+                            value={restaurantDescription}
+                            onChange={(e) => setrestaurantDescription(e.target.value)}
                             required
                         />
                     </div>
@@ -105,7 +119,6 @@ const AddPlaceToVisit = ({ closeMenu }) => {
                             <input
                                 type="file"
                                 name={`image${index}`}
-                                id={`image${index}`}
                                 onChange={(e) => handleImageChange(index, e)}
                                 required
                             />
@@ -118,7 +131,7 @@ const AddPlaceToVisit = ({ closeMenu }) => {
                         </div>
                     )}
                     <div className="addDestinationInput">
-                        <button type="submit">Add Place To Visit</button>
+                        <button type="submit">Update Restaurant</button>
                     </div>
                 </form>
 
@@ -127,4 +140,4 @@ const AddPlaceToVisit = ({ closeMenu }) => {
     );
 };
 
-export default AddPlaceToVisit;
+export default ModifyRestaurant;

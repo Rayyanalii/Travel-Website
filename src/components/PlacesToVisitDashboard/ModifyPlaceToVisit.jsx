@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import '../../pages/AdminDashboard/DestinationDashboard/DestinationDashboard.css';
+import { useEffect } from 'react';
 
-const AddPlaceToVisit = ({ closeMenu }) => {
+const ModifyPlaceToVisit = ({ closeMenu, editableData, updateMessage }) => {
     // State variables for input fields
     const [placeTitle, setplaceTitle] = useState('');
     const [placeCity, setplaceCity] = useState('');
@@ -11,8 +12,22 @@ const AddPlaceToVisit = ({ closeMenu }) => {
     const [successMessage, setSuccessMessage] = useState('');
 
     function handleMenu() {
+
         closeMenu(false);
     }
+
+    useEffect(() => {
+        setplaceTitle(editableData.PLACETITLE);
+        setplaceCity(editableData.PLACECITY);
+        setplaceDescription(editableData.PLACEDESCRIPTION);
+
+        return () => {
+            setplaceTitle('');
+            setplaceCity('');
+            setplaceDescription('');
+        }
+    }, [editableData])
+
 
     // Handle file input changes
     const handleImageChange = (index, event) => {
@@ -27,28 +42,27 @@ const AddPlaceToVisit = ({ closeMenu }) => {
 
         const formData = new FormData();
 
+        formData.append('placeID', editableData.PLACEID);
         formData.append('placeTitle', placeTitle);
         formData.append('placeCity', placeCity);
         formData.append('placeDescription', placeDescription);
+        const imageUrls = editableData.PLACEIMAGES.split(',');
+        formData.append('oldImages', JSON.stringify({ imageUrls }));
 
         images.forEach((image, index) => {
             formData.append('images', image);
         });
 
         try {
-            // Send the POST request with the FormData
-            const response = await fetch('http://localhost:3000/api/add-place-to-visit', {
-                method: 'POST',
+            const response = await fetch('http://localhost:3000/api/update-place-to-visit', {
+                method: 'PUT',
                 body: formData,
             });
 
             if (response.ok) {
-                setSuccessMessage('Place added successfully!');
-                // Clear the form if needed
-                setplaceTitle('');
-                setplaceCity('');
-                setplaceDescription('');
-                setImages(Array(5).fill(null));
+                setSuccessMessage('Place updated successfully!');
+                updateMessage("Place Updated Successfully!");
+                closeMenu(false);
             } else {
                 // Handle server error
                 console.error('Failed to add place to visit');
@@ -118,7 +132,7 @@ const AddPlaceToVisit = ({ closeMenu }) => {
                         </div>
                     )}
                     <div className="addDestinationInput">
-                        <button type="submit">Add Place To Visit</button>
+                        <button type="submit">Update Place To Visit</button>
                     </div>
                 </form>
 
@@ -127,4 +141,4 @@ const AddPlaceToVisit = ({ closeMenu }) => {
     );
 };
 
-export default AddPlaceToVisit;
+export default ModifyPlaceToVisit;
