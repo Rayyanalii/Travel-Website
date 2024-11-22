@@ -1,214 +1,213 @@
-.container{
-    background-color:rgba(0, 0, 0, 0.798);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
+.container {
+  background-color: rgba(0, 0, 0, 0.798);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
 }
-.links ul{
-    display: flex;
+.links ul {
+  display: flex;
 }
-li{
-    list-style: none;
+li {
+  list-style: none;
 }
-li a{
-    text-decoration: none;
-    color: white;
+li a {
+  text-decoration: none;
+  color: white;
 }
-.links{
-    padding-right: 20px;
+.links {
+  padding-right: 20px;
 }
-.links ul li a{
-    cursor: pointer;
-    list-style: none;
+.links ul li a {
+  cursor: pointer;
+  list-style: none;
 }
-.navbarLinks{
-    padding-left: 40px;
+.navbarLinks {
+  padding-left: 40px;
 }
-.rightSide{
-    display: inline-flex;
-    align-items: center;
+.rightSide {
+  display: inline-flex;
+  align-items: center;
 }
-.mainButtons{
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px;
-    margin: 10px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
+.mainButtons {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
 }
-#signupButton{
-    color: black;
-    background-color: white;
-    margin-right: 30px;
+#signupButton {
+  color: black;
+  background-color: white;
+  margin-right: 30px;
 }
-#loginButton{
-    background-color: transparent;
-    color: white;
+#loginButton {
+  background-color: transparent;
+  color: white;
 }
-.verticalLine{
-    font-size: 40px;
-    padding-bottom: 7px;
-    padding-right: 10px;
-    color: white;
+.verticalLine {
+  font-size: 40px;
+  padding-bottom: 7px;
+  padding-right: 10px;
+  color: white;
 }
-.logo{
-    margin-left: 10px;
+.logo {
+  margin-left: 10px;
 }
-#signupButton:hover{
-    background-color: rgba(255, 255, 255, 0.742);
+#signupButton:hover {
+  background-color: rgba(255, 255, 255, 0.742);
 }
-nav{
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
-.mobileContainer{
-    display: none;
+.mobileContainer {
+  display: none;
 }
-.sliderMenuContainer{
-    display: none;
+.sliderMenuContainer {
+  display: none;
 }
-.closedSlider{
-    display: none;
+.closedSlider {
+  display: none;
 }
-.serviceDropdown{
-    position: absolute;
-    z-index: 1000;
-    color: white;
-    margin-top: 30px;
-    background-color:rgba(0, 0, 0, 0.798);
-    padding: 15px 10px 0px 10px;
-    border-radius: 0px 0px 10px 10px;
+.serviceDropdown {
+  position: absolute;
+  z-index: 1000;
+  color: white;
+  margin-top: 30px;
+  background-color: rgba(0, 0, 0, 0.798);
+  padding: 15px 10px 0px 10px;
+  border-radius: 0px 0px 10px 10px;
 }
-.closedServiceDropdown{
-    display: none;
+.closedServiceDropdown {
+  display: none;
 }
-.serviceDropdownList ul{
-    display: block;
+.serviceDropdownList ul {
+  display: block;
 }
-.serviceDropdownList ul li{
-    padding-bottom: 20px;
+.serviceDropdownList ul li {
+  padding-bottom: 20px;
 }
-.pagesDropdown{
-    position: absolute;
-    z-index: 1000;
-    color: white;
-    margin-top: 30px;
-    background-color:rgba(0, 0, 0, 0.798);
-    padding: 15px 10px 0px 10px;
-    border-radius: 0px 0px 10px 10px;
+.pagesDropdown {
+  position: absolute;
+  z-index: 1000;
+  color: white;
+  margin-top: 30px;
+  background-color: rgba(0, 0, 0, 0.798);
+  padding: 15px 10px 0px 10px;
+  border-radius: 0px 0px 10px 10px;
 }
-.closedPagesDropdown{
-    display: none;
+.closedPagesDropdown {
+  display: none;
 }
-.pagesDropdownList ul{
-    display: block;
+.pagesDropdownList ul {
+  display: block;
 }
-.pagesDropdownList ul li{
-    padding-bottom: 20px;
+.pagesDropdownList ul li {
+  padding-bottom: 20px;
 }
-li a:hover{
-    text-decoration: underline;
+li a:hover {
+  text-decoration: underline;
 }
-#loginButton:hover{
-    text-decoration: underline;
+#loginButton:hover {
+  text-decoration: underline;
 }
 
 /* Mobile Styles */
-@media (max-width:794px){
-    .container{
-        display: none;
-    }
-    .mobileContainer{
-        display: flex;
-        background-color:rgba(0, 0, 0, 0.798);
-        z-index: 1000;
-        align-items: center;
-    }
-    .mobileLogo{
-        margin: 4px auto 0px auto;
-    }
-    .mobileLogo img{
-        width: 7em;
-    }
-    .hamburger{
-        color: white;
-        margin: auto;
-        width: 2em;
-        height: 2em;
-        cursor: pointer;
-    }
-    .hamburgerIconContainer{
-        padding-left: 10px;
-    }
-    .sliderMenuContainer{
-        display: block;
-        width: 100vw;
-        position: absolute;
-        z-index: 1000;
-        background-color:rgba(0, 0, 0, 0.798);
-    }
-    .sliderMenuContainer ul{
-        display: block;
-    }
-    .sliderMenuContainer ul li{
-        color: white;
-        padding: 10px;
-    }
-    .sliderMenuContainer ul li a{
-        cursor: pointer;
-        color: white;
-    }
-    .closedSlider{
-        display: none;
-    }
+@media (max-width: 794px) {
+  .container {
+    display: none;
+  }
+  .mobileContainer {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.798);
+    z-index: 1000;
+    align-items: center;
+  }
+  .mobileLogo {
+    margin: 4px auto 0px auto;
+  }
+  .mobileLogo img {
+    width: 7em;
+  }
+  .hamburger {
+    color: white;
+    margin: auto;
+    width: 2em;
+    height: 2em;
+    cursor: pointer;
+  }
+  .hamburgerIconContainer {
+    padding-left: 10px;
+  }
+  .sliderMenuContainer {
+    display: block;
+    width: 100vw;
+    position: absolute;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.798);
+  }
+  .sliderMenuContainer ul {
+    display: block;
+  }
+  .sliderMenuContainer ul li {
+    color: white;
+    padding: 10px;
+  }
+  .sliderMenuContainer ul li a {
+    cursor: pointer;
+    color: white;
+  }
+  .closedSlider {
+    display: none;
+  }
 
-    /* Mobile Dropdown for Services and Pages */
-/* Mobile Dropdown for Services and Pages */
-.mobileDropdown ul {
+  /* Mobile Dropdown for Services and Pages */
+  /* Mobile Dropdown for Services and Pages */
+  .mobileDropdown ul {
     display: block;
     border-radius: 0px 0px 10px 10px;
     margin: 5px 0;
-}
+  }
 
-.mobileDropdown ul li {
+  .mobileDropdown ul li {
     padding: 10px;
     color: white;
-}
+  }
 
-.mobileDropdown ul li a {
+  .mobileDropdown ul li a {
     color: white;
     text-decoration: none;
-}
+  }
 
-.mobileDropdown ul li a:hover {
+  .mobileDropdown ul li a:hover {
     text-decoration: underline;
-}
+  }
 
-.mobileDropdown span {
+  .mobileDropdown span {
     cursor: pointer;
     color: white;
-}
+  }
 
-.mobileDropdown span:hover {
+  .mobileDropdown span:hover {
     text-decoration: underline;
-}
+  }
 
+  /* Mobile Menu Buttons for Login and Signup */
+  .mobileMenuButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    justify-content: center;
+  }
 
-    /* Mobile Menu Buttons for Login and Signup */
-    .mobileMenuButtons {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
-        justify-content: center;
-    }
-
-    .mainButtons {
-        margin: 10px 0;
-        width: 80%;
-        text-align: center;
-    }
+  .mainButtons {
+    margin: 10px 0;
+    width: 80%;
+    text-align: center;
+  }
 }

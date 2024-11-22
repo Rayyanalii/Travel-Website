@@ -21,6 +21,8 @@ import HotelsDashboard from "./pages/AdminDashboard/HotelsDashboard/HotelsDashbo
 import CarsDashboard from "./pages/AdminDashboard/CarsDashboard/CarsDashboard.jsx";
 import FlightsDashboard from "./pages/AdminDashboard/FlightsDashboard/FlightsDashboard.jsx";
 import ServiceCar from "./pages/Services/Car/ServiceCar.jsx";
+import SearchResults from "./pages/Services/SearchResults/SearchResults.jsx";
+import DestinationDescription from "./pages/DestinationDescription.jsx";
 
 // Define router with all routes
 const router = createBrowserRouter([
@@ -35,14 +37,6 @@ const router = createBrowserRouter([
   {
     path: "/tripPackage",
     element: <TripPackage />,
-  },
-  {
-    path: "/ServiceFlight",
-    element: <ServiceFlight />,
-  },
-  {
-    path: "/ServiceHotel",
-    element: <ServiceHotel />,
   },
   {
     path: "/reviews",
@@ -95,6 +89,22 @@ const router = createBrowserRouter([
   {
     path: "/ServiceCar",
     element: <ServiceCar />,
+  },
+  {
+    path: "/ServiceFlight",
+    element: <ServiceFlight />,
+  },
+  {
+    path: "/ServiceHotel",
+    element: <ServiceHotel />,
+  },
+  {
+    path: "/:service/SearchResults",
+    element: <SearchResults />,
+  },
+  {
+    path: "/DestinationDescription",
+    element: <DestinationDescription />,
   },
 ]);
 

@@ -1,28 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../pages/ServiceFlight.css";
 
 const ServiceFlightForm = () => {
+  const [formData, setFormData] = useState({
+    from: "",
+    to: "",
+    departure: "",
+    passenger: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Navigate to SearchResults and pass formData
+    navigate("/Flight/SearchResults", { state: formData });
+  };
+
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <div className="FlightformContainer">
         <div className="partition">
           <div className="fromParentContainer">
             <div className="flightInputBox">
               <label htmlFor="from">From:</label>
-              <input type="text" name="from" id="from" required />
+              <input
+                type="text"
+                name="from"
+                id="from"
+                value={formData.from}
+                onChange={handleChange}
+                required
+              />
             </div>
           </div>
           <div className="passengerDepartureFlex">
             <div className="departurePassengerSmallContainer">
               <div className="flightInputBox">
-                <label htmlFor="from">Departure:</label>
-                <input type="date" name="from" id="from" required />
+                <label htmlFor="departure">Departure:</label>
+                <input
+                  type="date"
+                  name="departure"
+                  id="departure"
+                  value={formData.departure}
+                  onChange={handleChange}
+                  required
+                />
               </div>
             </div>
             <div className="departurePassengerSmallContainer">
               <div className="flightInputBox">
-                <label htmlFor="from">Passenger:</label>
-                <input type="number" name="from" id="from" required />
+                <label htmlFor="passenger">Passenger:</label>
+                <input
+                  type="number"
+                  name="passenger"
+                  id="passenger"
+                  value={formData.passenger}
+                  onChange={handleChange}
+                  required
+                />
               </div>
             </div>
           </div>
@@ -31,7 +76,14 @@ const ServiceFlightForm = () => {
           <div className="fromParentContainer">
             <div className="flightInputBox">
               <label htmlFor="to">To:</label>
-              <input type="text" name="to" id="to" required />
+              <input
+                type="text"
+                name="to"
+                id="to"
+                value={formData.to}
+                onChange={handleChange}
+                required
+              />
             </div>
           </div>
           <div className="fromParentContainer">
@@ -41,7 +93,7 @@ const ServiceFlightForm = () => {
           </div>
         </div>
       </div>
-    </>
+    </form>
   );
 };
 

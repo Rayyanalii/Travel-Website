@@ -1,0 +1,83 @@
+/*Car Search Results*/
+.carResultSearchMainContainer {
+  background-color: rgba(50, 50, 55, 0.425);
+  display: flex;
+  max-width: 65%;
+  margin: 0 auto;
+  margin-top: 1em;
+  color: white;
+  border-radius: 5px;
+  border: 1px solid white;
+  padding: 10px;
+  max-height: 8em;
+}
+.carResultSearchMainContainer p {
+  font-size: 1.1em;
+}
+.carResultsRestPartition {
+  max-width: 24%;
+  width: 100%;
+}
+.carResultsMainTextPartition {
+  max-width: 52%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1em;
+}
+.carResultsImageContainer img {
+  width: 90%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  margin-top: 1em;
+  border-radius: 15px;
+}
+.carResultsImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+}
+.carResultMainTextRow {
+  display: flex;
+  max-height: 50%;
+  height: 100%;
+  align-items: center;
+  gap: 10px;
+}
+.carResultMainTextRowSmallComponentLeft {
+  max-width: 40%;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.carResultMainTextRowSmallComponentRight {
+  max-width: 60%;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.carResultPriceButtonContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.6em;
+  gap: 15px;
+  text-align: center;
+  margin-right: 10px;
+}
+.carResultPriceButtonContainer input[type="submit"] {
+  margin: 0 auto;
+  width: 90%;
+  height: 2.2rem;
+  font-size: 1.1rem;
+}
+.carResultsPriceDescription {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+/*--------------FLIGHT-----------------------*/
