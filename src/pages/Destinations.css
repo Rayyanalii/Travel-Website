@@ -1,81 +1,99 @@
-.destinationHeadingText h1{
-    color: white;
-    font-size: 6.5vw;
-    text-align: center;
-    margin: 10vw auto;
-    text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
-    ;
+.destinationHeadingText h1 {
+  color: white;
+  font-size: 6.5vw;
+  text-align: center;
+  margin: 10vw auto;
 }
-@media (min-width:768px){
-    .destinationHeadingText h1{
-        font-size: 5vw;
-    }
+@media (min-width: 768px) {
+  .destinationHeadingText h1 {
+    font-size: 5vw;
+  }
 }
-@media (min-width:1024px){
-    .destinationHeadingText h1{
-        font-size: 3.8vw;
-    }
+@media (min-width: 1024px) {
+  .destinationHeadingText h1 {
+    font-size: 3.8vw;
+  }
 }
 
-.destinationImage{
-    position: absolute;
-  z-index: -1;
+.destinationsPage {
+  position: relative;
+  min-height: 100vh; /* Ensure it covers the viewport */
+  background-image: url("/Uploads/HomePageBackground.png");
+  background-position: center;
+  background-size: cover; /* Make the image cover the entire page */
+  z-index: 0;
+}
+
+.destinationsPage::before {
+  content: "";
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.1),
+    rgba(13, 15, 15, 0.8),
+    rgba(13, 15, 15, 1)
+  );
+  z-index: -1;
 }
 
-.allDestinationCards{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 25px;
-    margin: 35vw 12vw;
+.allDestinationCards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 35vw;
+  padding-bottom: 15vw;
 }
 
 /*Destination Cards*/
 
-.card{
-    width: 25vw;
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 100ms linear;
+.card {
+  width: 25vw;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 100ms linear;
+  aspect-ratio: 3/4;
 }
-.card h3{
-    position: absolute;
-    bottom: 10px;
-    left: 6px;
-    color: white;
-    z-index: 1;
-    font-size: 3.2vw;
-    text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+.card h3 {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  z-index: 1;
+  font-size: 3.2vw;
+  text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
 }
-.card img{
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
+.card img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 10px;
+  object-fit: cover;
 }
-.card:hover{
-    transform: translateY(-10px);
+.card:hover {
+  transform: translateY(-10px);
 }
 @media (min-width: 768px) {
-    .card {
-        width: 16vw;
-    }
+  .card {
+    width: 16vw;
+  }
 
-    .card h3 {
-        font-size: 2.2vw;
-    }
+  .card h3 {
+    font-size: 2.2vw;
+  }
 }
 
 @media (min-width: 1024px) {
-    .card {
-        max-width: 250px;
-    }
+  .card {
+    max-width: 250px;
+  }
 
-    .card h3 {
-        font-size: 1.3vw;
-    }
+  .card h3 {
+    font-size: 1.3vw;
+  }
 }

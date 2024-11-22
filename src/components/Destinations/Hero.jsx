@@ -6,10 +6,7 @@ const Hero = () => {
   return (
     <>
       <header>
-        <Navbar />
-        <div className="destImage">
-          <img className="destinationImage" src="/Uploads/HomePageBackground.png" alt="" />
-        </div>
+
         <div className="destinationHeadingText">
           <h1>Destinations</h1>
         </div>

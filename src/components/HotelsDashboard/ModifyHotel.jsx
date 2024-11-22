@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const AddHotel = ({ closeMenu }) => {
+const ModifyHotel = ({ closeMenu, message, editableData }) => {
     const [hotelName, sethotelName] = useState('')
     const [hotelCity, setHotelCity] = useState('')
     const [hotelDescription, sethotelDescription] = useState('');
@@ -15,7 +15,6 @@ const AddHotel = ({ closeMenu }) => {
     const [trips, settrips] = useState([])
     const [selectedDestination, setselectedDestination] = useState(''); // Selected value for the first dropdown
     const [selectedtrip, setSelectedtrip] = useState('');
-
 
     const fetchDropdownData = async () => {
         try {
@@ -32,8 +31,24 @@ const AddHotel = ({ closeMenu }) => {
     };
 
     useEffect(() => {
+        sethotelName(editableData.HOTELNAME);
+        setHotelCity(editableData.HOTELCITY);
+        sethotelDescription(editableData.HOTELDESCRIPTION);
+        sethotelClass(editableData.HOTELCLASS);
+        sethotelPrice(editableData.HOTELPRICEPERNIGHT);
+        setSelectedtrip(editableData.TRIPPACKAGEID);
+        setselectedDestination(editableData.DESTINATIONID);
         fetchDropdownData();
-    }, []);
+
+        return () => {
+            sethotelName('');
+            setHotelCity('');
+            sethotelDescription('');
+            sethotelClass('');
+            sethotelPrice('');
+        }
+    }, [editableData])
+
 
 
     function handleLogoImageChange(index, event) {
@@ -59,6 +74,7 @@ const AddHotel = ({ closeMenu }) => {
 
         const formData = new FormData();
 
+        formData.append('hotelID', editableData.HOTELID);
         formData.append('hotelName', hotelName);
         formData.append('hotelCity', hotelCity);
         formData.append('hotelDescription', hotelDescription);
@@ -75,29 +91,27 @@ const AddHotel = ({ closeMenu }) => {
             formData.append('images', image);
         });
 
+        const oldimages = editableData.HOTELIMAGES.split(",");
+        formData.append('oldImages', JSON.stringify({ oldimages }));
+
+        const oldLogo = editableData.HOTELLOGO.split(",");
+        formData.append('oldLogo', JSON.stringify({ oldLogo }));
+
 
         try {
             // Send the POST request with the FormData
-            const response = await fetch('http://localhost:3000/api/add-hotel', {
-                method: 'POST',
+            const response = await fetch('http://localhost:3000/api/update-hotel', {
+                method: 'PUT',
                 body: formData,
             });
 
             if (response.ok) {
-                setSuccessMessage('Hotel added successfully!');
-                // Clear the form if needed
-                sethotelName('');
-                setHotelCity('');
-                sethotelDescription('');
-                setlogoImage(Array(1).fill(null));
-                setImages(Array(4).fill(null));
-                sethotelClass('')
-                sethotelPrice('')
-                setSelectedtrip('');
-                setselectedDestination('');
+                message('Hotel updated successfully!');
+                closeMenu(false);
             } else {
                 // Handle server error
-                console.error('Failed to add Hotel');
+                message('Failed to update Hotel');
+                closeMenu(false);
             }
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -196,7 +210,6 @@ const AddHotel = ({ closeMenu }) => {
                         />
                     </div>
                     <div className="divider" />
-
                     <div className="addDestinationInput">
                         <label htmlFor="dropdown1">Destination ID:</label>
                         <select
@@ -238,7 +251,7 @@ const AddHotel = ({ closeMenu }) => {
                         </div>
                     )}
                     <div className="addDestinationInput">
-                        <button type="submit">Add Hotel</button>
+                        <button type="submit">Update Hotel</button>
                     </div>
                 </form>
 
@@ -247,4 +260,4 @@ const AddHotel = ({ closeMenu }) => {
     )
 }
 
-export default AddHotel
+export default ModifyHotel

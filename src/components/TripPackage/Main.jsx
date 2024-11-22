@@ -10,22 +10,18 @@ import Ratings from './Ratings'
 import WriteReview from './WriteReview'
 
 const Main = ({ packageData }) => {
+
   return (
     <>
       <main>
         <HotelSection packageData={packageData} />
         <RedDivider />
         <h3 id='placesVisitingh3'>Places you will be visiting:</h3>
-        <VisitingLocations num="1" packageData={packageData} />
-        <VisitingLocations num="2" />
-        <VisitingLocations num="3" />
-        <VisitingLocations num="4" last={true} />
+        {packageData.map((place, index) => (
+          <VisitingLocations key={index} num={index + 1} packageData={place} last={index == packageData.length ? false : true} />
+        ))}
         <RedDivider />
-        <Transportation />
-        <RedDivider />
-        <OtherInfo />
-        <RedDivider />
-        <Ratings />
+        <Ratings packageData={packageData} />
         <RedDivider />
         <WriteReview />
       </main>

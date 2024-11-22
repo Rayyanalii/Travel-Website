@@ -83,7 +83,7 @@ const router = createBrowserRouter([
     element: <FlightsDashboard />,
   },
   {
-    path: "/tripPackage/:id/:name",
+    path: "/TripPackage/:id/:name",
     element: <TripPackage />,
   },
   {

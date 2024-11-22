@@ -1,15 +1,21 @@
-import React from 'react'
-import './Destinations.css'
-import Hero from '../components/Destinations/Hero'
-import Main from '../components/Destinations/Main'
+import React from 'react';
+import './Destinations.css';
+import Hero from '../components/Destinations/Hero';
+import Main from '../components/Destinations/Main';
+import Navbar from '../components/Navbar';
+import Footer from './../components/General/Footer';
 
 const Destinations = () => {
   return (
     <>
-    <Hero/>
-    <Main/>
+      <div className="destinationsPage">
+        <Navbar />
+        <Hero />
+        <Main />
+      </div>
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Destinations
+export default Destinations;

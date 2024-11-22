@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../pages/AdminDashboard/DestinationDashboard/DestinationDashboard.css';
 
-const AddDestination = ({ closeMenu }) => {
+const ModifyDestinations = ({ closeMenu, editableData, setmessage }) => {
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
     const [caption, setCaption] = useState('');
@@ -12,6 +12,14 @@ const AddDestination = ({ closeMenu }) => {
     function handleMenu() {
         closeMenu(false);
     }
+
+    useEffect(() => {
+        setCountry(editableData.COUNTRY);
+        setCity(editableData.CITY);
+        setCaption(editableData.CAPTION);
+
+    }, [editableData]);
+
 
     // Handle file input changes
     const handleImageChange = (index, event) => {
@@ -27,10 +35,14 @@ const AddDestination = ({ closeMenu }) => {
 
         const formData = new FormData();
 
-        // Add text fields
+        formData.append('id', editableData.DESTINATIONID);
         formData.append('country', country);
         formData.append('city', city);
         formData.append('caption', caption);
+
+        const oldImages = editableData.IMAGES.split(",");
+
+        formData.append('oldImages', JSON.stringify({ oldImages }));
 
         // Add image files (assuming `images` is an array of selected File objects)
         images.forEach((image, index) => {
@@ -39,21 +51,18 @@ const AddDestination = ({ closeMenu }) => {
 
         try {
             // Send the POST request with the FormData
-            const response = await fetch('http://localhost:3000/api/add-destination', {
-                method: 'POST',
+            const response = await fetch('http://localhost:3000/api/update-destination', {
+                method: 'PUT',
                 body: formData,
             });
 
             if (response.ok) {
-                setSuccessMessage('Destination added successfully!'); // Set success message
-                // Clear the form if needed
-                setCountry('');
-                setCity('');
-                setCaption('');
-                setImages(Array(3).fill(null));
+                setmessage('Destination updated successfully!'); // Set success message
+                closeMenu(false); // Close the menu
             } else {
                 // Handle server error
                 console.error('Failed to add destination');
+                closeMenu(false); // Close the menu
             }
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -131,4 +140,4 @@ const AddDestination = ({ closeMenu }) => {
     );
 };
 
-export default AddDestination;
+export default ModifyDestinations;

@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import AddHotel from './AddHotel';
+import ModifyHotel from './ModifyHotel';
 
 const HotelsDashboardMain = () => {
     const [addMenu, setAddMenu] = useState(false);
     const [hotels, sethotels] = useState([]);
+    const [editMenu, setEditMenu] = useState(false);
+    const [message, setMessage] = useState('');
+    const [editableData, setEditableData] = useState([]);
 
 
     const fetchHotels = async () => {
@@ -18,10 +22,55 @@ const HotelsDashboardMain = () => {
 
     useEffect(() => {
         fetchHotels();
-    }, [])
+        if (message) {
+            const timeout = setTimeout(() => {
+                setMessage('');
+            }, 2000);
+
+            return () => {
+                clearTimeout(timeout);
+            }
+        }
+    }, [addMenu, editMenu])
 
     function handleAddMenu(e) {
         setAddMenu(!addMenu);
+    }
+
+    async function handleDelete(id) {
+        const hotel = hotels.find((h) => h.HOTELID === id);
+        if (hotel) {
+            const images = hotel.HOTELIMAGES.split(",");
+            const logo = hotel.HOTELLOGO.split(",");
+
+            try {
+
+                const res = await fetch(`http://localhost:3000/api/delete-hotel/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ images, logo }),
+                })
+                if (res.ok) {
+                    alert('Hotel deleted successfully');
+                    fetchHotels();
+                }
+                else {
+                    alert('Error deleting Hotel');
+                }
+            }
+            catch (error) {
+                console.error('Error deleting Hotel:', error);
+                alert('Error deleting Hotel');
+            }
+        }
+
+    }
+    function handleModify(id) {
+        const hotel = hotels.find((h) => h.HOTELID === id);
+        setEditableData(hotel);
+        setEditMenu(true);
     }
 
     return (
@@ -36,11 +85,18 @@ const HotelsDashboardMain = () => {
                         <input type="button" value="+" onClick={handleAddMenu} />
                     </div>
                 </div>
+
                 <div className="allDestinationsContainer">
+                    {message && <>
+                        <div className="success-message">
+                            <p>{message}</p>
+                        </div>
+                    </>}
                     <div className="addDestinationText">
                         <h1>All Hotels</h1>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                     </div>
+
                     <div className="allDestinationTableContainer">
                         <table>
                             <thead>
@@ -53,24 +109,36 @@ const HotelsDashboardMain = () => {
                                     <th>Images URLs</th>
                                     <th>Star Class</th>
                                     <th>Price Per Night</th>
+                                    <th>Destination ID</th>
+                                    <th>Trip Package ID</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {hotels.map((hotel) => (
-                                    <tr key={hotel.hotelID}>
-                                        <td className="dataField">{hotel.hotelID}</td>
-                                        <td className="dataField">{hotel.hotelName}</td>
-                                        <td className="dataField">{hotel.hotelCity}</td>
-                                        <td className="dataField">{hotel.hotelDescription}</td>
-                                        <td className="dataField">{hotel.hotelLogo}</td>
-                                        <td className="dataField">{hotel.hotelImages}</td>
-                                        <td className="dataField">{hotel.hotelClass}</td>
-                                        <td className="dataField">{hotel.hotelPricePerNight}</td>
+                                    <tr key={hotel.HOTELID}>
+                                        <td className="dataField">{hotel.HOTELID}</td>
+                                        <td className="dataField">{hotel.HOTELNAME}</td>
+                                        <td className="dataField">{hotel.HOTELCITY}</td>
+                                        <td className="dataField">{hotel.HOTELDESCRIPTION}</td>
+                                        <td className="dataField">{hotel.HOTELLOGO}</td>
+                                        <td className="dataField">
+                                            {hotel.HOTELIMAGES.split(',').map((image, index) => (
+                                                <React.Fragment key={index}>
+                                                    {image}
+                                                    <br />
+                                                </React.Fragment>
+                                            ))}
+                                        </td>
+                                        <td className="dataField">{hotel.HOTELCLASS}</td>
+                                        <td className="dataField">{hotel.HOTELPRICEPERNIGHT}</td>
+                                        <td className="dataField">{hotel.DESTINATIONID}</td>
+                                        <td className="dataField">{hotel.TRIPPACKAGEID}</td>
                                         <td className="dataFieldButton">
                                             <div className="optionsMenu">
                                                 <div className="buttonContainer">
-                                                    <button className="modifyButton" onClick={() => handleModify(hotel.hotelID)}>Modify</button>
-                                                    <button className="deleteButton" onClick={() => handleDelete(hotel.hotelID)}>Delete</button>
+                                                    <button className="modifyButton" onClick={() => handleModify(hotel.HOTELID)}>Modify</button>
+                                                    <button className="deleteButton" onClick={() => handleDelete(hotel.HOTELID)}>Delete</button>
                                                 </div>
                                             </div>
                                         </td>
@@ -81,6 +149,7 @@ const HotelsDashboardMain = () => {
                     </div>
                 </div>
                 {addMenu && <AddHotel closeMenu={setAddMenu} />}
+                {editMenu && <ModifyHotel closeMenu={setEditMenu} message={setMessage} editableData={editableData} />}
             </div>
         </>
     )

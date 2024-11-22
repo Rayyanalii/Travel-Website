@@ -1,13 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import AddTripPackage from './AddTripPackage';
 
 
 const TripPackageDashboardMain = () => {
     const [addMenu, setAddMenu] = useState(false);
+    const [trips, settrips] = useState([]);
+
+    const fetchTrips = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/api/get-trips');
+            const data = await response.json();
+            settrips(data);
+        } catch (error) {
+            console.error('Error fetching trips:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchTrips();
+
+    }, [addMenu])
+
 
     function handleAddMenu(e) {
-        setAddMenu(!addMenu);
+        setAddMenu(true);
     }
     return (
         <>
@@ -30,40 +47,57 @@ const TripPackageDashboardMain = () => {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Country</th>
-                                    <th>Caption</th>
-                                    <th>Image URLs</th>
-                                    <th>Best Places ID</th>
-                                    <th>Best Eat ID</th>
-                                    <th>Best Stay ID</th>
-                                    <th>Trip ID</th>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>City</th>
+                                    <th>Image URL</th>
+                                    <th>Duration</th>
+                                    <th>Availability</th>
+                                    <th>Requirement</th>
+                                    <th>Price</th>
+                                    <th>Accomodation Stars</th>
+                                    <th>Destination Stars</th>
+                                    <th>Value Stars</th>
+                                    <th>Transport Stars</th>
+                                    <th>Meals Stars</th>
+                                    <th>Overall Stars</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* {destinations.map((destination) => (
-                                    <tr key={destination.city}>
-                                        <td className="dataField">{destination.city}</td>
-                                        <td className="dataField">{destination.country}</td>
-                                        <td className="dataField">{destination.caption}</td>
-                                        <td className="dataField" style={{ whiteSpace: 'pre-wrap' }}>
-                                            {destination.first_image_url.join('\n\n')}
+                                {trips.map((trip) => (
+                                    <tr key={trip.TRIPPACKAGEID}>
+                                        <td className="dataField">{trip.TRIPPACKAGEID}</td>
+                                        <td className="dataField">{trip.TITLE}</td>
+                                        <td className="dataField">{trip.CITY}</td>
+                                        <td className="dataField">
+                                            {trip.IMAGE.split(',').map((image, index) => (
+                                                <React.Fragment key={index}>
+                                                    {image}
+                                                    <br />
+                                                </React.Fragment>
+                                            ))}
                                         </td>
-                                        <td className="dataField">{destination.best_places}</td>
-                                        <td className="dataField">{destination.best_eats}</td>
-                                        <td className="dataField">{destination.best_stays}</td>
-                                        <td className="dataField">{destination.trip_packages}</td>
+                                        <td className="dataField">{trip.PACKAGEDURATION}</td>
+                                        <td className="dataField">{trip.PACKAGEAVAILABILITY}</td>
+                                        <td className="dataField">{trip.PACKAGEREQUIREMENT}</td>
+                                        <td className="dataField">{trip.PRICE}</td>
+                                        <td className="dataField">{trip.ACCOMODATIONRATING}</td>
+                                        <td className="dataField">{trip.DESTINATIONRATING}</td>
+                                        <td className="dataField">{trip.VALUERATING}</td>
+                                        <td className="dataField">{trip.TRANSPORTRATING}</td>
+                                        <td className="dataField">{trip.MEALSRATING}</td>
+                                        <td className="dataField">{trip.OVERALLRATING}</td>
                                         <td className="dataFieldButton">
                                             <div className="optionsMenu">
                                                 <div className="buttonContainer">
-                                                    <button className="modifyButton" onClick={() => handleModify(destination.city)}>Modify</button>
-                                                    <button className="deleteButton" onClick={() => handleDelete(destination.city)}>Delete</button>
+                                                    <button className="modifyButton" onClick={() => handleModify(trip.TRIPPACKAGEID)}>Modify</button>
+                                                    <button className="deleteButton" onClick={() => handleDelete(trip.TRIPPACKAGEID)}>Delete</button>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                                ))} */}
+                                ))}
                             </tbody>
                         </table>
                     </div>

@@ -12,7 +12,7 @@ const TripCard = (props) => {
                     <div className="TripImageContainer">
                         <img src={props.url} alt="" />
                         <div className="priceContainer">
-                            <p>{props.price}</p>
+                            <p>${props.price}</p>
                         </div>
 
                     </div>

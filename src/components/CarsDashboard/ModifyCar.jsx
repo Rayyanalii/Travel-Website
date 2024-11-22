@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import React from 'react'
 
-const AddCar = ({ closeMenu }) => {
+const ModifyCar = ({ closeMenu, editableData, message }) => {
     const [carmake, setcarmake] = useState('')
     const [carmodel, setcarmodel] = useState('')
     const [caryear, setcaryear] = useState('');
@@ -10,7 +10,25 @@ const AddCar = ({ closeMenu }) => {
     const [cartype, setcartype] = useState('');
     const [carprice, setcarprice] = useState('');
 
-    const [successMessage, setSuccessMessage] = useState('');
+
+    useEffect(() => {
+        setcarmake(editableData.CARMAKE);
+        setcarmodel(editableData.CARMODEL);
+        setcaryear(editableData.CARYEAR);
+        setcarlocation(editableData.CARLOCATION);
+        setcartype(editableData.CARTYPE);
+        setcarprice(editableData.CARPRICE)
+
+        return () => {
+            setcarmake('');
+            setcarmodel('');
+            setcaryear('');
+            setcarlocation('');
+            setcartype('');
+            setcarprice('');
+        }
+    }, [editableData])
+
 
     const handleImageChange = (index, event) => {
         const files = Array.from(event.target.files);
@@ -28,6 +46,7 @@ const AddCar = ({ closeMenu }) => {
 
         const formData = new FormData();
 
+        formData.append('carID', editableData.CARID);
         formData.append('carmake', carmake);
         formData.append('carmodel', carmodel);
         formData.append('caryear', caryear);
@@ -35,29 +54,28 @@ const AddCar = ({ closeMenu }) => {
         formData.append('cartype', cartype);
         formData.append('carprice', carprice);
 
+        const oldImages = editableData.CARIMAGE.split(",");
+
+        formData.append('oldImages', JSON.stringify({ oldImages }));
+
         images.forEach((image, index) => {
             formData.append('images', image);
         });
 
 
         try {
-            const response = await fetch('http://localhost:3000/api/add-car', {
-                method: 'POST',
+            const response = await fetch('http://localhost:3000/api/update-car', {
+                method: 'PUT',
                 body: formData,
             });
 
             if (response.ok) {
-                setSuccessMessage('Car added successfully!');
-                setcarmake('');
-                setcarmodel('');
-                setcaryear('');
-                setcarlocation('');
-                setImages(Array(1).fill(null));
-                setcartype('')
-                setcarprice('')
+                message('Car updated successfully!');
+                closeMenu(false);
             } else {
-                // Handle server error
-                console.error('Failed to add Car');
+                message('Failed to update Car');
+                closeMenu(false);
+
             }
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -168,4 +186,4 @@ const AddCar = ({ closeMenu }) => {
     )
 }
 
-export default AddCar
+export default ModifyCar
