@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../pages/AdminDashboard/DestinationDashboard/DestinationDashboard.css';
 
 const AddRestaurant = ({ closeMenu }) => {
@@ -9,6 +9,25 @@ const AddRestaurant = ({ closeMenu }) => {
     const [images, setImages] = useState(Array(2).fill(null));
 
     const [successMessage, setSuccessMessage] = useState('');
+
+    const [Destinations, setDestinations] = useState([])
+    const [selectedDestination, setselectedDestination] = useState(''); // Selected value for the first dropdown
+
+
+    const fetchDropdownData = async () => {
+        try {
+            const response1 = await fetch('http://localhost:3000/api/get-destinations');
+            const data1 = await response1.json();
+            setDestinations(data1);
+
+        } catch (error) {
+            console.error('Error fetching dropdown data:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchDropdownData();
+    }, []);
 
     function handleMenu() {
         closeMenu(false);
@@ -30,6 +49,7 @@ const AddRestaurant = ({ closeMenu }) => {
         formData.append('restaurantName', restaurantName);
         formData.append('restaurantCity', restaurantCity);
         formData.append('restaurantDescription', restaurantDescription);
+        formData.append('destination', selectedDestination);
 
         images.forEach((image, index) => {
             formData.append('images', image);
@@ -48,6 +68,7 @@ const AddRestaurant = ({ closeMenu }) => {
                 setrestaurantName('');
                 setrestaurantCity('');
                 setrestaurantDescription('');
+                setselectedDestination('');
                 setImages(Array(2).fill(null));
             } else {
                 // Handle server error
@@ -98,6 +119,26 @@ const AddRestaurant = ({ closeMenu }) => {
                         />
                     </div>
                     <div className="divider" />
+
+                    <div className="addDestinationInput">
+                        <label htmlFor="dropdown1">Destination ID:</label>
+                        <select
+                            id="dropdown1"
+                            value={selectedDestination}
+                            onChange={(e) => setselectedDestination(e.target.value)}
+                            required
+                        >
+                            <option value="">-- Select Option --</option>
+                            {Destinations.map((item) => (
+                                <option key={item.DESTINATIONID} value={item.DESTINATIONID}>
+                                    {item.DESTINATIONID}: {item.CITY}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="divider" />
+
 
                     {images.map((image, index) => (
                         <div className="addDestinationInput" key={index}>

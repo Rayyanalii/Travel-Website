@@ -6,7 +6,6 @@
 .redbutton {
   background: rgba(255, 0, 0, 1);
   width: 5rem;
-  height: 1.6em;
   font-size: 1.2rem;
   font-weight: bold;
   border: none;
@@ -22,7 +21,6 @@
 @media (min-width: 768px) {
   .redbutton {
     width: 8rem;
-    height: 4rem;
     font-size: 1.2rem;
   }
 }
@@ -30,8 +28,8 @@
 @media (min-width: 1024px) {
   .redbutton {
     width: 5rem;
-    height: 3rem;
     font-size: 1.4rem;
+    min-height: 5vh;
   }
 }
 

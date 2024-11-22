@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-oracledb.initOracleClient({ libDir: "D:\\instantClient\\instantclient_23_5" });
+oracledb.initOracleClient({ libDir: "D:\\Instant Client\\instantclient_23_5" });
 oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
 
 const dbConfig = {
@@ -288,7 +288,8 @@ app.post(
 // Restaurants
 // Endpoint to ADD Restaurants
 app.post("/api/add-restaurant", upload.array("images", 2), async (req, res) => {
-  const { restaurantName, restaurantCity, restaurantDescription } = req.body;
+  const { restaurantName, restaurantCity, restaurantDescription, destination } =
+    req.body;
 
   const imageUrls = req.files.map((file) => {
     const filePath = path.join(
@@ -304,7 +305,7 @@ app.post("/api/add-restaurant", upload.array("images", 2), async (req, res) => {
   const imageUrlsString = imageUrls.join(",");
 
   let query =
-    "Insert into Restaurants(restaurantName,restaurantCity,restaurantDescription,restaurantImages) values (:restaurantName,:restaurantCity,:restaurantDescription,:imageUrlsString)";
+    "Insert into Restaurants(restaurantName,restaurantCity,restaurantDescription,restaurantImages,destinationID) values (:restaurantName,:restaurantCity,:restaurantDescription,:imageUrlsString,:destination)";
 
   let connection;
   try {
@@ -315,6 +316,7 @@ app.post("/api/add-restaurant", upload.array("images", 2), async (req, res) => {
       restaurantCity,
       restaurantDescription,
       imageUrlsString,
+      destination,
     });
 
     await connection.commit();
@@ -381,6 +383,7 @@ app.put(
       restaurantCity,
       restaurantDescription,
       oldImages,
+      destination,
     } = req.body;
 
     const parsedoldImages = JSON.parse(oldImages).oldImages;
@@ -408,7 +411,7 @@ app.put(
     const imageUrlsString = imageUrls.join(",");
 
     let query =
-      "Update Restaurants set restaurantName=:restaurantName,restaurantCity=:restaurantCity,restaurantDescription=:restaurantDescription,restaurantImages=:imageUrlsString where restaurantID=:restaurantID";
+      "Update Restaurants set restaurantName=:restaurantName,restaurantCity=:restaurantCity,restaurantDescription=:restaurantDescription,restaurantImages=:imageUrlsString,destinationID=:destination where restaurantID=:restaurantID";
 
     let connection;
     try {
@@ -419,14 +422,15 @@ app.put(
         restaurantCity,
         restaurantDescription,
         imageUrlsString,
+        destination,
         restaurantID,
       });
 
       await connection.commit();
-      res.status(200).send("Place To Visit updated successfully");
+      res.status(200).send("Restaurant updated successfully");
     } catch (error) {
       console.error("Database error:", error);
-      res.status(500).send("Error updating Place to Visit");
+      res.status(500).send("Error updating Restaurant");
     } finally {
       if (connection) {
         try {
@@ -1028,8 +1032,16 @@ app.get("/api/get-trips", async (req, res) => {
 
 // Endpoint to ADD Trip Pacakge
 app.post("/api/add-trip", upload.array("images", 1), async (req, res) => {
-  const { packageName, city, duration, availability, reqs, ratings, price } =
-    req.body;
+  const {
+    packageName,
+    city,
+    duration,
+    availability,
+    reqs,
+    ratings,
+    price,
+    destination,
+  } = req.body;
 
   const imageUrls = req.files.map((file) => {
     const filePath = path.join(
@@ -1053,7 +1065,7 @@ app.post("/api/add-trip", upload.array("images", 1), async (req, res) => {
   const Overall = array[5];
 
   let query =
-    "Insert into TripPackages(title,city,image,packageduration,packageavailability,packagerequirement,accomodationrating,destinationrating,valuerating,transportrating,mealsrating,overallrating,price) values (:packageName,:city,:imageUrlsString,:duration,:availability,:reqs,:Accomodation,:Destination,:Value,:Transport,:Meals,:Overall,:price)";
+    "Insert into TripPackages(title,city,image,packageduration,packageavailability,packagerequirement,accomodationrating,destinationrating,valuerating,transportrating,mealsrating,overallrating,price,destinationID) values (:packageName,:city,:imageUrlsString,:duration,:availability,:reqs,:Accomodation,:Destination,:Value,:Transport,:Meals,:Overall,:price,:destination)";
 
   let connection;
   try {
@@ -1073,6 +1085,7 @@ app.post("/api/add-trip", upload.array("images", 1), async (req, res) => {
       Meals,
       Overall,
       price,
+      destination,
     });
 
     await connection.commit();
@@ -1086,6 +1099,217 @@ app.post("/api/add-trip", upload.array("images", 1), async (req, res) => {
         await connection.close();
       } catch (err) {
         console.error("Error closing the connection:", err);
+      }
+    }
+  }
+});
+
+//Destination Description
+// Endpoint to GET Destination Description
+app.get("/api/get-destination-desc/:id", async (req, res) => {
+  let connection;
+  const id = req.params.id;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    // Query to select data for the specific trip package ID
+    const result = await connection.execute(
+      "select * from Destinations d where destinationID=:id",
+      [id]
+    );
+
+    // Check if any rows were returned
+    if (result.rows.length > 0) {
+      res.json(result.rows); // Send the first matching record as a JSON response
+    } else {
+      res.status(404).json({ error: "Destination not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching Destination:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    // Close the database connection
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing connection:", err);
+      }
+    }
+  }
+});
+
+// Endpoint to GET Destination Description Places
+app.get("/api/get-destination-desc-places/:id", async (req, res) => {
+  let connection;
+  const id = req.params.id;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    // Query to select data for the specific trip package ID
+    const result = await connection.execute(
+      "select * from (select * from places where destinationID=:id) where rownum<=4",
+      [id]
+    );
+
+    // Check if any rows were returned
+    if (result.rows.length > 0) {
+      res.json(result.rows); // Send the first matching record as a JSON response
+    } else {
+      res.status(404).json({ error: "Destination not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching Destination:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    // Close the database connection
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing connection:", err);
+      }
+    }
+  }
+});
+
+// Endpoint to GET Destination Description Restaurants
+app.get("/api/get-destination-desc-restaurants/:id", async (req, res) => {
+  let connection;
+  const id = req.params.id;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    // Query to select data for the specific trip package ID
+    const result = await connection.execute(
+      "select * from (select * from Restaurants where destinationID=:id) where rownum<=3",
+      [id]
+    );
+
+    // Check if any rows were returned
+    if (result.rows.length > 0) {
+      res.json(result.rows); // Send the first matching record as a JSON response
+    } else {
+      res.status(404).json({ error: "Destination not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching Destination:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    // Close the database connection
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing connection:", err);
+      }
+    }
+  }
+});
+
+// Endpoint to GET Destination Description Hotels
+app.get("/api/get-destination-desc-hotels/:id", async (req, res) => {
+  let connection;
+  const id = req.params.id;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    // Query to select data for the specific trip package ID
+    const result = await connection.execute(
+      "select * from (select * from Hotels where destinationID=:id) where rownum<=5",
+      [id]
+    );
+
+    // Check if any rows were returned
+    if (result.rows.length > 0) {
+      res.json(result.rows); // Send the first matching record as a JSON response
+    } else {
+      res.status(404).json({ error: "Destination not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching Destination:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    // Close the database connection
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing connection:", err);
+      }
+    }
+  }
+});
+
+//Auth
+//Endpoint to Login
+app.post("/api/login", upload.array(null), async (req, res) => {
+  const { email, password } = req.body;
+
+  let connection;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    const result = await connection.execute(
+      "select * from TravelUsers where email=:email and userPassword=:password",
+      [email, password]
+    );
+
+    if (result.rows.length === 1) {
+      res.json(result.rows);
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching User:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing connection:", err);
+      }
+    }
+  }
+});
+
+//Auth
+//Endpoint to Login
+app.post("/api/signup", upload.array(null), async (req, res) => {
+  const { fullName, email, password } = req.body;
+
+  const role = "User";
+
+  let connection;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    const result = await connection.execute(
+      "select * from TravelUsers where email=:email",
+      [email, password]
+    );
+
+    if (result.rows.length > 0) {
+      res.status(404).json({ error: "Email already exists" });
+    } else {
+      const result = await connection.execute(
+        "insert into Travelusers(fullName,email,userPassword,userRole) values(:fullName,:email,:password,:role)",
+        [fullName, email, password, role]
+      );
+
+      await connection.commit();
+      res.status(200).send("Registered successfully");
+    }
+  } catch (error) {
+    console.error("Error fetching User:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing connection:", err);
       }
     }
   }

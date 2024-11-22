@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { AuthProvider } from './pages/Auth/AuthContext';
 
 // Import all page components
 import Destinations from "./pages/Destinations.jsx";
@@ -103,14 +104,16 @@ const router = createBrowserRouter([
     element: <SearchResults />,
   },
   {
-    path: "/DestinationDescription",
+    path: "/Destinations/:id/:city",
     element: <DestinationDescription />,
   },
 ]);
 
 // Render application
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
+  <AuthProvider>
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>
+  </AuthProvider>,
 );

@@ -2,17 +2,18 @@ import React from "react";
 import "../../pages/DestinationDescription.css";
 import DestinationBestPlaceCard from "./DestinationBestPlaceCard";
 
-const Hero = () => {
+const Hero = ({ data, places }) => {
+
   return (
     <>
-      <div className="DestinationPlacesMainContainer">
+      <div className="DestinationPlacesMainContainer" style={{ backgroundImage: `url(${data[0].IMAGES.split(",")[0]})` }}>
         <div className="DestinationNameContainer">
           <div>
-            <h4>France</h4>
-            <h2>Paris</h2>
+            <h4>{data[0].COUNTRY}</h4>
+            <h2>{data[0].CITY}</h2>
             <br />
             <p>
-              Money can't buy you happiness but it can buy a ticket to Paris.
+              {data[0].CAPTION}
             </p>
           </div>
         </div>
@@ -22,10 +23,9 @@ const Hero = () => {
               <h2>Best Places To Visit</h2>
             </div>
             <div className="destionationBestPlaceImageContainer">
-              <DestinationBestPlaceCard />
-              <DestinationBestPlaceCard />
-              <DestinationBestPlaceCard />
-              <DestinationBestPlaceCard />
+              {places.map((place, index) => (
+                <DestinationBestPlaceCard key={index} data={place} />
+              ))}
             </div>
             <div className="destinationBestPlaceBlackBackground"></div>
           </div>

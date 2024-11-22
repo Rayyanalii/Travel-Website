@@ -50,10 +50,11 @@ const TripPackageDashboardMain = () => {
                                     <th>ID</th>
                                     <th>Title</th>
                                     <th>City</th>
+                                    <th>DestinationID</th>
                                     <th>Image URL</th>
-                                    <th>Duration</th>
+                                    <th>Duration (days)</th>
                                     <th>Availability</th>
-                                    <th>Requirement</th>
+                                    <th>Requirement (Persons)</th>
                                     <th>Price</th>
                                     <th>Accomodation Stars</th>
                                     <th>Destination Stars</th>
@@ -70,6 +71,7 @@ const TripPackageDashboardMain = () => {
                                         <td className="dataField">{trip.TRIPPACKAGEID}</td>
                                         <td className="dataField">{trip.TITLE}</td>
                                         <td className="dataField">{trip.CITY}</td>
+                                        <td className="dataField">{trip.DESTINATIONID}</td>
                                         <td className="dataField">
                                             {trip.IMAGE.split(',').map((image, index) => (
                                                 <React.Fragment key={index}>

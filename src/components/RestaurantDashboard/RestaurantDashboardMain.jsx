@@ -103,6 +103,7 @@ const RestaurantDashboardMain = () => {
                                     <th>City</th>
                                     <th>Description</th>
                                     <th>Image URLs</th>
+                                    <th>DestinationID</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -121,6 +122,7 @@ const RestaurantDashboardMain = () => {
                                                 </React.Fragment>
                                             ))}
                                         </td>
+                                        <td className="dataField">{restaurant.DESTINATIONID}</td>
                                         <td className="dataFieldButton">
                                             <div className="optionsMenu">
                                                 <div className="buttonContainer">

@@ -1,20 +1,72 @@
 import React, { useState } from 'react'
 import './AdminLogin.css'
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Auth/AuthContext';
+
 
 const AdminLogin = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const { login } = useAuth();
 
-    const handleUsernameChange = (e) => {
-        setUsername(e.target.value);
+    const [email, setemail] = useState("");
+    const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("")
+
+    const navigate = useNavigate();
+
+    const handleemailChange = (e) => {
+        setMessage('')
+        setemail(e.target.value);
     }
 
     const handlePasswordChange = (e) => {
+        setMessage('')
+
         setPassword(e.target.value);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+
+        const formdata = new FormData();
+        formdata.append('email', email);
+        formdata.append('password', password);
+
+
+        try {
+            const res = await fetch("http://localhost:3000/api/login", {
+                method: 'POST',
+                body: formdata,
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                setMessage("Login Successful")
+
+
+                sessionStorage.setItem('username', data[0].FULLNAME);
+                sessionStorage.setItem('email', data[0].EMAIL);
+                sessionStorage.setItem('role', data[0].USERROLE);
+
+                setemail('')
+                setPassword('')
+                login();
+
+                navigate("/admin/dashboard");
+
+            }
+            else {
+                setMessage("Invalid Email or password")
+                setPassword("")
+                console.error('Login failed: ', res.statusText);
+            }
+
+
+        }
+        catch (err) {
+            console.error("Login Failed", err);
+
+        }
 
     }
 
@@ -29,14 +81,16 @@ const AdminLogin = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="formContainer">
                         <div className="admininput">
-                            <label htmlFor="user">Username:</label>
+                            <label htmlFor="user">Email:</label>
                             <input
-                                type="text"
+                                type="email"
                                 name="user"
                                 id="user"
-                                value={username}
-                                onChange={handleUsernameChange}
+                                value={email}
+                                onChange={handleemailChange}
                                 required
+                                placeholder='Email'
+
                             />
                         </div>
                         <div className="admininput">
@@ -48,9 +102,13 @@ const AdminLogin = () => {
                                 value={password}
                                 onChange={handlePasswordChange}
                                 required
+                                placeholder='Password'
                             />
                         </div>
-                        <input id="subBtn" type="submit" value="Login" />
+                        {message && <>
+                            <p>{message}</p>
+                        </>}
+                        <input id="subBtn" className='adminLoginButton' type="submit" value="Login" />
                     </div>
                 </form>
             </div>

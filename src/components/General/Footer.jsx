@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import './Footer.css'
 
 const Footer = () => {
   return (
     <div className="footerMainContainer">
       <div className="footerPartition">
         <h3>Stay connected with us!</h3>
-        <input type="text" name="email" id="email" />
-        <input type="submit" value="Subscribe" className="redbutton" />
+        <input type="text" name="email" id="email" placeholder="Email Address" />
+        <input type="submit" value="Subscribe" className="footerredbutton" />
       </div>
       <div className="footerPartition">
         <div className="FooterSitemapAndServicesContainer">

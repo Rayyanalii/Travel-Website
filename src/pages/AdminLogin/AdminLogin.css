@@ -43,6 +43,22 @@
   font-size: 0.9em;
 }
 
+.adminLoginButton {
+  background: rgba(255, 0, 0, 1);
+  width: 5rem;
+  height: 1.6em;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.adminLoginButton:hover {
+  background: rgb(104, 25, 25);
+}
+
 @media (min-width: 768px) {
   .adminLoginContainer {
     max-width: 20rem;

@@ -10,10 +10,29 @@ const ModifyRestaurant = ({ closeMenu, editData, updateMessage }) => {
 
     const [successMessage, setSuccessMessage] = useState('');
 
+    const [Destinations, setDestinations] = useState([])
+    const [selectedDestination, setselectedDestination] = useState(''); // Selected value for the first dropdown
+
+
+
+    const fetchDropdownData = async () => {
+        try {
+            const response1 = await fetch('http://localhost:3000/api/get-destinations');
+            const data1 = await response1.json();
+            setDestinations(data1);
+
+        } catch (error) {
+            console.error('Error fetching dropdown data:', error);
+        }
+    };
+
     useEffect(() => {
         setrestaurantName(editData.RESTAURANTNAME);
         setrestaurantCity(editData.RESTAURANTCITY);
         setrestaurantDescription(editData.RESTAURANTDESCRIPTION);
+        setselectedDestination(editData.DESTINATIONID);
+        fetchDropdownData();
+
 
         return () => {
             setrestaurantName('')
@@ -51,6 +70,9 @@ const ModifyRestaurant = ({ closeMenu, editData, updateMessage }) => {
         images.forEach((image, index) => {
             formData.append('images', image);
         });
+
+        formData.append('destination', selectedDestination);
+
 
         try {
             // Send the POST request with the FormData
@@ -112,6 +134,26 @@ const ModifyRestaurant = ({ closeMenu, editData, updateMessage }) => {
                         />
                     </div>
                     <div className="divider" />
+
+                    <div className="addDestinationInput">
+                        <label htmlFor="dropdown1">Destination ID:</label>
+                        <select
+                            id="dropdown1"
+                            value={selectedDestination}
+                            onChange={(e) => setselectedDestination(e.target.value)}
+                            required
+                        >
+                            <option value="">-- Select Option --</option>
+                            {Destinations.map((item) => (
+                                <option key={item.DESTINATIONID} value={item.DESTINATIONID}>
+                                    {item.DESTINATIONID}: {item.CITY}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="divider" />
+
 
                     {images.map((image, index) => (
                         <div className="addDestinationInput" key={index}>

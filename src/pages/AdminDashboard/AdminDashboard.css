@@ -10,6 +10,7 @@
   flex-direction: column;
   gap: 50px;
   height: 100vh;
+  overflow-y: auto;
 }
 .sidebarImage {
   margin: 0 auto;
@@ -33,10 +34,15 @@
   cursor: pointer;
 }
 
+.dashboardItems .inactive:hover {
+  background-color: #57575784; /* Highlight color for active button */
+  color: white;
+}
+
 /* Active button styling */
 .dashboardItems .active {
   font-weight: bold;
-  background-color: #555; /* Highlight color for active button */
+  background-color: #7f7f7f; /* Highlight color for active button */
   color: white;
 }
 

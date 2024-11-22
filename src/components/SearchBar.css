@@ -1,6 +1,6 @@
 #searchBar {
   width: 10em;
-  height: 1.6em;
+  height: 100%;
   font-size: 0.8rem;
   padding-left: 8px;
   border: none;
@@ -10,8 +10,7 @@
 
 @media (min-width: 768px) {
   #searchBar {
-    height: 3.2rem; /* Replacing 4vw */
-    font-size: 1.36rem; /* Replacing 1.7vw */
+    font-size: 1rem; /* Replacing 1.7vw */
     width: 28rem; /* Replacing 35vw */
   }
 }

@@ -1,14 +1,14 @@
 import React from "react";
 import "../../pages/DestinationDescription.css";
 
-const DestinationBestPlaceCard = () => {
+const DestinationBestPlaceCard = ({ data }) => {
   return (
     <>
       <div
         className="destionationBestPlaceCardContainer"
         style={{
           backgroundImage:
-            'url("/Uploads/ParisDestinationBackgroundImage.png")',
+            `url(${data.PLACEIMAGES.split(",")[0]})`,
         }}
       ></div>
     </>

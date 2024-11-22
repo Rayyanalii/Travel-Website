@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../../pages/AdminDashboard/AdminDashboard.css';
+import { useAuth } from '../../pages/Auth/AuthContext';
+
+
 
 const DashboardSideBar = () => {
+  const { logout } = useAuth();
+
+  const navigate = useNavigate();
   const location = useLocation();
   const [isMiscOpen, setIsMiscOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -17,14 +23,18 @@ const DashboardSideBar = () => {
     setIsServicesOpen((prev) => !prev);
   };
 
+  function handleLogout() {
+    sessionStorage.clear();
+    logout();
+    navigate('/admin');
+  }
+
   useEffect(() => {
-    // Keep the Miscellaneous dropdown open if the current route matches one of its paths
     const miscPaths = ['/admin/dashboard/places-to-visit', '/admin/dashboard/restaurants'];
     if (miscPaths.includes(location.pathname)) {
       setIsMiscOpen(true);
     }
 
-    // Keep the Services dropdown open if the current route matches one of its paths
     const servicePaths = ['/admin/dashboard/hotels', '/admin/dashboard/cars', '/admin/dashboard/flights'];
     if (servicePaths.includes(location.pathname)) {
       setIsServicesOpen(true);
@@ -41,28 +51,28 @@ const DashboardSideBar = () => {
           <input
             type="button"
             value="Dashboard"
-            className={isActive('/admin/dashboard/') ? 'active' : ''}
+            className={isActive('/admin/dashboard/') ? 'active' : 'inactive'}
           />
         </Link>
         <Link to="/admin/dashboard/Destinations">
           <input
             type="button"
             value="Destinations"
-            className={isActive('/admin/dashboard/Destinations') ? 'active' : ''}
+            className={isActive('/admin/dashboard/Destinations') ? 'active' : 'inactive'}
           />
         </Link>
         <Link to="/admin/dashboard/Reviews">
           <input
             type="button"
             value="Reviews"
-            className={isActive('/admin/dashboard/Reviews') ? 'active' : ''}
+            className={isActive('/admin/dashboard/Reviews') ? 'active' : 'inactive'}
           />
         </Link>
         <Link to="/admin/dashboard/TripPackage">
           <input
             type="button"
             value="Trip Package"
-            className={isActive('/admin/dashboard/TripPackage') ? 'active' : ''}
+            className={isActive('/admin/dashboard/TripPackage') ? 'active' : 'inactive'}
           />
         </Link>
 
@@ -70,7 +80,7 @@ const DashboardSideBar = () => {
           <input
             type="button"
             value="Services"
-            className={`dropdownToggle ${isServicesOpen ? 'open' : ''}`}
+            className={`dropdownToggle ${isServicesOpen ? 'open' : 'inactive'}`}
             onClick={toggleServices}
           />
           {isServicesOpen && (
@@ -79,21 +89,21 @@ const DashboardSideBar = () => {
                 <input
                   type="button"
                   value="Hotels"
-                  className={isActive('/admin/dashboard/hotels') ? 'active' : ''}
+                  className={isActive('/admin/dashboard/hotels') ? 'active' : 'inactive'}
                 />
               </Link>
               <Link to="/admin/dashboard/cars">
                 <input
                   type="button"
                   value="Cars"
-                  className={isActive('/admin/dashboard/cars') ? 'active' : ''}
+                  className={isActive('/admin/dashboard/cars') ? 'active' : 'inactive'}
                 />
               </Link>
               <Link to="/admin/dashboard/flights">
                 <input
                   type="button"
                   value="Flights"
-                  className={isActive('/admin/dashboard/flights') ? 'active' : ''}
+                  className={isActive('/admin/dashboard/flights') ? 'active' : 'inactive'}
                 />
               </Link>
             </div>
@@ -105,7 +115,7 @@ const DashboardSideBar = () => {
           <input
             type="button"
             value="Miscellaneous"
-            className={`dropdownToggle ${isMiscOpen ? 'open' : ''}`}
+            className={`dropdownToggle ${isMiscOpen ? 'open' : 'inactive'}`}
             onClick={toggleMiscellaneous}
           />
           {isMiscOpen && (
@@ -114,21 +124,28 @@ const DashboardSideBar = () => {
                 <input
                   type="button"
                   value="Places to Visit"
-                  className={isActive('/admin/dashboard/places-to-visit') ? 'active' : ''}
+                  className={isActive('/admin/dashboard/places-to-visit') ? 'active' : 'inactive'}
                 />
               </Link>
               <Link to="/admin/dashboard/restaurants">
                 <input
                   type="button"
                   value="Restaurants"
-                  className={isActive('/admin/dashboard/restaurants') ? 'active' : ''}
+                  className={isActive('/admin/dashboard/restaurants') ? 'active' : 'inactive'}
                 />
               </Link>
             </div>
           )}
+
         </div>
 
-        {/* Services Dropdown */}
+        <input
+          type="button"
+          value="Logout"
+          className='inactive'
+          onClick={handleLogout}
+        />
+
 
       </div>
     </div>

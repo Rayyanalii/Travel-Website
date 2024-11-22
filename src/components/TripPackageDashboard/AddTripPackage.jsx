@@ -14,6 +14,25 @@ const AddTripPackage = ({ closeMenu }) => {
 
     const [successMessage, setSuccessMessage] = useState('');
 
+    const [Destinations, setDestinations] = useState([])
+    const [selectedDestination, setselectedDestination] = useState(''); // Selected value for the first dropdown
+
+
+    const fetchDropdownData = async () => {
+        try {
+            const response1 = await fetch('http://localhost:3000/api/get-destinations');
+            const data1 = await response1.json();
+            setDestinations(data1);
+
+        } catch (error) {
+            console.error('Error fetching dropdown data:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchDropdownData();
+    }, []);
+
     const handleMenu = () => closeMenu(false);
 
     const handleImageChange = (event) => setBackgroundImage(event.target.files[0]);
@@ -40,6 +59,8 @@ const AddTripPackage = ({ closeMenu }) => {
         formData.append('ratings', ratings);
         formData.append('price', price);
 
+        formData.append('destination', selectedDestination);
+
         try {
             const response = await fetch('http://localhost:3000/api/add-trip', {
                 method: 'POST',
@@ -55,6 +76,7 @@ const AddTripPackage = ({ closeMenu }) => {
                 setreq('');
                 setPrice('');
                 setBackgroundImage(null);
+                setselectedDestination('');
                 setRatings(Array(6).fill(null));
             } else {
                 console.error('Failed to add trip package');
@@ -140,6 +162,26 @@ const AddTripPackage = ({ closeMenu }) => {
                             required
                         />
                     </div>
+
+                    <div className="divider" />
+
+                    <div className="addDestinationInput">
+                        <label htmlFor="dropdown1">Destination ID:</label>
+                        <select
+                            id="dropdown1"
+                            value={selectedDestination}
+                            onChange={(e) => setselectedDestination(e.target.value)}
+                            required
+                        >
+                            <option value="">-- Select Option --</option>
+                            {Destinations.map((item) => (
+                                <option key={item.DESTINATIONID} value={item.DESTINATIONID}>
+                                    {item.DESTINATIONID}: {item.CITY}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
                     <div className="divider" />
 
 

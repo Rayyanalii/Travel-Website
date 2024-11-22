@@ -2,11 +2,31 @@ import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
+import Modal from "./Model/Modal";
+import Login from './../pages/Auth/Login';
+import Signup from './../pages/Auth/Signup';
 
 const Navbar = () => {
   const [hamburger, setHamburger] = useState(false);
   const [serviceDrop, setServiceDrop] = useState(false);
   const [pagesDrop, setPagesDrop] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  const openLoginModal = () => {
+
+    setModalContent("login");
+    setIsModalOpen(true);
+
+  };
+
+  const openSignupModal = () => {
+
+    setModalContent("signup");
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => setIsModalOpen(false);
 
   function toggleHamburger() {
     setHamburger(!hamburger);
@@ -45,12 +65,26 @@ const Navbar = () => {
       }
     };
 
+    // const handleClickOutside = (e) => {
+    //   if (
+    //     isModalOpen &&
+    //     !document.querySelector(".modal-content").contains(e.target)
+    //   ) {
+    //     closeModal();
+    //   }
+    // };
+
+    // if (isModalOpen) {
+    //   document.addEventListener("click", handleClickOutside);
+    // }
+
     document.addEventListener("mouseup", handleClick);
 
     return () => {
       document.removeEventListener("mouseup", handleClick);
+      // document.removeEventListener("click", handleClickOutside);
     };
-  }, [serviceDrop, pagesDrop, hamburger]);
+  }, [serviceDrop, pagesDrop, hamburger, isModalOpen]);
 
   return (
     <>
@@ -128,10 +162,10 @@ const Navbar = () => {
             </div>
             <div className="verticalLine">|</div>
             <div className="buttons">
-              <button className="mainButtons" id="loginButton">
+              <button className="mainButtons" id="loginButton" onClick={openLoginModal}>
                 Login
               </button>
-              <button className="mainButtons" id="signupButton">
+              <button className="mainButtons" id="signupButton" onClick={openSignupModal}>
                 Signup
               </button>
             </div>
@@ -201,14 +235,14 @@ const Navbar = () => {
               <button
                 className="mainButtons"
                 id="loginButton"
-                onClick={closeHamburger}
+                onClick={openLoginModal}
               >
                 Login
               </button>
               <button
                 className="mainButtons"
                 id="signupButton"
-                onClick={closeHamburger}
+                onClick={openSignupModal}
               >
                 Signup
               </button>
@@ -216,6 +250,13 @@ const Navbar = () => {
           </ul>
         </div>
       </nav>
+      <Modal show={isModalOpen} onClose={closeModal}>
+        {modalContent === "login" ? (
+          <Login setModal={setModalContent} />
+        ) : (
+          <Signup setModal={setModalContent} />
+        )}
+      </Modal>
     </>
   );
 };

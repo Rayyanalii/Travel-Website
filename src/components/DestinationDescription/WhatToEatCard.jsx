@@ -1,7 +1,9 @@
 import React from "react";
 import "../../pages/DestinationDescription.css";
 
-const WhatToEatCard = ({ invert }) => {
+const WhatToEatCard = ({ invert, data }) => {
+  const imageURLs = data.RESTAURANTIMAGES.split(",");
+
   return (
     <>
       <div
@@ -16,7 +18,7 @@ const WhatToEatCard = ({ invert }) => {
             className="whatToEatInsideImageContainer"
             style={{
               backgroundImage:
-                'url("/Uploads/ParisDestinationBackgroundImage.png")',
+                `url(${imageURLs[0]})`,
             }}
           ></div>
           <div
@@ -26,18 +28,16 @@ const WhatToEatCard = ({ invert }) => {
                 : "whatToEatPlaceDescriptionContainer textInvertBack"
             }
           >
-            <h3>Substance</h3>
+            <h3>{data.RESTAURANTNAME}</h3>
             <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt
-              minima incidunt quos consequuntur cumque rem odio. Voluptas
-              veritatis porro omnis. Unde sapient
+              {data.RESTAURANTDESCRIPTION}
             </p>
           </div>
           <div
             className="whatToEatFoodImageContainer"
             style={{
               backgroundImage:
-                'url("/Uploads/ParisDestinationBackgroundImage.png")',
+                `url(${imageURLs[1]})`,
             }}
           ></div>
         </div>
