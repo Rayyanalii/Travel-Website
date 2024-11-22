@@ -21,7 +21,6 @@ const AddFlight = ({ closeMenu }) => {
     };
 
     function handleMenu() {
-        console.log(availableseats);
 
         closeMenu(false);
     }
@@ -60,7 +59,7 @@ const AddFlight = ({ closeMenu }) => {
                 setseatprice('')
             } else {
                 // Handle server error
-                console.error('Failed to add Car');
+                console.error('Failed to add Flight');
             }
         } catch (error) {
             console.error('Error submitting form:', error);

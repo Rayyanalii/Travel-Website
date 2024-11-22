@@ -1,20 +1,21 @@
 import React from 'react'
 import '../../pages/TripPackage.css'
 
-const TripImageBox = (props) => {
+const TripImageBox = ({ url, hotel }) => {
+
+
   return (
     <>
-    <div className="TripPackageImagesContainer">
-        <img src="src\assets\LondonDestinationCard.png" alt="" />
-        <img src="src\assets\LondonDestinationCard.png" alt="" />
-        <img src="src\assets\LondonDestinationCard.png" alt="" />
-        <img src="src\assets\LondonDestinationCard.png" alt="" />
-        {!props.hotel&&<>
-          <img src="src\assets\LondonDestinationCard.png" alt="" />
-          <img src="src\assets\LondonDestinationCard.png" alt="" />
+      <div className="TripPackageImagesContainer">
+        <img src={url[0]} alt="" />
+        <img src={url[1]} alt="" />
+        <img src={url[2]} alt="" />
+        <img src={url[3]} alt="" />
+        {!hotel && <>
+          <img src={url[4]} alt="" />
         </>
         }
-    </div>
+      </div>
     </>
   )
 }

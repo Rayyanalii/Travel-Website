@@ -1,144 +1,144 @@
-.TripCardContainer{
-    width: 30vw;
-    border: 1px solid white;
-    transition: transform 100ms linear;
+.TripCardContainer {
+  width: 30vw;
+  border: 1px solid white;
+  transition: transform 100ms linear;
 }
-.TripImageContainer{
-    max-height: 29vw;
+.TripImageContainer {
+  max-height: 29vw;
 }
-.TripImageContainer img{
-    width: 100%;
-    height: auto;
+.TripImageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.priceContainer{
-    width: 9vw;
-    text-align: center;
-    padding: 5px;
-    background-color: black;
-    color: white;
-    font-size: 3vw;
-    position: relative;
-    top: -40px;
+.priceContainer {
+  width: 9vw;
+  text-align: center;
+  padding: 5px;
+  background-color: black;
+  color: white;
+  font-size: 3vw;
+  position: relative;
+  top: -40px;
 }
-.tripCardText h3{
-    font-size: 3vw;
-    margin-left: 6px;
-    color: white;
-    text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+.tripCardText h3 {
+  font-size: 3vw;
+  margin-left: 6px;
+  color: white;
+  text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
 }
-.tripCardText p{
-    font-size: 2.2vw;
-    margin-left: 6px;
-    color: white;
-    text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+.tripCardText p {
+  font-size: 2.2vw;
+  margin-left: 6px;
+  color: white;
+  text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
 }
-.TripCardATag{
-    text-decoration: none;
+.TripCardATag {
+  text-decoration: none;
 }
 
 .TripCardContainer:hover {
-    transform: translateY(-10px);
+  transform: translateY(-10px);
 }
 
-.starAndTime{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 0.4vw;
-    margin-left: 6px;
+.starAndTime {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.4vw;
+  margin-left: 6px;
 }
-.redtripCardStar{
-    width: 2.5vw;
-    color: red;
-    padding-right: 1px;
+.redtripCardStar {
+  width: 2.5vw;
+  color: red;
+  padding-right: 1px;
 }
-.whitetripCardStar{
-    width: 2.5vw;
-    color: white;
-    padding-right: 1px;
+.whitetripCardStar {
+  width: 2.5vw;
+  color: white;
+  padding-right: 1px;
 }
-.clockAndTime{
-    display: flex;
-    align-items: center;
-    margin-right: 2px;
-    color: white;
+.clockAndTime {
+  display: flex;
+  align-items: center;
+  margin-right: 2px;
+  color: white;
 }
-.clockAndTime p{
-    font-size: 2.6vw;
+.clockAndTime p {
+  font-size: 2.6vw;
 }
-.tripCardClock{
+.tripCardClock {
+  width: 1.9vw;
+  color: white;
+  margin-right: 3px;
+}
+@media (min-width: 768px) {
+  .TripCardContainer {
+    width: 20vw;
+  }
+  .TripImageContainer {
+    max-height: 19vw;
+  }
+  .tripCardText h3 {
+    font-size: 2vw;
+  }
+  .tripCardText p {
+    font-size: 1.6vw;
+  }
+  .redtripCardStar {
     width: 1.9vw;
-    color: white;
+  }
+  .whitetripCardStar {
+    width: 1.9vw;
+  }
+  .priceContainer {
+    width: 5.4vw;
+    font-size: 1.9vw;
+  }
+  .clockAndTime p {
+    font-size: 1.7vw;
+  }
+  .tripCardClock {
+    width: 1.3vw;
+  }
+}
+@media (min-width: 1024px) {
+  .TripCardContainer {
+    width: 17vw;
+  }
+  .TripImageContainer {
+    max-height: 13vw;
+  }
+  .tripCardText {
+    padding-left: 2px;
+  }
+  .tripCardText h3 {
+    font-size: 1.3vw;
+  }
+  .tripCardText p {
+    font-size: 1vw;
+  }
+  .redtripCardStar {
+    width: 1.7vw;
+    height: 1.2vw;
+  }
+  .whitetripCardStar {
+    width: 1.7vw;
+    height: 1.2vw;
+  }
+  .priceContainer {
+    width: min-content;
+    font-size: 1.2vw;
+    top: -50px;
+  }
+  .clockAndTime p {
+    font-size: 1vw;
     margin-right: 3px;
+  }
+  .tripCardClock {
+    width: 1.3vw;
+  }
+  .tripCardBottom {
+    margin-bottom: 5px;
+  }
 }
-@media (min-width:768px) {
-    .TripCardContainer{
-        width: 20vw;
-    }
-    .TripImageContainer{
-        max-height: 19vw;
-    }
-    .tripCardText h3{
-        font-size: 2vw;
-    }
-    .tripCardText p{
-        font-size: 1.6vw;
-    }
-    .redtripCardStar{
-        width: 1.9vw;
-    }
-    .whitetripCardStar{
-        width: 1.9vw;
-    }
-    .priceContainer{
-        width: 5.4vw;
-        font-size: 1.9vw;
-    }
-    .clockAndTime p{
-        font-size: 1.7vw;
-    }
-    .tripCardClock{
-        width: 1.3vw;
-    }
-}
-@media (min-width:1024px){
-    .TripCardContainer{
-        width: 17vw;
-    }
-    .TripImageContainer{
-        max-height: 16.2vw;
-    }
-    .tripCardText{
-        padding-left: 2px;
-    }
-    .tripCardText h3{
-        font-size: 1.3vw;
-    }
-    .tripCardText p{
-        font-size: 1vw;
-    }
-    .redtripCardStar{
-        width: 1.7vw;
-        height: 1.2vw;
-    }
-    .whitetripCardStar{
-        width: 1.7vw;
-        height: 1.2vw;
-    }
-    .priceContainer{
-        width: 3.5vw;
-        font-size: 1.2vw;
-        top: -50px;
-    }
-    .clockAndTime p{
-        font-size: 1vw;
-        margin-right: 3px;
-    }
-    .tripCardClock{
-        width: 1.3vw;
-    }
-    .tripCardBottom{
-        margin-bottom: 5px;
-    }
-}
-

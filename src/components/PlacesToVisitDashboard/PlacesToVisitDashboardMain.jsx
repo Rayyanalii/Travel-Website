@@ -104,6 +104,8 @@ const PlacesToVisitDashboardMain = () => {
                                     <th>City</th>
                                     <th>Description</th>
                                     <th>Image URLs</th>
+                                    <th>Destination ID</th>
+                                    <th>Trip Package ID</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -122,6 +124,8 @@ const PlacesToVisitDashboardMain = () => {
                                                 </React.Fragment>
                                             ))}
                                         </td>
+                                        <td className="dataField">{place.DESTINATIONID}</td>
+                                        <td className="dataField">{place.TRIPPACKAGEID}</td>
                                         <td className="dataFieldButton">
                                             <div className="optionsMenu">
                                                 <div className="buttonContainer">

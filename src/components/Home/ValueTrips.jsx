@@ -1,8 +1,36 @@
 import React from 'react'
 import '../../pages/Home.css'
 import TripCard from '../TripCard'
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const ValueTrips = () => {
+    const [tripCard, settripCard] = useState([]);
+
+    const fetchTripCard = async () => {
+        try {
+
+            const response = await fetch('http://localhost:3000/api/get-trip-card'); // Fetch data from the endpoint
+
+            if (!response.ok) {
+                throw new Error('Trip package not found'); // Handle errors if the response is not ok
+            }
+
+            const data = await response.json(); // Parse the response JSON
+
+
+            settripCard(data); // Set the data in state
+        } catch (error) {
+            console.error("No Trips Found");
+
+        }
+    };
+
+    useEffect(() => {
+        fetchTripCard();
+
+    }, [])
+
     return (
         <>
             <div className="valueTripText">
@@ -10,9 +38,18 @@ const ValueTrips = () => {
                 <p>Best trips offered by us!</p>
             </div>
             <div className="AllTripCards">
-                <TripCard url="/Uploads/ParisTripCard.png" route="/TripPackage/1/Konnichiwa" title="Konnichiwa" desc="City tours, iconic" price="$3000" star='4' time='5' />
-                <TripCard url="src\assets\ParisTripCard.png" route="/TripPackage/2/FrenchFever" title="French Fever" desc="City tours, urban" price="$5000" star='4' time='6' />
-                <TripCard url="src\assets\SkarduTripCard.png" route="/TripPackage/3/NorthernBlast" title="Northern Blast" desc="Nature, scenic" price="$2000" star='5' time='8' />
+                {tripCard.map((trip, index) => (
+                    <TripCard
+                        key={index}
+                        url={trip.IMAGE}
+                        route={`/TripPackage/${trip.TRIPPACKAGEID}/${encodeURIComponent(trip.TITLE)}`}
+                        title={trip.TITLE}
+                        desc={trip.CITY}
+                        price={trip.PRICE}
+                        star={trip.OVERALLRATING}
+                        time={trip.PACKAGEDURATION}
+                    />
+                ))}
             </div>
         </>
     )

@@ -2,16 +2,19 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 import AddDestination from './AddDestination';
 import '../../pages/AdminDashboard/DestinationDashboard/DestinationDashboard.css';
+import ModifyDestinations from './ModifyDestinations';
 
 const DestinationDashboardMain = () => {
     const [addMenu, setAddMenu] = useState(false);
     const [destinations, setDestinations] = useState([]);
+    const [editMenu, setEditMenu] = useState(false);
+    const [editableData, setEditableData] = useState([]);
+    const [message, setMessage] = useState('');
 
     const fetchDestinations = async () => {
         try {
             const response = await fetch('http://localhost:3000/api/get-destinations'); // Adjust the URL to match your API
             const data = await response.json();
-            console.log(data);
             setDestinations(data);
         } catch (error) {
             console.error('Error fetching destinations:', error);
@@ -20,32 +23,48 @@ const DestinationDashboardMain = () => {
 
     useEffect(() => {
         fetchDestinations();
-    }, []);
+        const timer = setTimeout((i) => {
+            setMessage('');
+        }, 2000);
+    }, [addMenu, editMenu]);
 
     function handleAddMenu(e) {
         setAddMenu(!addMenu);
     }
-    const handleDelete = async (city) => {
-        if (window.confirm(`Are you sure you want to delete the destination: ${city}?`)) {
+    const handleModify = (id) => {
+        const dest = destinations.find((dest) => dest.DESTINATIONID === id);
+        if (dest) {
+            setEditableData(dest);
+            setEditMenu(true);
+        }
+    };
+    const handleDelete = async (id) => {
+        const destination = destinations.find((destination) => destination.DESTINATIONID == id);
+        if (destination) {
+            const oldImages = destination.IMAGES.split(",");
             try {
-                const response = await fetch('http://localhost:3000/api/delete-destination', {
+
+                const res = await fetch(`http://localhost:3000/api/delete-destination/${id}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ city }), // Send city in the body
-                });
-
-                if (response.ok) {
-                    // Destination deleted successfully
-                    fetchDestinations(); // Reload the destinations
-                } else {
-                    console.error('Failed to delete destination:', response.statusText);
+                    body: JSON.stringify({ oldImages }),
+                })
+                if (res.ok) {
+                    alert('Destination deleted successfully');
+                    fetchDestinations();
                 }
-            } catch (error) {
-                console.error('Error deleting destination:', error);
+                else {
+                    alert('Error deleting Destination:');
+                }
+            }
+            catch (error) {
+                console.error('Error deleting Destination:', error);
+                alert('Error deleting Destination');
             }
         }
+
     };
 
 
@@ -66,39 +85,43 @@ const DestinationDashboardMain = () => {
                         <h1>All Destinations</h1>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                     </div>
+                    {message && <>
+                        <div className="success-message">
+                            <p>{message}</p>
+                        </div>
+                    </>}
                     <div className="allDestinationTableContainer">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>ID</th>
+                                    <th>City</th>
                                     <th>Country</th>
                                     <th>Caption</th>
                                     <th>Image URLs</th>
-                                    <th>Best Places ID</th>
-                                    <th>Best Eat ID</th>
-                                    <th>Best Stay ID</th>
-                                    <th>Trip ID</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {destinations.map((destination) => (
                                     <tr key={destination.city}>
-                                        <td className="dataField">{destination.city}</td>
-                                        <td className="dataField">{destination.country}</td>
-                                        <td className="dataField">{destination.caption}</td>
-                                        <td className="dataField" style={{ whiteSpace: 'pre-wrap' }}>
-                                            {destination.first_image_url.join('\n\n')}
+                                        <td className="dataField">{destination.DESTINATIONID}</td>
+                                        <td className="dataField">{destination.CITY}</td>
+                                        <td className="dataField">{destination.COUNTRY}</td>
+                                        <td className="dataField">{destination.CAPTION}</td>
+                                        <td className="dataField">
+                                            {destination.IMAGES.split(',').map((image, index) => (
+                                                <React.Fragment key={index}>
+                                                    {image}
+                                                    <br />
+                                                </React.Fragment>
+                                            ))}
                                         </td>
-                                        <td className="dataField">{destination.best_places}</td>
-                                        <td className="dataField">{destination.best_eats}</td>
-                                        <td className="dataField">{destination.best_stays}</td>
-                                        <td className="dataField">{destination.trip_packages}</td>
                                         <td className="dataFieldButton">
                                             <div className="optionsMenu">
                                                 <div className="buttonContainer">
-                                                    <button className="modifyButton" onClick={() => handleModify(destination.city)}>Modify</button>
-                                                    <button className="deleteButton" onClick={() => handleDelete(destination.city)}>Delete</button>
+                                                    <button className="modifyButton" onClick={() => handleModify(destination.DESTINATIONID)}>Modify</button>
+                                                    <button className="deleteButton" onClick={() => handleDelete(destination.DESTINATIONID)}>Delete</button>
                                                 </div>
                                             </div>
                                         </td>
@@ -109,6 +132,7 @@ const DestinationDashboardMain = () => {
                     </div>
                 </div>
                 {addMenu && <AddDestination closeMenu={setAddMenu} />}
+                {editMenu && <ModifyDestinations closeMenu={setEditMenu} editableData={editableData} setmessage={setMessage} />}
             </div>
         </>
     );

@@ -3,7 +3,6 @@ import '../../pages/AdminDashboard/DestinationDashboard/DestinationDashboard.css
 import { useEffect } from 'react';
 
 const ModifyPlaceToVisit = ({ closeMenu, editableData, updateMessage }) => {
-    // State variables for input fields
     const [placeTitle, setplaceTitle] = useState('');
     const [placeCity, setplaceCity] = useState('');
     const [placeDescription, setplaceDescription] = useState('');
@@ -16,10 +15,34 @@ const ModifyPlaceToVisit = ({ closeMenu, editableData, updateMessage }) => {
         closeMenu(false);
     }
 
+    const [Destinations, setDestinations] = useState([])
+    const [trips, settrips] = useState([])
+    const [selectedDestination, setselectedDestination] = useState(''); // Selected value for the first dropdown
+    const [selectedtrip, setSelectedtrip] = useState('');
+
+
+    const fetchDropdownData = async () => {
+        try {
+            const response1 = await fetch('http://localhost:3000/api/get-destinations');
+            const data1 = await response1.json();
+            setDestinations(data1);
+
+            const response2 = await fetch('http://localhost:3000/api/get-trips');
+            const data2 = await response2.json();
+            settrips(data2);
+        } catch (error) {
+            console.error('Error fetching dropdown data:', error);
+        }
+    };
+
+
     useEffect(() => {
         setplaceTitle(editableData.PLACETITLE);
         setplaceCity(editableData.PLACECITY);
         setplaceDescription(editableData.PLACEDESCRIPTION);
+        setSelectedtrip(editableData.TRIPPACKAGEID);
+        setselectedDestination(editableData.DESTINATIONID);
+        fetchDropdownData();
 
         return () => {
             setplaceTitle('');
@@ -46,6 +69,8 @@ const ModifyPlaceToVisit = ({ closeMenu, editableData, updateMessage }) => {
         formData.append('placeTitle', placeTitle);
         formData.append('placeCity', placeCity);
         formData.append('placeDescription', placeDescription);
+        formData.append('destination', selectedDestination);
+        formData.append('trip', selectedtrip);
         const imageUrls = editableData.PLACEIMAGES.split(',');
         formData.append('oldImages', JSON.stringify({ imageUrls }));
 
@@ -125,6 +150,41 @@ const ModifyPlaceToVisit = ({ closeMenu, editableData, updateMessage }) => {
                             />
                         </div>
                     ))}
+                    <div className="divider" />
+                    <div className="addDestinationInput">
+                        <label htmlFor="dropdown1">Destination ID:</label>
+                        <select
+                            id="dropdown1"
+                            value={selectedDestination}
+                            onChange={(e) => setselectedDestination(e.target.value)}
+                            required
+                        >
+                            <option value="">-- Select Option --</option>
+                            {Destinations.map((item) => (
+                                <option key={item.DESTINATIONID} value={item.DESTINATIONID}>
+                                    {item.DESTINATIONID}: {item.CITY}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    {/* Second Dropdown */}
+                    <div className="addDestinationInput">
+                        <label htmlFor="dropdown2">Trip Package ID:</label>
+                        <select
+                            id="dropdown2"
+                            value={selectedtrip}
+                            onChange={(e) => setSelectedtrip(e.target.value)}
+                            required
+                        >
+                            <option value="">-- Select Option --</option>
+                            {trips.map((item) => (
+                                <option key={item.TRIPPACKAGEID} value={item.TRIPPACKAGEID}>
+                                    {item.TRIPPACKAGEID}: {item.TITLE}, {item.CITY}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                     <div className="divider" />
                     {successMessage && (
                         <div className="success-message">

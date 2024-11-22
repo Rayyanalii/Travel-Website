@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './../components/Navbar';
 import Hero from '../components/ReviewPage/Hero';
 import Main from '../components/ReviewPage/Main';
+import Footer from './../components/General/Footer';
 
 
 const Reviews = () => {
@@ -26,6 +27,7 @@ const Reviews = () => {
       <Navbar />
       <Hero />
       <Main reviews={reviews} />
+      <Footer />
     </>
   )
 }
