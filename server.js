@@ -1736,7 +1736,7 @@ app.post("/api/add-car-booking", upload.array(null), async (req, res) => {
   }
 });
 
-//Endpoint to make Car Booking
+//Endpoint to make Hotel Booking
 app.post("/api/add-hotel-booking", upload.array(null), async (req, res) => {
   const {
     hotelID,
@@ -1806,6 +1806,39 @@ app.post("/api/add-trip-booking", upload.array(null), async (req, res) => {
   } catch (error) {
     console.error("Database error:", error);
     res.status(500).json({ error: "Error booking trip package" });
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing the connection:", err);
+      }
+    }
+  }
+});
+
+//Endpoint to make Flight Booking
+app.post("/api/add-flight-booking", upload.array(null), async (req, res) => {
+  const userID = Number(req.body.userID);
+  const flightID = Number(req.body.flightID);
+  const passengers = Number(req.body.passengers);
+  const totalPrice = Number(req.body.totalPrice);
+
+  let connection;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    await connection.execute(
+      `BEGIN
+          AddFlightBooking(:userID, :flightID, :passengers, :totalPrice);
+       END;`,
+      { userID, flightID, passengers, totalPrice }
+    );
+
+    res.status(200).json({ message: "Flight Booked successfully" });
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({ error: "Error booking Flight" });
   } finally {
     if (connection) {
       try {

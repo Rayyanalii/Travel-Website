@@ -95,6 +95,29 @@ const PaymentPage = () => {
                 setError("Something went wrong, please try again later.");
             }
         }
+        else if (page === "Flights") {
+            formData.append("flightID", details.FLIGHTID);
+            formData.append("passengers", userDetails.passenger);
+            formData.append("totalPrice", userDetails.passenger * details.SEATPRICE);
+
+            try {
+                const response = await fetch("http://localhost:3000/api/add-flight-booking", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                } else {
+                    const result = await response.json();
+                    setsuccess(true);
+                }
+            } catch (error) {
+                // Handle fetch error
+                setError("Something went wrong, please try again later.");
+            }
+        }
+
     };
 
     useEffect(() => {
