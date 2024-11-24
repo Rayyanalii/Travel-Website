@@ -28,6 +28,34 @@
 .searchButton {
   margin-left: 10px;
 }
+
+.search {
+  position: relative;
+}
+
+.homePageSearchResults {
+  background-color: rgb(245, 238, 238);
+  padding: 20px;
+  padding-bottom: 0;
+  margin-top: 10px;
+  border-radius: 5px;
+  position: absolute;
+  overflow-y: auto;
+  max-height: 20em;
+  width: 93%;
+}
+.searchResultDivider {
+  background-color: rgba(100, 98, 98, 0.741);
+  height: 2px;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.homePageSearchResults p {
+  color: rgba(30, 29, 29, 0.775);
+  text-shadow: none;
+}
+
 .destinationText {
   color: white;
   text-align: center;
