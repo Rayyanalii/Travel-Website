@@ -8,8 +8,10 @@ const AddFlight = ({ closeMenu }) => {
     const [tocity, settocity] = useState('');
     const [images, setImages] = useState(Array(1).fill(null));
     const [departuredate, setdeparturedate] = useState('');
-    const [availableseats, setavailableseats] = useState(0);
-    const [seatprice, setseatprice] = useState(0);
+    const [availableseats, setavailableseats] = useState('');
+    const [seatprice, setseatprice] = useState('');
+
+    const today = new Date().toISOString().split("T")[0];
 
     const [successMessage, setSuccessMessage] = useState('');
 
@@ -131,6 +133,7 @@ const AddFlight = ({ closeMenu }) => {
                             value={departuredate}
                             onChange={(e) => setdeparturedate(e.target.value)}
                             required
+                            min={today}
                         />
                     </div>
 
@@ -157,16 +160,16 @@ const AddFlight = ({ closeMenu }) => {
                             required
                         />
                     </div>
-
+                    {successMessage && (
+                        <div className="success-message">
+                            {successMessage}
+                        </div>
+                    )}
                     <div className="addDestinationInput">
                         <button type="submit">Add Flight</button>
                     </div>
                 </form>
-                {successMessage && (
-                    <div className="success-message">
-                        {successMessage}
-                    </div>
-                )}
+
             </div>
         </>
     )

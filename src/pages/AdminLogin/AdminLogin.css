@@ -62,12 +62,14 @@
 @media (min-width: 768px) {
   .adminLoginContainer {
     max-width: 20rem;
+    width: 100%;
   }
 }
 
 @media (min-width: 1024px) {
   .adminLoginContainer {
     max-width: 25rem;
+    width: 100%;
   }
   #subBtn {
     margin-top: 35px;

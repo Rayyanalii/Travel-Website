@@ -857,6 +857,150 @@ app.put("/api/update-car", upload.array("images", 1), async (req, res) => {
   }
 });
 
+//Flights
+// Endpoint to GET Flights
+app.get("/api/get-flights", async (req, res) => {
+  try {
+    const currentDate = new Date().toISOString().slice(0, 10);
+
+    const validFlightsQuery = `
+        SELECT * FROM Flights 
+        WHERE TO_DATE(DEPARTUREDATE, 'YYYY-MM-DD') >= TO_DATE('${currentDate}', 'YYYY-MM-DD')
+      `;
+
+    const invalidFlightsQuery = `
+        SELECT * FROM Flights 
+        WHERE TO_DATE(DEPARTUREDATE, 'YYYY-MM-DD') < TO_DATE('${currentDate}', 'YYYY-MM-DD')
+      `;
+
+    const validFlights = await getQuery(validFlightsQuery);
+    const invalidFlights = await getQuery(invalidFlightsQuery);
+
+    if (invalidFlights.length > 0) {
+      await fetch("http://localhost:3000/api/delete-old-flights", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ flights: invalidFlights }),
+      });
+    }
+
+    res.json(validFlights);
+  } catch (err) {
+    res.status(500).send("Database error");
+  }
+});
+
+// Endpoint to ADD Flights
+app.post("/api/add-flight", upload.array("images", 1), async (req, res) => {
+  const {
+    airline,
+    fromcity,
+    tocity,
+    departuredate,
+    availableseats,
+    seatprice,
+  } = req.body;
+
+  const imageUrls = req.files.map((file) => {
+    const filePath = path.join(
+      __dirname,
+      "public",
+      "Uploads",
+      file.originalname
+    );
+    fs.writeFileSync(filePath, file.buffer);
+    return path.join("/Uploads/", file.originalname).replace(/\\/g, "/");
+  });
+
+  const imageUrlsString = imageUrls.join(",");
+
+  let query =
+    "Insert into Flights(airline,fromCity,toCity,image,departureDate,availableSeats,seatPrice) values (:airline,:fromcity,:tocity,:imageUrlsString,:departuredate,:availableseats,:seatprice)";
+
+  let connection;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    const result = await connection.execute(query, {
+      airline,
+      fromcity,
+      tocity,
+      imageUrlsString,
+      departuredate,
+      availableseats,
+      seatprice,
+    });
+
+    await connection.commit();
+    res.status(200).send("Flight added successfully");
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).send("Error adding Flight");
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing the connection:", err);
+      }
+    }
+  }
+});
+
+// Endpoint to Delete Flights
+app.delete("/api/delete-flight/:id", async (req, res) => {
+  const { id } = req.params;
+
+  let connection;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    await connection.execute(`DELETE FROM Flights WHERE FlightID = :id`, [id], {
+      autoCommit: true,
+    });
+
+    res.status(200).send("Flight deleted successfully");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error deleting Flight");
+  } finally {
+    if (connection) {
+      await connection.close();
+    }
+  }
+});
+
+//Endpoint that Deletes old flights automatically
+app.post("/api/delete-old-flights", upload.array(null), async (req, res) => {
+  const { flights } = req.body;
+
+  if (!flights || flights.length === 0) {
+    return res.status(400).send("No flights provided for deletion");
+  }
+
+  try {
+    let connection = await oracledb.getConnection(dbConfig);
+    flights.forEach(async (flight) => {
+      const { FLIGHTID: id } = flight;
+
+      try {
+        await connection.execute(
+          `DELETE FROM Flights WHERE FLIGHTID = :id`,
+          [id],
+          { autoCommit: true }
+        );
+      } catch (err) {
+        console.error(`Error deleting flight with ID ${id}:`, err);
+      }
+    });
+
+    res.send("Old flights deleted successfully");
+  } catch (err) {
+    console.error("Error deleting old flights:", err);
+    res.status(500).send("Failed to delete old flights");
+  }
+});
+
 //Destinations
 //Endpoint to GET destinations
 app.get("/api/get-destinations", async (req, res) => {
@@ -1274,8 +1418,7 @@ app.post("/api/login", upload.array(null), async (req, res) => {
   }
 });
 
-//Auth
-//Endpoint to Login
+//Endpoint to Signup
 app.post("/api/signup", upload.array(null), async (req, res) => {
   const { fullName, email, password } = req.body;
 
@@ -1287,7 +1430,7 @@ app.post("/api/signup", upload.array(null), async (req, res) => {
 
     const result = await connection.execute(
       "select * from TravelUsers where email=:email",
-      [email, password]
+      [email]
     );
 
     if (result.rows.length > 0) {
@@ -1299,7 +1442,16 @@ app.post("/api/signup", upload.array(null), async (req, res) => {
       );
 
       await connection.commit();
-      res.status(200).send("Registered successfully");
+
+      const result1 = await connection.execute(
+        "Select * from TravelUsers where email=:email",
+        [email]
+      );
+
+      res.status(200).json({
+        message: "Registered successfully",
+        rows: result1.rows,
+      });
     }
   } catch (error) {
     console.error("Error fetching User:", error);
@@ -1315,66 +1467,7 @@ app.post("/api/signup", upload.array(null), async (req, res) => {
   }
 });
 
-// Endpoint to GET Flights
-app.get("/api/get-flights", async (req, res) => {
-  try {
-    const result = await getQuery("SELECT * FROM Flights");
-    res.json(result);
-  } catch (err) {
-    res.status(500).send("Database error");
-  }
-});
-
-// Endpoint to ADD Flights
-app.post("/api/add-flight", upload.array("images", 1), async (req, res) => {
-  const {
-    airline,
-    fromcity,
-    tocity,
-    departuredate,
-    availableseats,
-    seatprice,
-  } = req.body;
-
-  const imageUrls = req.files.map((file) =>
-    path.join("/Uploads/", file.filename).replace(/\\/g, "/")
-  );
-
-  const imageUrlsString = imageUrls.join(",");
-
-  let query =
-    "Insert into Flights(airline,fromCity,toCity,image,departureDate,availableSeats,seatPrice) values (:airline,:fromcity,:tocity,:imageUrlsString,:departuredate,:availableseats,:seatprice)";
-
-  let connection;
-  try {
-    connection = await oracledb.getConnection(dbConfig);
-
-    const result = await connection.execute(query, {
-      airline,
-      fromcity,
-      tocity,
-      imageUrlsString,
-      departuredate,
-      availableseats,
-      seatprice,
-    });
-
-    await connection.commit();
-    res.status(200).send("Flight added successfully");
-  } catch (error) {
-    console.error("Database error:", error);
-    res.status(500).send("Error adding Flight");
-  } finally {
-    if (connection) {
-      try {
-        await connection.close();
-      } catch (err) {
-        console.error("Error closing the connection:", err);
-      }
-    }
-  }
-});
-
+//Reviews
 // Endpoint to GET Reviews
 app.get("/api/get-reviews", async (req, res) => {
   try {
@@ -1385,6 +1478,7 @@ app.get("/api/get-reviews", async (req, res) => {
   }
 });
 
+// Endpoint to Delete Reviews
 app.delete("/api/delete-review", async (req, res) => {
   const { review } = req.body;
   const query = "DELETE FROM reviews WHERE REVIEWID = :review";
@@ -1400,6 +1494,326 @@ app.delete("/api/delete-review", async (req, res) => {
   } catch (error) {
     console.error("Error deleting Review:", error);
     res.status(500).send("Internal server error");
+  }
+});
+
+// Endpoint to ADD Reviews
+app.post("/api/add-review", upload.array(null), async (req, res) => {
+  const {
+    comments,
+    username,
+    userID,
+    accommodationRating,
+    destinationRating,
+    valueForMoneyRating,
+    transportRating,
+    mealsRating,
+    overallRating,
+    tripPackageID,
+    tripPackageName,
+  } = req.body;
+
+  let query =
+    "Insert into Reviews(UserID,Username,tripPackageID,PackageName,Comments,AccommodationStars,DestinationStars,ValueStars,TransportStars,MealsStars,OverallStars) values (:userID,:username,:tripPackageID,:tripPackageName,:comments,:accommodationRating,:destinationRating,:valueForMoneyRating,:transportRating,:mealsRating,:overallRating)";
+
+  let connection;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    const result = await connection.execute(query, {
+      userID,
+      username,
+      tripPackageID,
+      tripPackageName,
+      comments,
+      accommodationRating,
+      destinationRating,
+      valueForMoneyRating,
+      transportRating,
+      mealsRating,
+      overallRating,
+    });
+
+    await connection.commit();
+    res.status(200).json({ message: "Review posted successfully" });
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({ error: "Error posting review" });
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing the connection:", err);
+      }
+    }
+  }
+});
+
+//Search Results
+//Endpoint to get Car Search Results
+app.get("/api/get-car-results/:carcity/:cartype", async (req, res) => {
+  const carcity = req.params.carcity;
+  const cartype = req.params.cartype;
+  console.log(carcity);
+  console.log(cartype);
+
+  let connection;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    let result;
+    let query;
+
+    if (cartype == "any") {
+      query = "select * from Cars where carLocation=:carcity";
+      result = await connection.execute(query, [carcity]);
+    } else {
+      query =
+        "select * from Cars where carLocation=:carcity and carType=:cartype";
+      result = await connection.execute(query, [carcity, cartype]);
+    }
+
+    if (result.rows.length > 0) {
+      res.json(result.rows);
+    } else {
+      res.status(404).json({ error: "No Cars found" });
+    }
+  } catch (error) {
+    console.error("Error fetching User:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing connection:", err);
+      }
+    }
+  }
+});
+
+//Endpoint to get Hotel Search Results
+app.get("/api/get-hotel-results/:hotelcity/:hotelclass", async (req, res) => {
+  const hotelcity = req.params.hotelcity;
+  const hotelclass = req.params.hotelclass;
+
+  let connection;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    let result;
+    let query;
+
+    if (hotelclass == 0) {
+      query = "select * from Hotels where hotelcity=:hotelcity";
+      result = await connection.execute(query, [hotelcity]);
+    } else {
+      query =
+        "select * from Hotels where hotelcity=:hotelcity and hotelClass=:hotelclass";
+      result = await connection.execute(query, [hotelcity, hotelclass]);
+    }
+
+    if (result.rows.length > 0) {
+      res.json(result.rows);
+    } else {
+      res.status(404).json({ error: "No Hotels found" });
+    }
+  } catch (error) {
+    console.error("Error fetching User:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing connection:", err);
+      }
+    }
+  }
+});
+
+//Endpoint to get Hotel Search Results
+app.get("/api/get-flight-results/:from/:to/:departure", async (req, res) => {
+  const fromCity = req.params.from;
+  const toCity = req.params.to;
+  const departureDate = req.params.departure;
+
+  let connection;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    const currentDate = new Date().toISOString().slice(0, 10);
+
+    let result;
+    let query;
+
+    if (departureDate == "any") {
+      query =
+        "select * from FLIGHTS where FROMCITY=:fromCity and TOCITY=:toCity and TO_DATE(DEPARTUREDATE, 'YYYY-MM-DD') >= TO_DATE(:currentDate, 'YYYY-MM-DD')";
+
+      result = await connection.execute(query, [fromCity, toCity, currentDate]);
+    } else {
+      query =
+        "select * from FLIGHTS where FROMCITY=:fromCity and TOCITY=:toCity and DEPARTUREDATE=:departureDate";
+      result = await connection.execute(query, [
+        fromCity,
+        toCity,
+        departureDate,
+      ]);
+    }
+
+    const invalidFlightsQuery = `
+    SELECT * FROM Flights 
+    WHERE TO_DATE(DEPARTUREDATE, 'YYYY-MM-DD') < TO_DATE('${currentDate}', 'YYYY-MM-DD')
+  `;
+
+    const invalidFlights = await getQuery(invalidFlightsQuery);
+
+    if (invalidFlights.length > 0) {
+      await fetch("http://localhost:3000/api/delete-old-flights", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ flights: invalidFlights }),
+      });
+    }
+
+    if (result.rows.length > 0) {
+      res.json(result.rows);
+    } else {
+      res.status(404).json({ error: "No Flights found" });
+    }
+  } catch (error) {
+    console.error("Error fetching Flights:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing connection:", err);
+      }
+    }
+  }
+});
+
+//Payment
+//Endpoint to make Car Booking
+app.post("/api/add-car-booking", upload.array(null), async (req, res) => {
+  const { carRentedDays, carID, userID, carPickupDate, totalAmount } = req.body;
+
+  let query =
+    "Insert into CarBookings(userID,carID,carRentedDays,carPickupDate,totalAmount) values (:userID,:carID,:carRentedDays,:carPickupDate,:totalAmount)";
+
+  let connection;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    await connection.execute(
+      query,
+      {
+        userID,
+        carID,
+        carRentedDays,
+        carPickupDate,
+        totalAmount,
+      },
+      { autoCommit: true }
+    );
+
+    res.status(200).json({ message: "Car Booked successfully" });
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({ error: "Error booking car" });
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing the connection:", err);
+      }
+    }
+  }
+});
+
+//Endpoint to make Car Booking
+app.post("/api/add-hotel-booking", upload.array(null), async (req, res) => {
+  const {
+    hotelID,
+    hotelBookDays,
+    userID,
+    hotelBookRooms,
+    hotelCheckInDate,
+    totalPrice,
+  } = req.body;
+
+  let query =
+    "Insert into HotelBookings(userID,hotelID,hotelBookDays,hotelBookRooms,hotelCheckinDate,totalPrice) values (:userID,:hotelID,:hotelBookDays,:hotelBookRooms,:hotelCheckInDate,:totalPrice)";
+
+  let connection;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    await connection.execute(
+      query,
+      {
+        userID,
+        hotelID,
+        hotelBookDays,
+        hotelBookRooms,
+        hotelCheckInDate,
+        totalPrice,
+      },
+      { autoCommit: true }
+    );
+
+    res.status(200).json({ message: "Hotel Booked successfully" });
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({ error: "Error booking Hotel" });
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing the connection:", err);
+      }
+    }
+  }
+});
+
+//Endpoint to make Trip Booking
+app.post("/api/add-trip-booking", upload.array(null), async (req, res) => {
+  const { userID, packageID } = req.body;
+
+  let query =
+    "Insert into TripBookings(userID,packageID) values (:userID,:packageID)";
+
+  let connection;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    await connection.execute(
+      query,
+      {
+        userID,
+        packageID,
+      },
+      { autoCommit: true }
+    );
+
+    res.status(200).json({ message: "Trip Booked successfully" });
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({ error: "Error booking trip package" });
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing the connection:", err);
+      }
+    }
   }
 });
 

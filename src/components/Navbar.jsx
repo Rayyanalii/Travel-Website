@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 import Modal from "./Model/Modal";
 import Login from './../pages/Auth/Login';
 import Signup from './../pages/Auth/Signup';
+import { useAuth } from '../pages/Auth/AuthContext';
+
 
 const Navbar = () => {
+  const { loggedIn, logout, login } = useAuth();
   const [hamburger, setHamburger] = useState(false);
   const [serviceDrop, setServiceDrop] = useState(false);
   const [pagesDrop, setPagesDrop] = useState(false);
@@ -46,6 +49,11 @@ const Navbar = () => {
     setPagesDrop(!pagesDrop);
   }
 
+  function handleLogout() {
+    localStorage.clear();
+    logout();
+  }
+
   useEffect(() => {
     const handleClick = (e) => {
       if (
@@ -65,24 +73,17 @@ const Navbar = () => {
       }
     };
 
-    // const handleClickOutside = (e) => {
-    //   if (
-    //     isModalOpen &&
-    //     !document.querySelector(".modal-content").contains(e.target)
-    //   ) {
-    //     closeModal();
-    //   }
-    // };
 
-    // if (isModalOpen) {
-    //   document.addEventListener("click", handleClickOutside);
-    // }
+    if (localStorage.getItem('email')) {
+      login();
+    }
+
+
 
     document.addEventListener("mouseup", handleClick);
 
     return () => {
       document.removeEventListener("mouseup", handleClick);
-      // document.removeEventListener("click", handleClickOutside);
     };
   }, [serviceDrop, pagesDrop, hamburger, isModalOpen]);
 
@@ -161,14 +162,24 @@ const Navbar = () => {
               </ul>
             </div>
             <div className="verticalLine">|</div>
-            <div className="buttons">
+            {!loggedIn && <div className="buttons">
               <button className="mainButtons" id="loginButton" onClick={openLoginModal}>
                 Login
               </button>
               <button className="mainButtons" id="signupButton" onClick={openSignupModal}>
                 Signup
               </button>
-            </div>
+            </div>}
+            {loggedIn && <div className="navbarUsernameContainer">
+              <div className="navbarUsernameContent">
+                <img src="/Uploads/EiffelTower1.jpg" alt="User" />
+                <p>{localStorage.getItem('username')}</p>
+              </div>
+              <div className="navbarLogoutContainer">
+                <button className="navbarlogout" onClick={handleLogout}>Logout</button>
+              </div>
+            </div>}
+
           </div>
         </div>
 
@@ -252,9 +263,9 @@ const Navbar = () => {
       </nav>
       <Modal show={isModalOpen} onClose={closeModal}>
         {modalContent === "login" ? (
-          <Login setModal={setModalContent} />
+          <Login closeModal={setIsModalOpen} setModal={setModalContent} />
         ) : (
-          <Signup setModal={setModalContent} />
+          <Signup closeModal={setIsModalOpen} setModal={setModalContent} />
         )}
       </Modal>
     </>

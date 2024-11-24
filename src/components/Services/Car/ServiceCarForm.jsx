@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../../pages/Services/Car/ServiceCar.css";
+import { useAuth } from './../../../pages/Auth/AuthContext';
 
 const ServiceCarForm = () => {
+  const { loggedIn } = useAuth();
   const [formData, setFormData] = useState({
-    hotelCity: "",
+    city: "",
     pickup: "",
-    hotelDays: "",
+    carDays: "",
     cartype: "",
   });
 
@@ -22,8 +24,12 @@ const ServiceCarForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Navigate to SearchResults and pass formData
-    navigate("/Cars/SearchResults", { state: formData });
+    if (loggedIn) {
+      navigate("/Cars/SearchResults", { state: formData });
+    }
+    else {
+      alert("You Need To Login To Book A Car")
+    }
   };
 
   return (
@@ -35,9 +41,9 @@ const ServiceCarForm = () => {
               <label htmlFor="hotelCity">Enter your city:</label>
               <input
                 type="text"
-                name="hotelCity"
+                name="city"
                 id="hotelCity"
-                value={formData.hotelCity}
+                value={formData.city}
                 onChange={handleChange}
                 required
               />
@@ -62,11 +68,12 @@ const ServiceCarForm = () => {
                 <label htmlFor="hotelDays">Enter Days:</label>
                 <input
                   type="number"
-                  name="hotelDays"
+                  name="carDays"
                   id="hotelDays"
-                  value={formData.hotelDays}
+                  value={formData.carDays}
                   onChange={handleChange}
                   required
+                  min="1"
                 />
               </div>
             </div>
@@ -84,14 +91,15 @@ const ServiceCarForm = () => {
                 required
               >
                 <option value="">-- Select Car Type --</option>
-                <option value="sedan">Sedan</option>
-                <option value="suv">SUV</option>
-                <option value="hatchback">Hatchback</option>
-                <option value="convertible">Convertible</option>
-                <option value="pickup">Pickup Truck</option>
-                <option value="minivan">Minivan</option>
-                <option value="luxury">Luxury</option>
-                <option value="sports">Sports Car</option>
+                <option value="any">Any</option>
+                <option value="Sedan">Sedan</option>
+                <option value="SUV">SUV</option>
+                <option value="Hatchback">Hatchback</option>
+                <option value="Convertible">Convertible</option>
+                <option value="Pickup">Pickup Truck</option>
+                <option value="Minivan">Minivan</option>
+                <option value="Luxury">Luxury</option>
+                <option value="Sports">Sports Car</option>
               </select>
             </div>
           </div>

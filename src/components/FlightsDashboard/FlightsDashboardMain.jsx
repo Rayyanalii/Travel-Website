@@ -18,10 +18,31 @@ const FlightsDashboardMain = () => {
 
     useEffect(() => {
         fetchFlights();
-    }, [])
+    }, [addMenu])
 
     function handleAddMenu(e) {
         setAddMenu(!addMenu);
+    }
+
+    async function handleDelete(id) {
+        try {
+
+            const res = await fetch(`http://localhost:3000/api/delete-flight/${id}`, {
+                method: 'DELETE',
+
+            })
+            if (res.ok) {
+                alert('Flight deleted successfully');
+                fetchFlights();
+            }
+            else {
+                alert('Error deleting Flight');
+            }
+        }
+        catch (error) {
+            console.error('Error deleting Flight:', error);
+            alert('Error deleting Flight');
+        }
     }
 
     return (
@@ -52,25 +73,26 @@ const FlightsDashboardMain = () => {
                                     <th>Image URL</th>
                                     <th>Departure Date</th>
                                     <th>Available Seats</th>
-                                    <th>Price</th>
+                                    <th>Seat Price</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {flights.map((flight) => (
-                                    <tr key={flight.flightID}>
-                                        <td className="dataField">{flight.flightID}</td>
-                                        <td className="dataField">{flight.airline}</td>
-                                        <td className="dataField">{flight.fromCity}</td>
-                                        <td className="dataField">{flight.toCity}</td>
-                                        <td className="dataField">{flight.image}</td>
-                                        <td className="dataField">{flight.departureDate}</td>
-                                        <td className="dataField">{flight.availableSeats}</td>
-                                        <td className="dataField">{flight.seatPrice}</td>
+                                    <tr key={flight.FLIGHTID}>
+                                        <td className="dataField">{flight.FLIGHTID}</td>
+                                        <td className="dataField">{flight.AIRLINE}</td>
+                                        <td className="dataField">{flight.FROMCITY}</td>
+                                        <td className="dataField">{flight.TOCITY}</td>
+                                        <td className="dataField">{flight.IMAGE}</td>
+                                        <td className="dataField">{flight.DEPARTUREDATE}</td>
+                                        <td className="dataField">{flight.AVAILABLESEATS}</td>
+                                        <td className="dataField">{flight.SEATPRICE}</td>
                                         <td className="dataFieldButton">
                                             <div className="optionsMenu">
                                                 <div className="buttonContainer">
-                                                    <button className="modifyButton" onClick={() => handleModify(flight.flightID)}>Modify</button>
-                                                    <button className="deleteButton" onClick={() => handleDelete(flight.flightID)}>Delete</button>
+                                                    <button className="modifyButton" onClick={() => handleModify(flight.FLIGHTID)}>Modify</button>
+                                                    <button className="deleteButton" onClick={() => handleDelete(flight.FLIGHTID)}>Delete</button>
                                                 </div>
                                             </div>
                                         </td>

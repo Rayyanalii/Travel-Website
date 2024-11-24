@@ -3,12 +3,14 @@ import './Auth.css';
 import { useAuth } from './AuthContext';
 
 
-const Login = ({ setModal }) => {
+const Login = ({ setModal, closeModal }) => {
     const { login } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+
 
     function handleLoginClick() {
         setModal('signup');
@@ -56,15 +58,17 @@ const Login = ({ setModal }) => {
                 setPassword('');
                 setError('');
                 setRememberMe(false)
-                login();
-                if (rememberMe) {
-                    localStorage.setItem('email', data[0].EMAIL);
-                    localStorage.setItem('username', data[0].FULLNAME);
+                setSuccess("Login Successful!");
 
-                    localStorage.setItem('role', data[0].USERROLE);
+                localStorage.setItem('email', data[0].EMAIL);
+                localStorage.setItem('username', data[0].FULLNAME);
 
-                }
-                setModal(false);
+                localStorage.setItem('role', data[0].USERROLE);
+                localStorage.setItem('userID', data[0].USERID);
+                const timer = setTimeout(() => {
+                    closeModal(false);
+                    login();
+                }, 1000);
             } else {
                 setError(data.message || 'Invalid Email Or Password');
                 setPassword('')
@@ -83,7 +87,7 @@ const Login = ({ setModal }) => {
                         alt="Mountain"
                         className="auth-image"
                     />
-                    <img id="loginSignupLogo" src="Uploads/MajesticTravels Logo.png" alt="Logo" />
+                    <img id="loginSignupLogo" src="/Uploads/MajesticTravels Logo.png" alt="Logo" />
                 </div>
                 <div className="form-section">
                     <div className="auth-header">
@@ -116,6 +120,8 @@ const Login = ({ setModal }) => {
                             <div className='rem-text'>Remember me</div>
                         </div>
                         {error && <p className="error-text">{error}</p>}
+                        {success && <div className="success-text">{success}</div>}
+
                         <button className="login-btn-new" type='submit'>Login</button>
                     </form>
                 </div>

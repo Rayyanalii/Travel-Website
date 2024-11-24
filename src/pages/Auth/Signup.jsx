@@ -1,9 +1,9 @@
-// src/components/Signup.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Auth.css';
 
+import { useAuth } from './AuthContext';
 
-const Signup = ({ setModal }) => {
+const Signup = ({ setModal, closeModal }) => {
     const { login } = useAuth();
 
     const [fullName, setFullName] = useState('');
@@ -12,15 +12,46 @@ const Signup = ({ setModal }) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [termsAccepted, setTermsAccepted] = useState(false);
     const [error, setError] = useState('');
-    const [success, setsuccess] = useState('')
+    const [success, setSuccess] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleLoginClick = () => {
         setModal('login');
     };
 
+    // Separate onChange functions
+    function handleFullNameChange(event) {
+        setError('')
+        setSuccess('')
+        setFullName(event.target.value);
+    }
+
+    function handleEmailChange(event) {
+        setError('')
+        setSuccess('')
+        setEmail(event.target.value);
+    }
+
+    function handlePasswordChange(event) {
+        setError('')
+        setSuccess('')
+        setPassword(event.target.value);
+    }
+
+    function handleConfirmPasswordChange(event) {
+        setError('')
+        setSuccess('')
+        setConfirmPassword(event.target.value);
+    }
+
+    function handleTermsChange(event) {
+        setError('')
+        setSuccess('')
+        setTermsAccepted(event.target.checked);
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
 
         if (password !== confirmPassword) {
             setError('Passwords do not match.');
@@ -46,27 +77,31 @@ const Signup = ({ setModal }) => {
                 body: formData,
             });
 
-            if (!res.ok) {
-                throw new Error('Failed to sign up. Please try again.');
-            }
-
             const data = await res.json();
 
-            setFullName('')
-            setEmail('')
-            setPassword('')
-            setConfirmPassword('')
-            localStorage.setItem('email', data[0].EMAIL);
-            localStorage.setItem('username', data[0].FULLNAME);
 
-            localStorage.setItem('role', data[0].USERROLE);
-            setsuccess("Registration Successful")
+            if (!res.ok) {
+                setError(data.error || "An Error Occurred. Please try again later");
+                return;
+            }
 
 
-            setTimeout(() => {
-                setModal(false);
+            setFullName('');
+            setEmail('');
+            setPassword('');
+            setConfirmPassword('');
+            localStorage.setItem('email', email);
+            localStorage.setItem('username', fullName);
+            localStorage.setItem('role', "User");
+            localStorage.setItem('userID', data.rows[0].USERID);
+            console.log(localStorage.getItem('userID'));
+
+
+            setSuccess(data.message || "Registration Successful!");
+
+            const timer = setTimeout(() => {
+                closeModal(false);
                 login();
-
             }, 2000);
 
         } catch (error) {
@@ -75,6 +110,8 @@ const Signup = ({ setModal }) => {
             setIsSubmitting(false);
         }
     };
+
+
 
     return (
         <div className="auth-container">
@@ -85,7 +122,7 @@ const Signup = ({ setModal }) => {
                         alt="Mountain"
                         className="auth-image"
                     />
-                    <img id="loginSignupLogo" src="Uploads/MajesticTravels Logo.png" alt="Logo" />
+                    <img id="loginSignupLogo" src="/Uploads/MajesticTravels Logo.png" alt="Logo" />
                 </div>
                 <div className="form-section">
                     <div className="auth-header">
@@ -97,41 +134,43 @@ const Signup = ({ setModal }) => {
                             type="text"
                             placeholder="Full Name"
                             value={fullName}
-                            onChange={(e) => setFullName(e.target.value)}
+                            onChange={handleFullNameChange}
                             required
                         />
                         <input
                             type="email"
                             placeholder="Email"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={handleEmailChange}
                             required
                         />
                         <input
                             type="password"
                             placeholder="Password"
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={handlePasswordChange}
                             required
                         />
                         <input
                             type="password"
                             placeholder="Re-Enter Password"
                             value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            onChange={handleConfirmPasswordChange}
                             required
                         />
                         <div className="remember">
                             <input
                                 type="checkbox"
                                 checked={termsAccepted}
-                                onChange={(e) => setTermsAccepted(e.target.checked)}
+                                onChange={handleTermsChange}
                             />
                             <div className='rem-text'>I accept all Terms and Conditions</div>
                         </div>
                         {error && <div className="error-text">{error}</div>}
                         {success && <div className="success-text">{success}</div>}
-                        <button className="signup-btn-new" type="submit">Signup</button>
+                        <button className="signup-btn-new" type="submit" disabled={isSubmitting}>
+                            {isSubmitting ? 'Signing up...' : 'Signup'}
+                        </button>
                     </form>
                 </div>
             </div>

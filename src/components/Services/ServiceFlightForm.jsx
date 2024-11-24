@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../pages/ServiceFlight.css";
+import { useAuth } from './../../pages/Auth/AuthContext';
+
 
 const ServiceFlightForm = () => {
+  const { loggedIn } = useAuth();
+
   const [formData, setFormData] = useState({
     from: "",
     to: "",
@@ -22,8 +26,12 @@ const ServiceFlightForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Navigate to SearchResults and pass formData
-    navigate("/Flight/SearchResults", { state: formData });
+    if (loggedIn) {
+      navigate("/Flights/SearchResults", { state: formData });
+    }
+    else {
+      alert("You Need To Login To Book A Flight")
+    }
   };
 
   return (
@@ -53,7 +61,6 @@ const ServiceFlightForm = () => {
                   id="departure"
                   value={formData.departure}
                   onChange={handleChange}
-                  required
                 />
               </div>
             </div>

@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import Footer from './../components/General/Footer';
 
 const TripPackage = () => {
-  const { id } = useParams();
+  const { id, name } = useParams();
   const [tripPackageData, setTripPackageData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -46,7 +46,7 @@ const TripPackage = () => {
     <>
       <Navbar />
       <Hero packageData={tripPackageData} />
-      <Main packageData={tripPackageData} />
+      <Main packageData={tripPackageData} id={id} name={name} />
       <Footer />
     </>
   );

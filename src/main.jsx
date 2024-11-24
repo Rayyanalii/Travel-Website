@@ -24,6 +24,8 @@ import FlightsDashboard from "./pages/AdminDashboard/FlightsDashboard/FlightsDas
 import ServiceCar from "./pages/Services/Car/ServiceCar.jsx";
 import SearchResults from "./pages/Services/SearchResults/SearchResults.jsx";
 import DestinationDescription from "./pages/DestinationDescription.jsx";
+import PaymentPage from "./pages/Payment/PaymentPage.jsx";
+import ConfirmationPage from './components/Payment/ConfirmationPage';
 
 // Define router with all routes
 const router = createBrowserRouter([
@@ -34,10 +36,6 @@ const router = createBrowserRouter([
   {
     path: "/destinations",
     element: <Destinations />,
-  },
-  {
-    path: "/tripPackage",
-    element: <TripPackage />,
   },
   {
     path: "/reviews",
@@ -106,6 +104,15 @@ const router = createBrowserRouter([
   {
     path: "/Destinations/:id/:city",
     element: <DestinationDescription />,
+  },
+
+  {
+    path: "/:page/payment",
+    element: <PaymentPage />,
+  },
+  {
+    path: "/:page/payment/confirmation",
+    element: <ConfirmationPage />,
   },
 ]);
 

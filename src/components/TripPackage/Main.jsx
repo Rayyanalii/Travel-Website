@@ -9,7 +9,7 @@ import OtherInfo from './OtherInfo'
 import Ratings from './Ratings'
 import WriteReview from './WriteReview'
 
-const Main = ({ packageData }) => {
+const Main = ({ packageData, id, name }) => {
 
   return (
     <>
@@ -23,7 +23,7 @@ const Main = ({ packageData }) => {
         <RedDivider />
         <Ratings packageData={packageData} />
         <RedDivider />
-        <WriteReview />
+        <WriteReview id={id} name={name} />
       </main>
     </>
   )
