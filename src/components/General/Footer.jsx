@@ -1,15 +1,75 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+
 import './Footer.css'
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [message, setmessage] = useState(false)
+  const [isSending, setisSending] = useState(false)
+
+  const handleSubscribe = async (e) => {
+    setisSending(true)
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:3000/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Sending JSON data
+        },
+        body: JSON.stringify({ email }), // Send email as JSON
+      });
+      if (response.ok) {
+        setEmail("");
+        setisSending(false)
+        setmessage(true)
+        setTimeout(() => {
+          setmessage(false);
+        }, 3000);
+      }
+      setEmail("");
+    } catch (error) {
+    }
+  };
+
+
   return (
     <footer>
       <div className="footerMainContainer">
         <div className="footerPartition">
           <h3>Stay connected with us!</h3>
-          <input type="text" name="email" id="email" placeholder="Email Address" />
-          <input type="submit" value="Subscribe" className="footerredbutton" />
+          <form onSubmit={handleSubscribe} className="footerForm">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={email}
+              placeholder="Email Address"
+              required
+              className="footerEmailInput"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {isSending && <input
+              type="submit"
+              value="Sending..."
+              className="footerredbuttonSending"
+              disabled
+            />}
+            {message && <input
+              type="submit"
+              value="Subscribed!"
+              className="footergreenbutton"
+              disabled
+            />}
+            {!message && !isSending && <input
+              type="submit"
+              value="Subscribe"
+              className="footerredbutton"
+            />}
+          </form>
+
         </div>
         <div className="footerPartition">
           <div className="FooterSitemapAndServicesContainer">

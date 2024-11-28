@@ -2,11 +2,12 @@ import { useState } from 'react'
 import React from 'react'
 import './SearchBar.css'
 
-const SearchBar = ({ setsearched, defaultValue, setID }) => {
+const SearchBar = ({ setsearched, defaultValue, setID, seterror }) => {
 
     const handleChange = (e) => {
         setsearched(e.target.value);
         setID("")
+        seterror("")
     }
 
     return (

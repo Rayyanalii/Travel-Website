@@ -72,6 +72,11 @@
   overflow-x: hidden;
 }
 
+.footerForm {
+  display: flex;
+  flex-direction: column;
+}
+
 .footerredbutton {
   background: rgba(255, 0, 0, 1);
   font-size: 1rem;
@@ -81,6 +86,32 @@
   color: white;
   cursor: pointer;
 
+  min-height: 2em;
+  margin: 0 auto;
+  width: 45%;
+  margin-top: 10px;
+}
+
+.footerredbuttonSending {
+  background: rgba(255, 0, 0, 1);
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  min-height: 2em;
+  margin: 0 auto;
+  width: 45%;
+  margin-top: 10px;
+}
+
+.footergreenbutton {
+  background: rgb(29, 158, 23);
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  color: white;
   min-height: 2em;
   margin: 0 auto;
   width: 45%;

@@ -15,6 +15,8 @@ const DestinationDescription = () => {
   const [hotels, sethotels] = useState([])
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [tripPackages, settripPackages] = useState([])
+
 
   const { id, city } = useParams();
 
@@ -56,6 +58,13 @@ const DestinationDescription = () => {
 
 
 
+      const response4 = await fetch(`http://localhost:3000/api/get-destination-trips/${id}`);
+      if (!response4.ok) {
+        throw new Error('Destination not found');
+      }
+      const data4 = await response4.json();
+      settripPackages(data4);
+
 
     } catch (error) {
       setError(error.message);
@@ -83,10 +92,10 @@ const DestinationDescription = () => {
     <>
       <Navbar />
       <Hero data={destinationData} places={placesData} />
-      <Divider />
+
       <WhatToEat data={destinationData} rest={restaurantData} />
-      <Divider />
-      <WhereToStay data={destinationData} stay={hotels} />
+
+      <WhereToStay data={destinationData} stay={hotels} trip={tripPackages} />
       <Footer />
     </>
   );

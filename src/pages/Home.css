@@ -4,33 +4,40 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: auto;
+  min-height: 100vh;
 }
 .headingText {
   text-align: center;
-  margin-top: 10vw;
+  margin-top: 10em;
   color: white;
   text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
   padding: 0 10px;
+  display: block;
 }
 .headingText h1 {
-  font-size: 5vw;
+  font-size: 2rem;
 }
 .headingText p {
-  font-size: 2.5vw;
+  font-size: 1rem;
 }
 
 .searchForm {
   display: flex;
   justify-content: center;
-  margin-top: 2vw;
+  flex-wrap: wrap;
+  max-width: 30%;
+  margin: 0 auto;
+  margin-top: 1em;
+  gap: 10px;
+  width: 100%;
 }
 .searchButton {
-  margin-left: 10px;
+  flex: 0 1 70px;
+  height: 2em;
 }
 
 .search {
-  position: relative;
+  flex: 1 0 250px;
 }
 
 .homePageSearchResults {
@@ -42,7 +49,6 @@
   position: absolute;
   overflow-y: auto;
   max-height: 20em;
-  width: 93%;
 }
 .searchResultDivider {
   background-color: rgba(100, 98, 98, 0.741);
@@ -59,33 +65,33 @@
 .destinationText {
   color: white;
   text-align: center;
-  margin: 30vw 0px 3vw 0px;
-  text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+  margin: 15em 0px 2em 0px;
 }
 .destinationText h2 {
-  font-size: 3.8vw;
+  font-size: 1.5rem;
 }
 .destinationText p {
-  font-size: 2.3vw;
+  font-size: 0.9rem;
 }
 .destinationCards {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 25px;
-  margin: 0 12vw;
+  margin: 0 auto;
+  max-width: 80%;
+  width: 100%;
 }
 .valueTripText {
   color: white;
   text-align: center;
-  margin: 14vw 0px 3vw 0px;
-  text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+  margin: 6em 0px 2em 0px;
 }
 .valueTripText h2 {
-  font-size: 3.8vw;
+  font-size: 1.5rem;
 }
 .valueTripText p {
-  font-size: 2.3vw;
+  font-size: 0.9rem;
 }
 
 .AllTripCards {
@@ -93,30 +99,33 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 25px;
-  margin: 0 10vw;
+  margin: 0 auto;
+  max-width: 80%;
+  width: 100%;
 }
 .servicesText {
   color: white;
   text-align: center;
-  margin: 14vw 0px 3vw 0px;
-  text-shadow: 2px 2px hsla(0, 0%, 27%, 0.489);
+  margin: 6em 0px 2em 0px;
 }
 .servicesText h2 {
-  font-size: 4.5vw;
+  font-size: 1.5rem;
 }
 .allServices {
-  margin: 0 10vw;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 25px;
+  max-width: 80%;
+  width: 100%;
 }
 
 /*Footer*/
 
 @media (min-width: 768px) {
   .headingText {
-    margin-top: 10vw;
+    margin-top: 10em;
   }
   .headingText h1 {
     font-size: 4vw;
@@ -143,7 +152,7 @@
 
 @media (min-width: 1024px) {
   .headingText {
-    margin-top: 9vw;
+    margin-top: 10em;
   }
   .headingText h1 {
     font-size: 3.1vw;

@@ -1,24 +1,22 @@
 #searchBar {
-  width: 10em;
-  height: 100%;
+  height: 2rem;
   font-size: 0.8rem;
   padding-left: 8px;
   border: none;
   border-radius: 5px;
   background-color: ghostwhite;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
   #searchBar {
     font-size: 1rem; /* Replacing 1.7vw */
-    width: 28rem; /* Replacing 35vw */
   }
 }
 
 @media (min-width: 1024px) {
   #searchBar {
     height: 2.8rem; /* Replacing 2.5vw */
-    width: 35rem; /* Replacing 32vw */
     padding-left: 15px;
     font-size: 1rem; /* Replacing 1vw */
   }

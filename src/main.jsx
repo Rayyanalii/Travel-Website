@@ -26,6 +26,7 @@ import SearchResults from "./pages/Services/SearchResults/SearchResults.jsx";
 import DestinationDescription from "./pages/DestinationDescription.jsx";
 import PaymentPage from "./pages/Payment/PaymentPage.jsx";
 import ConfirmationPage from './components/Payment/ConfirmationPage';
+import NotFoundPage from "./pages/NotFound/NotFoundPage.jsx";
 
 // Define router with all routes
 const router = createBrowserRouter([
@@ -113,6 +114,10 @@ const router = createBrowserRouter([
   {
     path: "/:page/payment/confirmation",
     element: <ConfirmationPage />,
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 

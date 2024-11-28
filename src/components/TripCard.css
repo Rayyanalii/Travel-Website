@@ -5,6 +5,7 @@
 }
 .TripImageContainer {
   max-height: 29vw;
+  position: relative;
 }
 .TripImageContainer img {
   width: 100%;
@@ -12,14 +13,16 @@
   object-fit: cover;
 }
 .priceContainer {
-  width: 9vw;
+  width: max-content;
+
   text-align: center;
   padding: 5px;
   background-color: black;
   color: white;
   font-size: 3vw;
-  position: relative;
-  top: -40px;
+  position: absolute;
+  z-index: 1;
+  bottom: 10%;
 }
 .tripCardText h3 {
   font-size: 3vw;
@@ -92,7 +95,7 @@
     width: 1.9vw;
   }
   .priceContainer {
-    width: 5.4vw;
+    width: max-content;
     font-size: 1.9vw;
   }
   .clockAndTime p {
@@ -107,7 +110,7 @@
     width: 17vw;
   }
   .TripImageContainer {
-    max-height: 13vw;
+    max-height: 22vw;
   }
   .tripCardText {
     padding-left: 2px;
@@ -127,9 +130,8 @@
     height: 1.2vw;
   }
   .priceContainer {
-    width: min-content;
+    width: max-content;
     font-size: 1.2vw;
-    top: -50px;
   }
   .clockAndTime p {
     font-size: 1vw;

@@ -6,6 +6,9 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -1385,6 +1388,40 @@ app.get("/api/get-destination-desc-hotels/:id", async (req, res) => {
   }
 });
 
+// Endpoint to GET Destination Description Trips
+app.get("/api/get-destination-trips/:id", async (req, res) => {
+  let connection;
+  const id = req.params.id;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    // Query to select data for the specific trip package ID
+    const result = await connection.execute(
+      "select * from (select * from TripPackages where destinationID=:id) where rownum<=2",
+      [id]
+    );
+
+    // Check if any rows were returned
+    if (result.rows.length > 0) {
+      res.json(result.rows); // Send the first matching record as a JSON response
+    } else {
+      res.status(404).json({ error: "Destination not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching Destination:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    // Close the database connection
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing connection:", err);
+      }
+    }
+  }
+});
+
 //Auth
 //Endpoint to Login
 app.post("/api/login", upload.array(null), async (req, res) => {
@@ -1909,6 +1946,40 @@ app.get("/api/get-trip-package/:id", async (req, res) => {
         console.error("Error closing connection:", err);
       }
     }
+  }
+});
+
+//Subscribe To Email Endpoint
+app.post("/subscribe", upload.array(null), async (req, res) => {
+  const { email } = req.body;
+
+  const EMAIL_USER = process.env.EMAIL_USER;
+
+  const EMAIL_PASS = process.env.EMAIL_PASS;
+
+  // Set up the transporter
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: EMAIL_USER,
+      pass: EMAIL_PASS,
+    },
+  });
+
+  // Email details
+  const mailOptions = {
+    from: EMAIL_USER,
+    to: email,
+    subject: "Thank you for subscribing!",
+    text: "We appreciate your interest in Majestic Travels! Stay tuned for updates.",
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "Email sent successfully!" });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).json({ message: "Failed to send email" });
   }
 });
 

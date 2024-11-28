@@ -9,7 +9,7 @@
   position: relative; /* Change to relative */
   top: 0;
   justify-content: space-around;
-  z-index: -100;
+  z-index: 0;
 }
 .DestinationNameContainer {
   display: flex;
@@ -69,7 +69,7 @@
 .destinationBestPlaceBlackBackground {
   background-color: rgba(14, 14, 14, 0.678);
   position: absolute;
-  z-index: -1;
+  z-index: -10;
   max-width: 70%;
   width: 100%;
   height: 100%;
@@ -95,8 +95,31 @@ p {
   max-height: 100%;
   height: 100%;
   border-radius: 10px;
+  position: relative;
+  z-index: 1;
 }
-
+.destionationBestPlaceCardContainerActive {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  max-width: 22%;
+  width: 100%;
+  max-height: 100%;
+  height: 100%;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
+  transform: translateY(-5px);
+  transition: transform 0.2s ease;
+}
+.hoverBestPlaceCardContainer {
+  position: absolute;
+  z-index: 1;
+  height: 15%;
+  width: 100%;
+  background-color: rgba(17, 17, 17, 0.627);
+  bottom: 0;
+}
 /*Divider*/
 .destionationDescriptionDivider {
   position: absolute;
@@ -116,7 +139,6 @@ p {
   width: 100%;
   padding: 0;
   position: relative;
-  z-index: -100;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -205,15 +227,15 @@ p {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh;
+  height: auto;
   width: 100%;
   padding: 0;
   position: relative;
-  z-index: -100;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 30px;
+  padding-bottom: 100px;
 }
 .destinationWhereToStayMainHeadingContainer {
   text-align: center;

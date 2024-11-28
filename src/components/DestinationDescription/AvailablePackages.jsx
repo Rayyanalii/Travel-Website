@@ -3,7 +3,7 @@ import "../../pages/DestinationDescription.css";
 import TripCard from "../TripCard";
 import "../../pages/Home.css";
 
-const AvailablePackages = () => {
+const AvailablePackages = ({ trip }) => {
   return (
     <>
       <div className="availablePackagesMainContainer">
@@ -11,24 +11,18 @@ const AvailablePackages = () => {
           <h2>Available Packages</h2>
         </div>
         <div className="availablePackagesCardContainer">
-          <TripCard
-            url="/Uploads/ParisTripCard.png"
-            route="/TripPackage/1/Konnichiwa"
-            title="Konnichiwa"
-            desc="City tours, iconic"
-            price="$3000"
-            star="4"
-            time="5"
-          />
-          <TripCard
-            url="/Uploads/ParisTripCard.png"
-            route="/TripPackage/1/Konnichiwa"
-            title="Konnichiwa"
-            desc="City tours, iconic"
-            price="$3000"
-            star="4"
-            time="5"
-          />
+          {trip.map((trip, index) => (
+            <TripCard
+              key={index}
+              url={trip.IMAGE}
+              route={`/TripPackage/${trip.TRIPPACKAGEID}/${encodeURIComponent(trip.TITLE)}`}
+              title={trip.TITLE}
+              desc={trip.CITY}
+              price={trip.PRICE}
+              star={trip.OVERALLRATING}
+              time={trip.PACKAGEDURATION}
+            />
+          ))}
         </div>
       </div>
     </>

@@ -4,14 +4,19 @@ import RedButton from '../RedButton'
 import SearchBar from '../SearchBar'
 import '../../pages/Home.css'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 
 const Hero = () => {
+  const navigate = useNavigate();
   const [searched, setsearched] = useState("")
   const [searchedID, setsearchedID] = useState("")
   const [error, seterror] = useState("")
 
   const [destinations, setdestinations] = useState([]);
   const [filteredDestinations, setfilteredDestinations] = useState([]);
+
+  const [clickedCity, setclickedCity] = useState([])
 
   const fetchDestinations = async () => {
     try {
@@ -47,15 +52,19 @@ const Hero = () => {
     if (!searchedID || searchedID == "") {
       seterror("Choose a destination first")
     }
+    if (clickedCity && searchedID) {
+      navigate(`/Destinations/${searchedID}/${clickedCity.CITY}`);
+    }
   }
 
   function handleSearchClick(id) {
     const dest = destinations.find((dest) => dest.DESTINATIONID === id);
+    setclickedCity(dest)
     const string = `${dest.COUNTRY}, ${dest.CITY}`;
     setsearched(string);
     setfilteredDestinations([])
     setsearchedID(id)
-
+    seterror("")
   }
 
   return (
@@ -69,9 +78,12 @@ const Hero = () => {
           <p>Trips, experiences, and places. All in one service.</p>
         </div>
         <form onSubmit={handleSubmit}>
+
           <div className="searchForm">
             <div className="search">
-              <SearchBar setsearched={setsearched} defaultValue={searched} setID={setsearchedID} />
+              <SearchBar setsearched={setsearched} defaultValue={searched} setID={setsearchedID} seterror={seterror} />
+
+              {error && <p style={{ marginTop: "5px" }}>{error}</p>}
               {filteredDestinations.length > 0 && <div className="homePageSearchResults">
                 {filteredDestinations.map((dest, index) => {
                   return (
@@ -83,8 +95,8 @@ const Hero = () => {
                 })}
 
               </div>}
-
             </div>
+
             <div className="searchButton">
               <RedButton type="submit" review={false} desc="Go!" />
             </div>
