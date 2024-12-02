@@ -20,7 +20,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-oracledb.initOracleClient({ libDir: "Instant Client\\instantclient_23_5" });
+oracledb.initOracleClient({
+  libDir:
+    "C:\\Users\\rayya\\Desktop\\Final Project\\Instant Client\\instantclient_23_5",
+});
 oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
 
 const dbConfig = {
