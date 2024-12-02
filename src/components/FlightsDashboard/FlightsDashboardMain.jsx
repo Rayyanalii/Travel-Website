@@ -25,23 +25,25 @@ const FlightsDashboardMain = () => {
     }
 
     async function handleDelete(id) {
-        try {
+        if (window.confirm(`Are you sure you want to delete the flight`)) {
+            try {
 
-            const res = await fetch(`http://localhost:3000/api/delete-flight/${id}`, {
-                method: 'DELETE',
+                const res = await fetch(`http://localhost:3000/api/delete-flight/${id}`, {
+                    method: 'DELETE',
 
-            })
-            if (res.ok) {
-                alert('Flight deleted successfully');
-                fetchFlights();
+                })
+                if (res.ok) {
+                    alert('Flight deleted successfully');
+                    fetchFlights();
+                }
+                else {
+                    alert('Error deleting Flight');
+                }
             }
-            else {
+            catch (error) {
+                console.error('Error deleting Flight:', error);
                 alert('Error deleting Flight');
             }
-        }
-        catch (error) {
-            console.error('Error deleting Flight:', error);
-            alert('Error deleting Flight');
         }
     }
 
@@ -91,7 +93,6 @@ const FlightsDashboardMain = () => {
                                         <td className="dataFieldButton">
                                             <div className="optionsMenu">
                                                 <div className="buttonContainer">
-                                                    <button className="modifyButton" onClick={() => handleModify(flight.FLIGHTID)}>Modify</button>
                                                     <button className="deleteButton" onClick={() => handleDelete(flight.FLIGHTID)}>Delete</button>
                                                 </div>
                                             </div>

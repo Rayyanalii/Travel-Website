@@ -158,7 +158,7 @@ const AddRestaurant = ({ closeMenu }) => {
                         </div>
                     )}
                     <div className="addDestinationInput">
-                        <button type="submit">Add Place To Visit</button>
+                        <button type="submit">Add Restaurant</button>
                     </div>
                 </form>
 

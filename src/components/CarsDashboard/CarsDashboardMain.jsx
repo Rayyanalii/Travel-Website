@@ -34,7 +34,7 @@ const CarsDashboardMain = () => {
 
     async function handleDelete(id) {
         const car = cars.find((car) => car.CARID == id);
-        if (car) {
+        if (car && window.confirm(`Are you sure you want to delete the Car`)) {
             const oldImages = car.CARIMAGE.split(",");
             try {
 

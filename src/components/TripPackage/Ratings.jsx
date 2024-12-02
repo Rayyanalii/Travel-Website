@@ -2,11 +2,12 @@ import React from 'react'
 import Stars from '../General/Stars'
 
 const Ratings = ({ packageData }) => {
+
     return (
         <>
             <div className="tripRatingsContainer">
                 <h3>Ratings</h3>
-                <div className="tripRatingsItemsContainer">
+                {packageData.length > 0 && <div className="tripRatingsItemsContainer">
                     <div className="tripRatingRow">
                         <div className="tripRatingItem">
                             <h4>Accomodation</h4>
@@ -49,7 +50,9 @@ const Ratings = ({ packageData }) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>}
+                {packageData.length == 0 && <p>No Ratings Found</p>}
+
             </div>
         </>
     )

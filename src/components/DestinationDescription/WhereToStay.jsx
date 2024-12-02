@@ -30,9 +30,9 @@ const WhereToStay = ({ data, stay, trip }) => {
               </div>
             </>
           ))}
+          {stay.length == 0 && <p>No Hotels Found</p>}
 
         </div>
-        <Divider />
         <AvailablePackages trip={trip} />
       </div>
     </>

@@ -1,13 +1,14 @@
-import './App.css'
-import Home from './pages/Home'
+import './App.css';
+import { Outlet } from 'react-router-dom';
+import ScrollToTop from './components/General/ScrollToTop';
 
 function App() {
-
   return (
     <>
-    <Home/>
+      <ScrollToTop />
+      <Outlet />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

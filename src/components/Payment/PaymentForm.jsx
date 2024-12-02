@@ -16,8 +16,24 @@ const PaymentForm = ({ onSubmit }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const cardNumber = formData.cardNumber;
+        if (!/^\d{16}$/.test(cardNumber)) {
+            alert("Please enter a valid 16-digit card number.");
+            return;
+        }
+
+        const cvv = formData.cvv;
+
+        if (!/^\d{3}$/.test(cvv)) {
+            alert("Please enter a valid 3-digit CVV number.");
+            return;
+        }
+
         onSubmit(formData);
     };
+
+    const today = new Date().toISOString().split("T")[0];
 
     return (
         <div className="payment-section">
@@ -32,6 +48,8 @@ const PaymentForm = ({ onSubmit }) => {
                         value={formData.cardName}
                         onChange={handleChange}
                         required
+                        placeholder="Cardholder name"
+
                     />
                 </div>
 
@@ -44,7 +62,9 @@ const PaymentForm = ({ onSubmit }) => {
                         value={formData.cardNumber}
                         onChange={handleChange}
                         required
+                        minLength={16}
                         maxLength={16}
+                        placeholder="Card Number"
                     />
                 </div>
 
@@ -59,6 +79,7 @@ const PaymentForm = ({ onSubmit }) => {
                             onChange={handleChange}
                             placeholder="MM/YY"
                             required
+                            min={today}
                         />
                     </div>
                     <div className="form-group">
@@ -71,6 +92,8 @@ const PaymentForm = ({ onSubmit }) => {
                             onChange={handleChange}
                             required
                             maxLength={3}
+                            minLength={3}
+                            placeholder="CVV"
                         />
                     </div>
                 </div>

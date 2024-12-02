@@ -46,7 +46,7 @@ const PlacesToVisitDashboardMain = () => {
 
     async function handleDelete(id) {
         const place = placesToVisit.find((place) => place.PLACEID === id);
-        if (place) {
+        if (place && window.confirm(`Are you sure you want to delete the place to visit`)) {
             const imageUrls = place.PLACEIMAGES.split(',');
 
             try {

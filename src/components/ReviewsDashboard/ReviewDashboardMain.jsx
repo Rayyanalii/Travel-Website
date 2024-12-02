@@ -6,19 +6,6 @@ const ReviewDashboardMain = () => {
 
     const [reviews, setReviews] = useState([]);
 
-    const grant = async () => {
-        try {
-            const response = await fetch('http://localhost:3000/api/grant-access'); // Adjust the URL to match your API
-            if (response.ok) {
-                console.log("HELLO");
-
-            }
-
-        } catch (error) {
-            console.error('Error fetching reviews:', error);
-        }
-    };
-
     const fetchReviews = async () => {
         try {
             const response = await fetch('http://localhost:3000/api/get-reviews'); // Adjust the URL to match your API
@@ -35,7 +22,6 @@ const ReviewDashboardMain = () => {
     };
 
     useEffect(() => {
-        grant();
         fetchReviews();
     }, []);
 
@@ -52,9 +38,7 @@ const ReviewDashboardMain = () => {
                 });
 
                 if (response.ok) {
-                    setReviews((prevReviews) =>
-                        prevReviews.filter(rev => rev.REVIEWID !== review) // Use the passed reviewID
-                    );
+                    fetchReviews();
                 } else {
                     console.error('Failed to delete review:', response.statusText);
                 }
@@ -106,7 +90,6 @@ const ReviewDashboardMain = () => {
                                         <td className="dataFieldButton">
                                             <div className="optionsMenu">
                                                 <div className="buttonContainer">
-                                                    <button className="modifyButton" onClick={() => handleModify(review.REVIEWID)}>Modify</button>
                                                     <button className="deleteButton" onClick={() => handleDelete(review.REVIEWID)}>Delete</button>
                                                 </div>
                                             </div>

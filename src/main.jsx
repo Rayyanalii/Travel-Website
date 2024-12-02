@@ -27,105 +27,44 @@ import DestinationDescription from "./pages/DestinationDescription.jsx";
 import PaymentPage from "./pages/Payment/PaymentPage.jsx";
 import ConfirmationPage from './components/Payment/ConfirmationPage';
 import NotFoundPage from "./pages/NotFound/NotFoundPage.jsx";
+import Home from './pages/Home';
 
-// Define router with all routes
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-  },
-  {
-    path: "/destinations",
-    element: <Destinations />,
-  },
-  {
-    path: "/reviews",
-    element: <Reviews />,
-  },
-  {
-    path: "/admin",
-    element: <AdminLogin />,
-  },
-  {
-    path: "/admin/dashboard",
-    element: <AdminDashboard />,
-  },
-  {
-    path: "/admin/dashboard/destinations",
-    element: <DestinationDashboard />,
-  },
-  {
-    path: "/admin/dashboard/reviews",
-    element: <ReviewsDashboard />,
-  },
-  {
-    path: "/admin/dashboard/tripPackage",
-    element: <TripPackageDashboard />,
-  },
-  {
-    path: "/admin/dashboard/places-to-visit",
-    element: <PlacesToVisitDashboard />,
-  },
-  {
-    path: "/admin/dashboard/restaurants",
-    element: <RestaurantDashboard />,
-  },
-  {
-    path: "/admin/dashboard/hotels",
-    element: <HotelsDashboard />,
-  },
-  {
-    path: "/admin/dashboard/cars",
-    element: <CarsDashboard />,
-  },
-  {
-    path: "/admin/dashboard/flights",
-    element: <FlightsDashboard />,
-  },
-  {
-    path: "/TripPackage/:id/:name",
-    element: <TripPackage />,
-  },
-  {
-    path: "/ServiceCar",
-    element: <ServiceCar />,
-  },
-  {
-    path: "/ServiceFlight",
-    element: <ServiceFlight />,
-  },
-  {
-    path: "/ServiceHotel",
-    element: <ServiceHotel />,
-  },
-  {
-    path: "/:service/SearchResults",
-    element: <SearchResults />,
-  },
-  {
-    path: "/Destinations/:id/:city",
-    element: <DestinationDescription />,
-  },
-
-  {
-    path: "/:page/payment",
-    element: <PaymentPage />,
-  },
-  {
-    path: "/:page/payment/confirmation",
-    element: <ConfirmationPage />,
-  },
-  {
-    path: "*",
-    element: <NotFoundPage />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/destinations", element: <Destinations /> },
+      { path: "/reviews", element: <Reviews /> },
+      { path: "/admin", element: <AdminLogin /> },
+      { path: "/admin/dashboard", element: <AdminDashboard /> },
+      { path: "/admin/dashboard/destinations", element: <DestinationDashboard /> },
+      { path: "/admin/dashboard/reviews", element: <ReviewsDashboard /> },
+      { path: "/admin/dashboard/tripPackage", element: <TripPackageDashboard /> },
+      { path: "/admin/dashboard/places-to-visit", element: <PlacesToVisitDashboard /> },
+      { path: "/admin/dashboard/restaurants", element: <RestaurantDashboard /> },
+      { path: "/admin/dashboard/hotels", element: <HotelsDashboard /> },
+      { path: "/admin/dashboard/cars", element: <CarsDashboard /> },
+      { path: "/admin/dashboard/flights", element: <FlightsDashboard /> },
+      { path: "/TripPackage/:id/:name", element: <TripPackage /> },
+      { path: "/ServiceCar", element: <ServiceCar /> },
+      { path: "/ServiceFlight", element: <ServiceFlight /> },
+      { path: "/ServiceHotel", element: <ServiceHotel /> },
+      { path: "/:service/SearchResults", element: <SearchResults /> },
+      { path: "/Destinations/:id/:city", element: <DestinationDescription /> },
+      { path: "/:page/payment", element: <PaymentPage /> },
+      { path: "/:page/payment/confirmation", element: <ConfirmationPage /> },
+      { path: "*", element: <NotFoundPage /> },
+    ],
   },
 ]);
 
-// Render application
 createRoot(document.getElementById("root")).render(
   <AuthProvider>
     <StrictMode>
       <RouterProvider router={router} />
     </StrictMode>
-  </AuthProvider>,
+  </AuthProvider>
 );

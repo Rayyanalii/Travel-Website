@@ -23,9 +23,10 @@ const Hero = ({ data, places }) => {
               <h2>Best Places To Visit</h2>
             </div>
             <div className="destionationBestPlaceImageContainer">
-              {places.map((place, index) => (
+              {places && places.map((place, index) => (
                 <DestinationBestPlaceCard key={index} data={place} />
               ))}
+              {places.length == 0 && <p>No Places Found</p>}
             </div>
             <div className="destinationBestPlaceBlackBackground"></div>
           </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Auth.css';
 import { useAuth } from './AuthContext';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 
 const Login = ({ setModal, closeModal }) => {
@@ -10,7 +11,7 @@ const Login = ({ setModal, closeModal }) => {
     const [rememberMe, setRememberMe] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-
+    const [showPassword, setShowPassword] = useState(false);
 
     function handleLoginClick() {
         setModal('signup');
@@ -78,6 +79,10 @@ const Login = ({ setModal, closeModal }) => {
         }
     }
 
+    const togglePasswordVisibility = () => {
+        setShowPassword((prev) => !prev);
+    };
+
     return (
         <div className="auth-container">
             <div className="auth-form">
@@ -102,13 +107,22 @@ const Login = ({ setModal, closeModal }) => {
                             onChange={handleEmailChange}
                             required
                         />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={handlePasswordChange}
-                            required
-                        />
+                        <div className='passwordEyeContainer'>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Password"
+                                value={password}
+                                onChange={handlePasswordChange}
+                                required
+                            />
+                            <button
+                                type="button"
+                                onClick={togglePasswordVisibility}
+
+                            >
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </button>
+                        </div>
                         <div className="remember">
                             <div>
                                 <input

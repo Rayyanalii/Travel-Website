@@ -38,6 +38,7 @@
   background-color: #dc3545;
   font-size: 3em;
   cursor: pointer;
+  transition: background-color 0.2s linear;
 }
 .addDestinationButton input:hover {
   background-color: #6f0e18;
@@ -67,14 +68,16 @@
   width: 100%;
   margin: 0 auto;
   background-color: #555555;
-  border: 2px solid #8d8d8d;
+  border: 1px solid #8d8d8d;
+  padding-bottom: 20px;
+  padding-top: 10px;
   color: #f7f7f7;
   font-size: 1em;
   font-weight: bold;
   border-radius: 10px;
   max-height: 70%;
-  overflow-y: scroll;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Shadow effect */
+  overflow-y: auto;
+  box-shadow: -20px 50px 12px rgba(0, 0, 0, 0.3); /* Shadow effect */
 }
 
 .close input {
@@ -85,6 +88,10 @@
   font-size: 20px;
   background-color: #555555;
   cursor: pointer;
+  transition: background-color 0.1s linear;
+}
+.close input:hover {
+  background-color: rgba(70, 70, 70, 0.708);
 }
 .addDestinationInput label {
   display: inline-block;
@@ -93,6 +100,17 @@
 .addDestinationInput button {
   height: 3.5em;
   padding: 15px;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.1s linear;
+}
+
+.addDestinationInput button:hover {
+  background-color: #9e0817;
 }
 .addDestinationMenuContainer form {
   margin-top: 20px;

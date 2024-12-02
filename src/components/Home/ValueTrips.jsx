@@ -38,7 +38,7 @@ const ValueTrips = () => {
                 <p>Best trips offered by us!</p>
             </div>
             <div className="AllTripCards">
-                {tripCard.map((trip, index) => (
+                {tripCard && tripCard.map((trip, index) => (
                     <TripCard
                         key={index}
                         url={trip.IMAGE}
@@ -50,6 +50,7 @@ const ValueTrips = () => {
                         time={trip.PACKAGEDURATION}
                     />
                 ))}
+                {tripCard.length == 0 && <p>No Trip Packages Found</p>}
             </div>
         </>
     )

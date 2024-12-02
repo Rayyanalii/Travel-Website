@@ -12,7 +12,6 @@ const Reviews = () => {
     const response = await fetch('http://localhost:3000/api/get-reviews');
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
       setreviews(data);
     }
   }

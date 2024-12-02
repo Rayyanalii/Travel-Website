@@ -15,7 +15,7 @@ const Main = () => {
 
             const result = await response.json();
 
-            setData(result); // Store fetched data in state
+            setData(result)
         } catch (error) {
             console.error('Error fetching destinations:', error);
         }
@@ -28,9 +28,11 @@ const Main = () => {
     return (
         <>
             <div className="allDestinationCards">
-                {data.map((item, index) => (
+                {data && data.map((item, index) => (
                     <DestinationCard key={index} imageUrl={item.IMAGES.split(",")[0]} name={item.CITY} url={`/Destinations/${item.DESTINATIONID}/${item.CITY}`} />
                 ))}
+                {data.length == 0 && <p>No Destinations Found</p>}
+
             </div>
         </>
     )

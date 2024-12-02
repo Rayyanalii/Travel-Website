@@ -8,7 +8,7 @@ const MainReview = ({ review }) => {
                 <div className="gray-divider"></div>
                 <div className="username-and-trip-flexbox">
                     <div className="username-and-profile">
-                        <img src="/Uploads/LondonDestinationCard.png" alt="" />
+                        <img src="/Uploads/userProfileLogo.png" alt="" />
                         <p>{review.USERNAME}</p>
                     </div>
                     <p id='tripNameReview'>on {review.PACKAGENAME}</p>

@@ -38,7 +38,7 @@ const RestaurantDashboardMain = () => {
 
     async function handleDelete(id) {
         const restaurant = restaurants.find((restaurant) => restaurant.RESTAURANTID === id);
-        if (restaurant) {
+        if (restaurant && window.confirm(`Are you sure you want to delete the restaurant`)) {
             const imageUrls = restaurant.RESTAURANTIMAGES.split(',');
 
             try {

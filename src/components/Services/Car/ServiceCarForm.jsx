@@ -31,6 +31,7 @@ const ServiceCarForm = () => {
       alert("You Need To Login To Book A Car")
     }
   };
+  const today = new Date().toISOString().split("T")[0];
 
   return (
     <form onSubmit={handleSubmit}>
@@ -46,6 +47,7 @@ const ServiceCarForm = () => {
                 value={formData.city}
                 onChange={handleChange}
                 required
+                placeholder="City"
               />
             </div>
           </div>
@@ -60,6 +62,8 @@ const ServiceCarForm = () => {
                   value={formData.pickup}
                   onChange={handleChange}
                   required
+                  min={today}
+
                 />
               </div>
             </div>
@@ -74,6 +78,7 @@ const ServiceCarForm = () => {
                   onChange={handleChange}
                   required
                   min="1"
+                  placeholder="Days"
                 />
               </div>
             </div>

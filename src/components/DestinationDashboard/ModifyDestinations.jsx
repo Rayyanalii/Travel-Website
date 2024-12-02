@@ -131,7 +131,7 @@ const ModifyDestinations = ({ closeMenu, editableData, setmessage }) => {
                         </div>
                     )}
                     <div className="addDestinationInput">
-                        <button type="submit">Add Destination</button>
+                        <button type="submit">Modify Destination</button>
                     </div>
                 </form>
 

@@ -193,3 +193,28 @@
     transform: translateY(0);
   }
 }
+
+.fade-in-button {
+  display: block;
+  opacity: 0;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in, transform 0.3s ease-in,
+    background-color 0.2s linear;
+  font-weight: bold;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.fade-in-button:hover {
+  background-color: #3c9140;
+}
+
+.fade-in {
+  opacity: 1;
+}

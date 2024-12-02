@@ -16,7 +16,7 @@ const TripPackageHero = ({ packageData }) => {
   const navigate = useNavigate();
 
   function handlePrice() {
-    if (loggedIn) {
+    if (loggedIn && packageData.length > 0) {
       navigate("/tripPackage/payment", { state: { tripDetails: packageData[0] } });
     }
     else {
@@ -27,8 +27,7 @@ const TripPackageHero = ({ packageData }) => {
   return (
     <>
       <header>
-
-        <div className="tripPackageImageContainer">
+        {packageData.length > 0 && <div className="tripPackageImageContainer">
           <img src={packageData[0].IMAGE} alt="Trip Image" />
           <h1>{packageData[0].TITLE}</h1>
           <div className="tripPackagePriceContainer">
@@ -53,7 +52,8 @@ const TripPackageHero = ({ packageData }) => {
             </div>
 
           </div>
-        </div>
+        </div>}
+        {packageData.length == 0 && <p>No Details Found</p>}
       </header>
 
     </>

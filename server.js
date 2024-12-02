@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-oracledb.initOracleClient({ libDir: "D:\\Instant Client\\instantclient_23_5" });
+oracledb.initOracleClient({ libDir: "Instant Client\\instantclient_23_5" });
 oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
 
 const dbConfig = {
@@ -92,11 +92,7 @@ async function grantQuery(query) {
 async function DeleteQueryWithParams(query, params) {
   let con;
   try {
-    con = await oracledb.getConnection({
-      user: "hr",
-      password: "abc123",
-      connectString: "localhost/xe",
-    });
+    con = await oracledb.getConnection(dbConfig);
 
     const result = await con.execute(query, params, { autoCommit: true });
 
@@ -1248,6 +1244,25 @@ app.post("/api/add-trip", upload.array("images", 1), async (req, res) => {
         console.error("Error closing the connection:", err);
       }
     }
+  }
+});
+
+// Endpoint to Delete Reviews
+app.delete("/api/delete-trip-package", async (req, res) => {
+  const { id } = req.body;
+  const query = "DELETE FROM TRIPPACKAGES WHERE TRIPPACKAGEID = :id";
+  const params = [id];
+
+  try {
+    const affectedRows = await DeleteQueryWithParams(query, params);
+    if (affectedRows > 0) {
+      res.status(200).send("Trip Package deleted successfully");
+    } else {
+      res.status(404).send("Trip Package not found"); // Handle case where no rows were deleted
+    }
+  } catch (error) {
+    console.error("Error deleting Review:", error);
+    res.status(500).send("Internal server error");
   }
 });
 

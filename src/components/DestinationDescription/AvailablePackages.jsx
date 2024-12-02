@@ -11,7 +11,7 @@ const AvailablePackages = ({ trip }) => {
           <h2>Available Packages</h2>
         </div>
         <div className="availablePackagesCardContainer">
-          {trip.map((trip, index) => (
+          {trip && trip.map((trip, index) => (
             <TripCard
               key={index}
               url={trip.IMAGE}
@@ -23,6 +23,8 @@ const AvailablePackages = ({ trip }) => {
               time={trip.PACKAGEDURATION}
             />
           ))}
+          {trip.length == 0 && <p>No Trip Packages Found</p>}
+
         </div>
       </div>
     </>

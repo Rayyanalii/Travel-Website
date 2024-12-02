@@ -52,3 +52,17 @@
 .HotelInputBox label {
   font-weight: bold;
 }
+.hotelResetButton {
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  padding-bottom: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s linear;
+  font-weight: bold;
+}
+.hotelResetButton:hover {
+  background-color: #0056b3;
+}

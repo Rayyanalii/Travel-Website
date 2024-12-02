@@ -40,7 +40,7 @@ const DestinationDashboardMain = () => {
     };
     const handleDelete = async (id) => {
         const destination = destinations.find((destination) => destination.DESTINATIONID == id);
-        if (destination) {
+        if (destination && window.confirm(`Are you sure you want to delete the destination`)) {
             const oldImages = destination.IMAGES.split(",");
             try {
 

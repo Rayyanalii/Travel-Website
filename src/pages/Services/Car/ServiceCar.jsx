@@ -8,7 +8,6 @@ import Footer from "../../../components/General/Footer";
 
 const ServiceCar = () => {
   useEffect(() => {
-    // Apply background styles to the body
     document.body.style.backgroundImage =
       'url("/Uploads/ServicesCarBackgroundImage.png")';
 
@@ -18,7 +17,6 @@ const ServiceCar = () => {
     document.body.style.height = "100%";
     document.body.style.width = "100%";
 
-    // Clean up styles when the component is unmounted or the dependency 'third' changes
     return () => {
       document.body.style.backgroundImage = "";
       document.body.style.backgroundSize = "";

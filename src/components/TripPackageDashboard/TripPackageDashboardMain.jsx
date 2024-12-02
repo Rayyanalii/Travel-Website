@@ -26,6 +26,30 @@ const TripPackageDashboardMain = () => {
     function handleAddMenu(e) {
         setAddMenu(true);
     }
+
+    async function handleDelete(id) {
+        if (window.confirm(`Are you sure you want to delete the trip package`)) {
+            try {
+                const response = await fetch('http://localhost:3000/api/delete-trip-package', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id }),
+                });
+
+                if (response.ok) {
+                    alert("Trip Package deleted successfully")
+                    fetchTrips();
+                } else {
+                    alert("Error deleting trip package")
+                    console.error('Failed to delete trip package:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error deleting trip package:', error);
+            }
+        }
+    }
     return (
         <>
             <div className="destinationDashboardMainContainerFlexbox">
@@ -93,7 +117,6 @@ const TripPackageDashboardMain = () => {
                                         <td className="dataFieldButton">
                                             <div className="optionsMenu">
                                                 <div className="buttonContainer">
-                                                    <button className="modifyButton" onClick={() => handleModify(trip.TRIPPACKAGEID)}>Modify</button>
                                                     <button className="deleteButton" onClick={() => handleDelete(trip.TRIPPACKAGEID)}>Delete</button>
                                                 </div>
                                             </div>

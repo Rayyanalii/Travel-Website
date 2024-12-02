@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Auth.css';
 
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 import { useAuth } from './AuthContext';
 
 const Signup = ({ setModal, closeModal }) => {
@@ -14,6 +16,10 @@ const Signup = ({ setModal, closeModal }) => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setshowConfirmPassword] = useState(false);
+
+
 
     const handleLoginClick = () => {
         setModal('login');
@@ -111,6 +117,13 @@ const Signup = ({ setModal, closeModal }) => {
         }
     };
 
+    const togglePasswordVisibility = () => {
+        setShowPassword((prev) => !prev);
+    };
+
+    const toggleConfirmPasswordVisibility = () => {
+        setshowConfirmPassword((prev) => !prev);
+    };
 
 
     return (
@@ -144,20 +157,36 @@ const Signup = ({ setModal, closeModal }) => {
                             onChange={handleEmailChange}
                             required
                         />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={handlePasswordChange}
-                            required
-                        />
-                        <input
-                            type="password"
-                            placeholder="Re-Enter Password"
-                            value={confirmPassword}
-                            onChange={handleConfirmPasswordChange}
-                            required
-                        />
+                        <div className='passwordEyeContainer'>
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Password"
+                                value={password}
+                                onChange={handlePasswordChange}
+                                required
+                            />
+                            <button
+                                type="button"
+                                onClick={togglePasswordVisibility}
+                            >
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </button>
+                        </div>
+                        <div className='passwordEyeContainer'>
+                            <input
+                                type={showConfirmPassword ? "text" : "password"}
+                                placeholder="Re-Enter Password"
+                                value={confirmPassword}
+                                onChange={handleConfirmPasswordChange}
+                                required
+                            />
+                            <button
+                                type="button"
+                                onClick={toggleConfirmPasswordVisibility}
+                            >
+                                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                            </button>
+                        </div>
                         <div className="remember">
                             <input
                                 type="checkbox"

@@ -171,13 +171,9 @@ const ModifyCar = ({ closeMenu, editableData, message }) => {
                             required
                         />
                     </div>
-                    {successMessage && (
-                        <div className="success-message">
-                            {successMessage}
-                        </div>
-                    )}
+
                     <div className="addDestinationInput">
-                        <button type="submit">Add Car</button>
+                        <button type="submit">Modify Car</button>
                     </div>
                 </form>
 

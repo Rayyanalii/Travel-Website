@@ -33,6 +33,8 @@ const ServiceFlightForm = () => {
       alert("You Need To Login To Book A Flight")
     }
   };
+  const today = new Date().toISOString().split("T")[0];
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -48,6 +50,7 @@ const ServiceFlightForm = () => {
                 value={formData.from}
                 onChange={handleChange}
                 required
+                placeholder="City"
               />
             </div>
           </div>
@@ -61,6 +64,8 @@ const ServiceFlightForm = () => {
                   id="departure"
                   value={formData.departure}
                   onChange={handleChange}
+                  min={today}
+
                 />
               </div>
             </div>
@@ -74,6 +79,9 @@ const ServiceFlightForm = () => {
                   value={formData.passenger}
                   onChange={handleChange}
                   required
+                  min={1}
+                  placeholder="Passengers"
+
                 />
               </div>
             </div>
@@ -90,6 +98,8 @@ const ServiceFlightForm = () => {
                 value={formData.to}
                 onChange={handleChange}
                 required
+                placeholder="City"
+
               />
             </div>
           </div>

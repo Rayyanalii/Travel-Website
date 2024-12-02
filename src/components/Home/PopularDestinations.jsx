@@ -10,6 +10,7 @@ const PopularDestinations = () => {
   const [card, setCard] = useState([]);
 
 
+
   const fetchDestinationCard = async () => {
     try {
 
@@ -42,9 +43,10 @@ const PopularDestinations = () => {
         <p>World's best tourist city destinations</p>
       </div>
       <div className="destinationCards">
-        {card.map((dest, index) => (
+        {card && card.map((dest, index) => (
           <DestinationCard key={index} url={`/Destinations/${dest.DESTINATIONID}/${dest.CITY}`} imageUrl={dest.IMAGES.split(",")[0]} name={dest.CITY} />
         ))}
+        {card.length == 0 && <p>No Destinations Found</p>}
       </div>
     </>
   )

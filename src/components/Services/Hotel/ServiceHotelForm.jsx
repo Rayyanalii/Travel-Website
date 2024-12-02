@@ -36,6 +36,9 @@ const ServiceHotelForm = () => {
     }
   };
 
+  const today = new Date().toISOString().split("T")[0];
+
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="HotelFormMainContainer">
@@ -50,6 +53,7 @@ const ServiceHotelForm = () => {
                 value={formData.city}
                 onChange={handleChange}
                 required
+                placeholder="City"
               />
             </div>
           </div>
@@ -64,15 +68,20 @@ const ServiceHotelForm = () => {
                   value={formData.checkin}
                   onChange={handleChange}
                   required
+                  min={today}
+
                 />
               </div>
             </div>
             <div className="HotelTwoInputsSmallContainer">
               <div className="HotelInputBox">
                 <label htmlFor="class">Class:</label>
-                <RatingStars
-                  setRating={sethotelClass} defaultvalue={hotelClass}
-                />
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <RatingStars
+                    setRating={sethotelClass} defaultvalue={hotelClass}
+                  />
+                  <input type="button" value="Reset" onClick={(e) => sethotelClass(0)} className="hotelResetButton" />
+                </div>
               </div>
             </div>
           </div>
@@ -89,6 +98,8 @@ const ServiceHotelForm = () => {
                   value={formData.room}
                   onChange={handleChange}
                   required
+                  placeholder="Rooms"
+                  min={1}
                 />
               </div>
             </div>
@@ -102,7 +113,8 @@ const ServiceHotelForm = () => {
                   value={formData.days}
                   onChange={handleChange}
                   required
-                  min="1"
+                  placeholder="Days"
+                  min={1}
                 />
               </div>
             </div>

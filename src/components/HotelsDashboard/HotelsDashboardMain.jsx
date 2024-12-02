@@ -39,7 +39,7 @@ const HotelsDashboardMain = () => {
 
     async function handleDelete(id) {
         const hotel = hotels.find((h) => h.HOTELID === id);
-        if (hotel) {
+        if (hotel && window.confirm(`Are you sure you want to delete the hotel`)) {
             const images = hotel.HOTELIMAGES.split(",");
             const logo = hotel.HOTELLOGO.split(",");
 

@@ -45,7 +45,10 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 25px;
+  margin: 0 auto;
+  max-width: 60%;
+  width: 100%;
+  gap: 40px;
   margin-top: 35vw;
   padding-bottom: 15vw;
 }

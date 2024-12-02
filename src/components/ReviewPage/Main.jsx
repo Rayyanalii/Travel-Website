@@ -5,9 +5,10 @@ const Main = ({ reviews }) => {
 
   return (
     <>
-      {reviews.map((review, index) => (
+      {reviews && reviews.map((review, index) => (
         <MainReview key={index} review={review} />
       ))}
+      {reviews.length == 0 && <p>No Reviews Found</p>}
     </>
   )
 }
