@@ -21,30 +21,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 oracledb.initOracleClient({
-  libDir:
-    "C:\\Users\\rayya\\Desktop\\Final Project\\Instant Client\\instantclient_23_5",
+  libDir: process.env.INSTANTCLIENT,
 });
 oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
 
 const dbConfig = {
-  user: "hr",
-  password: "abc123",
-  connectionString: "localhost/xe",
+  user: process.env.DBUSER,
+  password: process.env.DBPASS,
+  connectionString: process.env.DBCONSTRING,
 };
-
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, path.join(__dirname, "public", "Uploads")); // Use the existing 'Uploads' directory
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, file.originalname); // Use the original file name
-//   },
-// });
-
-// const upload = multer({ storage: storage });
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error("Server Error:", err);
+  res.status(500).send({ error: "Internal Server Error" });
+});
 
 // Function to get data from the database without any params
 async function getQuery(query) {
@@ -53,31 +47,6 @@ async function getQuery(query) {
     con = await oracledb.getConnection(dbConfig);
     const result = await con.execute(query);
     return result.rows;
-  } catch (e) {
-    console.error(e);
-    throw e; // Throw error to be handled in the route
-  } finally {
-    if (con) {
-      try {
-        await con.close();
-      } catch (err) {
-        console.error(err);
-      }
-    }
-  }
-}
-
-async function grantQuery(query) {
-  let con;
-  try {
-    con = await oracledb.getConnection({
-      user: "hr",
-      password: "abc123",
-      connectString: "localhost/xe",
-    });
-    const result = await con.execute(query);
-
-    return result;
   } catch (e) {
     console.error(e);
     throw e; // Throw error to be handled in the route
