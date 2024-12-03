@@ -3,7 +3,7 @@ import './TripPackage.css';
 import Hero from '../components/TripPackage/Hero';
 import Main from '../components/TripPackage/Main';
 import Navbar from '../components/Navbar';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Footer from './../components/General/Footer';
 
 const TripPackage = () => {
@@ -12,12 +12,14 @@ const TripPackage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const navigate = useNavigate();
+
   const fetchTripPackage = async () => {
     try {
 
       const response = await fetch(`http://localhost:3000/api/get-trip-package/${id}`);
       if (!response.ok) {
-        throw new Error('Trip package not found');
+        navigate("/error");
       }
       const data = await response.json();
       setTripPackageData(data);

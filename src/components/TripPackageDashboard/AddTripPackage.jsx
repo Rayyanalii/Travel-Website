@@ -121,6 +121,7 @@ const AddTripPackage = ({ closeMenu }) => {
                             value={duration}
                             onChange={(e) => setDuration(e.target.value)}
                             required
+                            min={1}
                         />
                     </div>
                     <div className="addDestinationInput">
@@ -141,6 +142,7 @@ const AddTripPackage = ({ closeMenu }) => {
                             value={req}
                             onChange={(e) => setreq(e.target.value)}
                             required
+                            min={1}
                         />
                     </div>
                     <div className="addDestinationInput">
@@ -151,6 +153,7 @@ const AddTripPackage = ({ closeMenu }) => {
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
                             required
+                            min={1}
                         />
                     </div>
                     <div className="addDestinationInput">
@@ -193,8 +196,8 @@ const AddTripPackage = ({ closeMenu }) => {
                                 id={`rating${index}`}
                                 value={rating}
                                 onChange={(e) => handleRatingChange(index, e)}
-                                min="1"
-                                max="5"
+                                min={1}
+                                max={5}
                                 required
                             />
                         </div>

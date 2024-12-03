@@ -102,6 +102,7 @@ const AddCar = ({ closeMenu }) => {
                             value={caryear}
                             onChange={(e) => setcaryear(e.target.value)}
                             required
+                            min={1}
                         />
                     </div>
                     <div className="divider" />
@@ -123,6 +124,7 @@ const AddCar = ({ closeMenu }) => {
                     <div className="addDestinationInput">
                         <label htmlFor="carlocation">Car City:</label>
                         <input
+                            type="text"
                             name="carlocation"
                             id="carlocation"
                             value={carlocation}
@@ -134,6 +136,7 @@ const AddCar = ({ closeMenu }) => {
                     <div className="addDestinationInput">
                         <label htmlFor="cartype">Car Type:</label>
                         <input
+                            type="text"
                             name="cartype"
                             id="cartype"
                             value={cartype}
@@ -151,6 +154,7 @@ const AddCar = ({ closeMenu }) => {
                             value={carprice}
                             onChange={(e) => setcarprice(e.target.value)}
                             required
+                            min={1}
                         />
                     </div>
                     {successMessage && (

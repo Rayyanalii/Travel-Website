@@ -146,6 +146,7 @@ const AddFlight = ({ closeMenu }) => {
                             value={availableseats}
                             onChange={(e) => setavailableseats(e.target.value)}
                             required
+                            min={1}
                         />
                     </div>
 
@@ -158,6 +159,7 @@ const AddFlight = ({ closeMenu }) => {
                             value={seatprice}
                             onChange={(e) => setseatprice(e.target.value)}
                             required
+                            min={1}
                         />
                     </div>
                     {successMessage && (

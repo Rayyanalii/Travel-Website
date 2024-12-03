@@ -1043,6 +1043,13 @@ app.delete("/api/delete-destination/:id", async (req, res) => {
   try {
     connection = await oracledb.getConnection(dbConfig);
 
+    await connection.execute(
+      `DELETE FROM Destinations WHERE DESTINATIONID = :id`,
+      [id],
+      {
+        autoCommit: true,
+      }
+    );
     oldImages.forEach((imageUrl) => {
       const imagePath = path.join(__dirname, "public", imageUrl); // Path to the image in the 'uploads' folder
       if (fs.existsSync(imagePath)) {
@@ -1051,14 +1058,6 @@ app.delete("/api/delete-destination/:id", async (req, res) => {
         console.log(`Image not found: ${imagePath}`);
       }
     });
-
-    await connection.execute(
-      `DELETE FROM Destinations WHERE DESTINATIONID = :id`,
-      [id],
-      {
-        autoCommit: true,
-      }
-    );
 
     res.status(200).send("Destinations deleted successfully");
   } catch (err) {
@@ -1233,7 +1232,7 @@ app.delete("/api/delete-trip-package", async (req, res) => {
       res.status(404).send("Trip Package not found"); // Handle case where no rows were deleted
     }
   } catch (error) {
-    console.error("Error deleting Review:", error);
+    console.error("Error deleting Trip Package:", error);
     res.status(500).send("Internal server error");
   }
 });

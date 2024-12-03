@@ -181,6 +181,8 @@ const AddHotel = ({ closeMenu }) => {
                             value={hotelClass}
                             onChange={(e) => sethotelClass(e.target.value)}
                             required
+                            min={1}
+                            max={5}
                         />
                     </div>
 
@@ -193,6 +195,7 @@ const AddHotel = ({ closeMenu }) => {
                             value={hotelPrice}
                             onChange={(e) => sethotelPrice(e.target.value)}
                             required
+                            min={1}
                         />
                     </div>
                     <div className="divider" />
