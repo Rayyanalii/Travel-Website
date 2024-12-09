@@ -93,7 +93,7 @@ const Navbar = () => {
         <div className="container">
           <div className="logo">
             <Link to="/">
-              <img src="/Uploads/MajesticTravels Logo.png" alt="Logo" />
+              <img src="/MajesticTravels Logo.png" alt="Logo" />
             </Link>
           </div>
           <div className="rightSide">
@@ -172,7 +172,7 @@ const Navbar = () => {
             </div>}
             {loggedIn && <div className="navbarUsernameContainer">
               <div className="navbarUsernameContent">
-                <img src="/Uploads/userProfileLogo.png" alt="User" />
+                <img src="/userProfileLogo.png" alt="User" />
                 <p>{localStorage.getItem('username')}</p>
               </div>
               <div className="navbarLogoutContainer">

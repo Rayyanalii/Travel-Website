@@ -19,7 +19,7 @@
 .destinationsPage {
   position: relative;
   min-height: 100vh; /* Ensure it covers the viewport */
-  background-image: url("Uploads/DestinationBackgroundImage.png");
+  background-image: url("/DestinationBackgroundImage.png");
   background-position: center;
   background-size: cover; /* Make the image cover the entire page */
   z-index: 0;

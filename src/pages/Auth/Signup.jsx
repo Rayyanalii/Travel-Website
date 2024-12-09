@@ -131,11 +131,11 @@ const Signup = ({ setModal, closeModal }) => {
             <div className="auth-form">
                 <div className="image-section">
                     <img
-                        src='/Uploads/LoginSignup.png'
+                        src='/LoginSignup.png'
                         alt="Mountain"
                         className="auth-image"
                     />
-                    <img id="loginSignupLogo" src="/Uploads/MajesticTravels Logo.png" alt="Logo" />
+                    <img id="loginSignupLogo" src="/MajesticTravels Logo.png" alt="Logo" />
                 </div>
                 <div className="form-section">
                     <div className="auth-header">

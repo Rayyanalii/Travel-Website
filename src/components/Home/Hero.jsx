@@ -71,7 +71,7 @@ const Hero = () => {
     <>
       <header>
         <div className="images">
-          <img className="backImage" src="/Uploads/GradientBackgroundHomePage.png" alt="" />
+          <img className="backImage" src="/GradientBackgroundHomePage.png" alt="" />
         </div>
         <div className="headingText">
           <h1>Where do you want to go?</h1>

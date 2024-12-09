@@ -1935,6 +1935,43 @@ app.get("/api/get-trip-package/:id", async (req, res) => {
   }
 });
 
+//Endpoint to GET Trip Package Data Only
+app.get("/api/get-trip-package-visit/:id", async (req, res) => {
+  let connection;
+
+  const tripPackageID = req.params.id;
+
+  try {
+    // Establish a connection to the database
+    connection = await oracledb.getConnection(dbConfig);
+
+    // Query to select data for the specific trip package ID
+    const result = await connection.execute(
+      "select * from Places where tripPackageID=:tripPackageID",
+      [tripPackageID]
+    );
+
+    // Check if any rows were returned
+    if (result.rows.length > 0) {
+      res.json(result.rows); // Send the first matching record as a JSON response
+    } else {
+      res.status(404).json({ error: "Trip package not found" });
+    }
+  } catch (error) {
+    console.error("Error fetching trip package:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    // Close the database connection
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error("Error closing connection:", err);
+      }
+    }
+  }
+});
+
 //Subscribe To Email Endpoint
 app.post("/subscribe", upload.array(null), async (req, res) => {
   const { email } = req.body;

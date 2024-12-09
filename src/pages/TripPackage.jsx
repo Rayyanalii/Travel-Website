@@ -9,6 +9,7 @@ import Footer from './../components/General/Footer';
 const TripPackage = () => {
   const { id, name } = useParams();
   const [tripPackageData, setTripPackageData] = useState([]);
+  const [visitData, setVisitData] = useState([])
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -23,6 +24,13 @@ const TripPackage = () => {
       }
       const data = await response.json();
       setTripPackageData(data);
+
+      const response1 = await fetch(`http://localhost:3000/api/get-trip-package-visit/${id}`);
+      if (!response1.ok) {
+        navigate("/error");
+      }
+      const data1 = await response1.json();
+      setVisitData(data1);
 
     } catch (error) {
       setError(error.message);
@@ -48,7 +56,7 @@ const TripPackage = () => {
     <>
       <Navbar />
       <Hero packageData={tripPackageData} />
-      <Main packageData={tripPackageData} id={id} name={name} />
+      <Main packageData={tripPackageData} id={id} name={name} visitData={visitData} />
       <Footer />
     </>
   );

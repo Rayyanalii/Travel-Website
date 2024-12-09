@@ -76,7 +76,7 @@ const AdminLogin = () => {
             <div className="adminLoginContainer">
 
                 <div className='imgContainer'>
-                    <img src="/Uploads/MajesticTravels Logo.png" alt="Logo" />
+                    <img src="/MajesticTravels Logo.png" alt="Logo" />
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="formContainer">

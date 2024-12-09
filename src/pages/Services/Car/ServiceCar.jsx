@@ -9,7 +9,7 @@ import Footer from "../../../components/General/Footer";
 const ServiceCar = () => {
   useEffect(() => {
     document.body.style.backgroundImage =
-      'url("/Uploads/ServicesCarBackgroundImage.png")';
+      'url("/ServicesCarBackgroundImage.png")';
 
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundPosition = "top";

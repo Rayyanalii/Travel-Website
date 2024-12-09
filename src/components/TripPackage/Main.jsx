@@ -9,7 +9,7 @@ import OtherInfo from './OtherInfo'
 import Ratings from './Ratings'
 import WriteReview from './WriteReview'
 
-const Main = ({ packageData, id, name }) => {
+const Main = ({ packageData, id, name, visitData }) => {
 
   return (
     <>
@@ -17,8 +17,8 @@ const Main = ({ packageData, id, name }) => {
         <HotelSection packageData={packageData} />
         <RedDivider />
         <h3 id='placesVisitingh3'>Places you will be visiting:</h3>
-        {packageData.length > 0 && packageData.map((place, index) => (
-          <VisitingLocations key={index} num={index + 1} packageData={place} last={index == packageData.length ? false : true} />
+        {visitData.length > 0 && visitData.map((place, index) => (
+          <VisitingLocations key={index} num={index + 1} packageData={place} last={index == visitData.length ? false : true} />
         ))}
         {packageData.length == 0 && <p>No Places Found</p>}
 

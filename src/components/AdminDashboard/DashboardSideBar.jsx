@@ -44,7 +44,7 @@ const DashboardSideBar = () => {
   return (
     <div className="dashboardSidebar">
       <div className="sidebarImage">
-        <img src="/Uploads/MajesticTravels Logo.png" alt="Logo" />
+        <img src="/MajesticTravels Logo.png" alt="Logo" />
       </div>
       <div className="dashboardItems">
         <Link to="/admin/dashboard">

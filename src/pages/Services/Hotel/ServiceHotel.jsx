@@ -11,7 +11,7 @@ const ServiceHotel = () => {
   useEffect(() => {
     // Apply background styles to the body
     document.body.style.backgroundImage =
-      'linear-gradient(to bottom, rgba(17, 19, 19, 0.3), rgba(17, 19, 19, 0.7), #000), url("/Uploads/ServicesHotelBackgroundImage.png")';
+      'linear-gradient(to bottom, rgba(17, 19, 19, 0.3), rgba(17, 19, 19, 0.7), #000), url("/ServicesHotelBackgroundImage.png")';
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundPosition = "top";
     document.body.style.backgroundRepeat = "no-repeat";

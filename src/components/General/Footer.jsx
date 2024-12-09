@@ -110,9 +110,9 @@ const Footer = () => {
             <h3>Follow our Socials</h3>
           </div>
           <div className="FooterSocialLogos">
-            <img src="/Uploads/facebookLogo.png" alt="Facebook Logo" />
-            <img src="/Uploads/instaLogo.png" alt="Insta Logo" />
-            <img src="/Uploads/twitterLogo.png" alt="Twitter Logo" />
+            <img src="/facebookLogo.png" alt="Facebook Logo" />
+            <img src="/instaLogo.png" alt="Insta Logo" />
+            <img src="/twitterLogo.png" alt="Twitter Logo" />
           </div>
         </div>
         <div className="footerCopywriteContainer">

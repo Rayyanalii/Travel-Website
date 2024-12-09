@@ -20,9 +20,9 @@ const WhereToStay = ({ data, stay, trip }) => {
             <>
               <div key={index}
                 className="whereToStayCards"
-                id={classArr[index + 1]}
+                id={classArr[index]}
                 style={{
-                  backgroundImage: `url(${s.HOTELIMAGES.split(",")[index]})`
+                  backgroundImage: `url(${s.HOTELIMAGES.split(",")[0]})`
                   ,
                 }}
               >
