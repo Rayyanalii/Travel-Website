@@ -1,8 +1,8 @@
-# React + Vite
+#  Majestic Travels Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sleek and modern travel booking platform built to simplify the process of finding their favourite destination spots, pre-planned trip packages and services. Users can look up any destination spot, view all the best places to visit there, book flights or hotels, or use our pre-planned trip packages. Administrators can go to the backend portal to manage all destinations, trip packages, and services. Designed with user-friendliness and functionality in mind, Majestic Travels provides a seamless experience for both travellers and administrators.
 
-Currently, two official plugins are available:
+##  Figma Design Link  
+View the complete UI/UX design of the application:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[View Figma Design](https://www.figma.com/design/7wFoQ4FDwWQAuqN3OAO30r/Majestic-Travels?node-id=0-1&p=f&t=cn52NwNCWL33Yr8j-0)
